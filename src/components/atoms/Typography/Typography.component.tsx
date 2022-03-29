@@ -20,7 +20,7 @@ export interface JiteraTypographyProps extends TypographyProps {
 
 const JiteraTypography = forwardRef<HTMLElement, JiteraTypographyProps>((props, ref) => {
   const { variant = VariantType.Text, 
-      ...rest } = props
+...rest } = props
 
   const Component = Typography[variant]
 

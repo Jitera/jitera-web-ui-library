@@ -47,7 +47,7 @@
     "build-storybook": "build-storybook -s public",
     "format": "prettier . --write",
     "check-types": "tsc --noemit",
-    "lint": "eslint \"**/*.@(js|jsx|ts|tsx)\" --fix"
+    "lint": "eslint \"src/**/*.@(js|jsx|ts|tsx)\" --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -85,8 +85,8 @@
   },
   "lint-staged": {
     "**/*.@(ts|tsx)": [
-      "eslint '**/*.{ts,tsx}'",
-      "prettier --write --ignore-unknown"
+      "npm run lint",
+      "npm run format"
     ]
   }
 }
