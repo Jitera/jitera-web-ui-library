@@ -1,5 +1,5 @@
 // Atoms
-export * from 'components/Atoms'
+export * from 'components/atoms'
 
 // Theme
 export * from 'styles/theme'
