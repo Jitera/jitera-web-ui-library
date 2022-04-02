@@ -14,18 +14,22 @@ export enum TypographyVariantType {
   Paragraph = 'Paragraph'
 }
 
+export type TypographyElement = HTMLHeadingElement & HTMLSpanElement & HTMLDivElement & HTMLElement
+
 export type TypographyProps = TextProps & LinkProps & TitleProps & ParagraphProps
 
 export interface JiteraTypographyProps extends PreviewProps, TypographyProps {
   variant: TypographyVariantType
 }
 
-const JiteraTypography = React.forwardRef<HTMLElement, JiteraTypographyProps>((props, ref) => {
-  const { variant = TypographyVariantType.Text, ...rest } = props
+const JiteraTypography = React.forwardRef<TypographyElement, JiteraTypographyProps>(
+  (props, ref) => {
+    const { variant = TypographyVariantType.Text, ...rest } = props
 
-  const Component = Typography[variant]
+    const Component = Typography[variant]
 
-  return <Component {...rest} ref={ref} />
-})
+    return <Component {...rest} ref={ref} />
+  }
+)
 
 export { JiteraTypography }
