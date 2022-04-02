@@ -292,7 +292,7 @@
 "@jitera/jitera-web-ui-library@file:.yalc/@jitera/jitera-web-ui-library":
   version "0.1.0"
   dependencies:
-    antd MQuy/ant-design.git#main
+    antd "~4.19.4"
 
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.0.5"
@@ -367,9 +367,10 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-antd@MQuy/ant-design.git#main:
-  version "4.19.5-alpha.0"
-  resolved "https://codeload.github.com/MQuy/ant-design/tar.gz/8935c8ba2f940da450575c417b878c2c8af0f986"
+antd@~4.19.4:
+  version "4.19.4"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-4.19.4.tgz#d0f33e277af7c1bd3b188e9a25c12c044f85bb71"
+  integrity sha512-1nwQPtOsEOE0ZdCnYATPE1UFW/hVq4OP7gZZa0QcalYB4TN0FbXJS5sxn2rTF/IjO2fKv/5VtkbiD+LyoFkZKA==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.7.0"

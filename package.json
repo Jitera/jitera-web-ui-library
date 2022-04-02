@@ -7,7 +7,7 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "antd": "MQuy/ant-design.git#main"
+    "antd": "~4.19.4"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "~16.2.1",
