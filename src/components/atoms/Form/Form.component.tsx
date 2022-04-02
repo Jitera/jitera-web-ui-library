@@ -3,20 +3,24 @@ import { Form, FormInstance, FormProps, FormItemProps } from 'antd'
 
 import { PreviewProps } from '@/types/preview'
 
-export interface JiteraFormProps extends PreviewProps, FormProps {}
+export interface JiteraFormProps extends PreviewProps, FormProps {
+  formRef?: React.RefObject<FormInstance>
+}
 
 type FormInterface = typeof Form
 
 export interface JiteraFormInterface
-  extends ForwardRefExoticComponent<JiteraFormProps & RefAttributes<FormInstance<any>>>,
+  extends ForwardRefExoticComponent<JiteraFormProps & RefAttributes<HTMLDivElement>>,
     FormInterface {}
 
-const JiteraFormComponent = React.forwardRef<FormInstance, JiteraFormProps>((props, ref) => {
-  const { children, ...rest } = props
+const JiteraFormComponent = React.forwardRef<HTMLDivElement, JiteraFormProps>((props, ref) => {
+  const { children, formRef, ...rest } = props
   return (
-    <Form {...rest} ref={ref}>
-      {children}
-    </Form>
+    <div ref={ref}>
+      <Form {...rest} ref={formRef}>
+        {children}
+      </Form>
+    </div>
   )
 })
 
