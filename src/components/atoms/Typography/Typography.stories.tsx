@@ -63,7 +63,7 @@ export default {
       description: 'Level(Size) of text',
       control: {
         type: 'select',
-        options: ['2', '3', '4', '5', '6']
+        options: ['1', '2', '3', '4', '5']
       }
     }
   }

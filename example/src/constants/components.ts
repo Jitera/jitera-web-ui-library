@@ -6,7 +6,11 @@ import Form from '@/pages/Form'
 import Header from '@/pages/Header'
 import Input from '@/pages/Input'
 import Layout from '@/pages/Layout'
+import Page from '@/pages/Page'
+import Paragraph from '@/pages/Paragraph'
 import Sider from '@/pages/Sider'
+import Text from '@/pages/Text'
+import Title from '@/pages/Title'
 
 export const COMPONENTS = {
   Button,
@@ -17,5 +21,9 @@ export const COMPONENTS = {
   Header,
   Input,
   Layout,
-  Sider
+  Page,
+  Paragraph,
+  Sider,
+  Text,
+  Title
 }

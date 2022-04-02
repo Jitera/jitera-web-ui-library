@@ -3,12 +3,12 @@ import { JiteraTitle } from '@jitera/jitera-web-ui-library'
 
 import Layout from '@/components/Layout'
 
-const Content: React.FC = () => {
+const Title: React.FC = () => {
   return (
     <Layout>
-      <JiteraTitle>A Content</JiteraTitle>
+      <JiteraTitle>A Title</JiteraTitle>
     </Layout>
   )
 }
 
-export default Content
+export default Title
