@@ -6,7 +6,7 @@ export interface JiteraLayoutProps extends BasicProps {}
 const JiteraLayout = React.forwardRef<HTMLDivElement, JiteraLayoutProps>((props, ref) => {
   const { children, style, ...rest } = props
   return (
-    <Layout {...rest} style={{ ...style, width: '100%', minHeight: '100vh' }} ref={ref}>
+    <Layout {...rest} style={{ width: '100%', ...style }} ref={ref}>
       {children}
     </Layout>
   )
