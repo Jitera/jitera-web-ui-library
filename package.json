@@ -2,7 +2,7 @@
   "name": "@jitera/jitera-web-ui-library",
   "version": "0.1.0",
   "description": "atoms and component for web project",
-  "sideEffects": false,
+  "sideEffects": ["*.css"],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
