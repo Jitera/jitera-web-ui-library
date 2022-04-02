@@ -19,7 +19,7 @@ export type TypographyElement = HTMLHeadingElement & HTMLSpanElement & HTMLDivEl
 export type TypographyProps = TextProps & LinkProps & TitleProps & ParagraphProps
 
 export interface JiteraTypographyProps extends PreviewProps, TypographyProps {
-  variant: TypographyVariantType
+  variant?: TypographyVariantType
 }
 
 const JiteraTypography = React.forwardRef<TypographyElement, JiteraTypographyProps>(
