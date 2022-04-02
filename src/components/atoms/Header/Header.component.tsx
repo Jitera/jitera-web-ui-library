@@ -1,7 +1,9 @@
 import React from 'react'
 import { Header, BasicProps } from 'antd/lib/layout/layout'
 
-export interface JiteraHeaderProps extends BasicProps {}
+import { PreviewProps } from '@/types/preview'
+
+export interface JiteraHeaderProps extends PreviewProps, BasicProps {}
 
 const JiteraHeader = React.forwardRef<HTMLDivElement, JiteraHeaderProps>((props, ref) => {
   const { children, style, ...rest } = props

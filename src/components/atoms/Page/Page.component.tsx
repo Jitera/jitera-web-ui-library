@@ -1,18 +1,29 @@
 import React from 'react'
 
-export interface JiteraPageProps extends React.HTMLAttributes<HTMLDivElement> {}
+import { PreviewProps } from '@/types/preview'
 
-const JiteraPage = React.forwardRef<HTMLDivElement, JiteraPageProps>((props, ref) => {
-  const { children, style, ...rest } = props
-  return (
-    <div
-      {...rest}
-      style={{ width: '100%', minHeight: '100vh', backgroundColor: '#fff', ...style }}
-      ref={ref}
-    >
-      {children}
-    </div>
-  )
-})
+export interface JiteraPageProps extends PreviewProps, React.HTMLAttributes<HTMLDivElement> {}
+
+const JiteraPage = React.forwardRef<HTMLDivElement, JiteraPageProps>(
+  ({ isPreview, ...props }, ref) => {
+    const { children, style, ...rest } = props
+    const minHeight = isPreview ? '100%' : '100vh'
+
+    return (
+      <div
+        {...rest}
+        style={{
+          width: '100%',
+          minHeight,
+          backgroundColor: '#fff',
+          ...style
+        }}
+        ref={ref}
+      >
+        {children}
+      </div>
+    )
+  }
+)
 
 export { JiteraPage }

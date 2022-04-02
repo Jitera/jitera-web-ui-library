@@ -2,7 +2,9 @@ import React from 'react'
 import { Input, InputRef, InputProps } from 'antd'
 import { JiteraForm, JiteraFormItemProps } from '../Form/Form.component'
 
-export interface JiteraInputProps extends InputProps {
+import { PreviewProps } from '@/types/preview'
+
+export interface JiteraInputProps extends PreviewProps, InputProps {
   formItem?: boolean
   formItemProps?: Omit<JiteraFormItemProps, 'children'>
 }

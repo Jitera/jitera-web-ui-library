@@ -5,6 +5,8 @@ import { LinkProps } from 'antd/lib/typography/Link'
 import { TitleProps } from 'antd/lib/typography/Title'
 import { ParagraphProps } from 'antd/lib/typography/Paragraph'
 
+import { PreviewProps } from '@/types/preview'
+
 export enum TypographyVariantType {
   Title = 'Title',
   Link = 'Link',
@@ -14,7 +16,7 @@ export enum TypographyVariantType {
 
 export type TypographyProps = TextProps & LinkProps & TitleProps & ParagraphProps
 
-export interface JiteraTypographyProps extends TypographyProps {
+export interface JiteraTypographyProps extends PreviewProps, TypographyProps {
   variant: TypographyVariantType
 }
 

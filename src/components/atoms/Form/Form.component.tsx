@@ -1,7 +1,9 @@
 import React, { ForwardRefExoticComponent, RefAttributes } from 'react'
 import { Form, FormInstance, FormProps, FormItemProps } from 'antd'
 
-export interface JiteraFormProps extends FormProps {}
+import { PreviewProps } from '@/types/preview'
+
+export interface JiteraFormProps extends PreviewProps, FormProps {}
 
 type FormInterface = typeof Form
 
