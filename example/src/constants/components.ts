@@ -11,6 +11,7 @@ import Paragraph from '@/pages/Paragraph'
 import Sider from '@/pages/Sider'
 import Text from '@/pages/Text'
 import Title from '@/pages/Title'
+import Typography from '@/pages/Typography'
 
 export const COMPONENTS = {
   Button,
@@ -25,5 +26,6 @@ export const COMPONENTS = {
   Paragraph,
   Sider,
   Text,
-  Title
+  Title,
+  Typography
 }
