@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@jitera/jitera-web-ui-library": {
-      "signature": "4c647c1af502268db6d90284ebfe0373",
+      "signature": "f3e3083c68457189e738dc7b50079d44",
       "file": true
     }
   }
