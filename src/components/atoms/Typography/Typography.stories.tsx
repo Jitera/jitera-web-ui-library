@@ -1,5 +1,9 @@
 import { Story } from '@storybook/react'
-import { JiteraTypography, VariantType, JiteraTypographyProps } from './Typography.component'
+import {
+  JiteraTypography,
+  TypographyVariantType,
+  JiteraTypographyProps
+} from './Typography.component'
 
 const defaultArgs = {
   variant: 'Text'
@@ -10,7 +14,7 @@ const TypographyTemplate: Story<JiteraTypographyProps> = (args) => <JiteraTypogr
 export const Text = TypographyTemplate.bind({})
 Text.args = {
   ...defaultArgs,
-  variant: 'Text' as VariantType,
+  variant: 'Text' as TypographyVariantType,
   children: 'Jitera Automation Tool',
   type: 'danger'
 }
@@ -18,7 +22,7 @@ Text.args = {
 export const Title = TypographyTemplate.bind({})
 Title.args = {
   ...defaultArgs,
-  variant: 'Title' as VariantType,
+  variant: 'Title' as TypographyVariantType,
   level: 2,
   children: 'Jitera Automation Tool'
 }
@@ -26,14 +30,14 @@ Title.args = {
 export const Link = TypographyTemplate.bind({})
 Link.args = {
   ...defaultArgs,
-  variant: 'Link' as VariantType,
+  variant: 'Link' as TypographyVariantType,
   children: 'Jitera Automation Tool'
 }
 
 export const Paragraph = TypographyTemplate.bind({})
 Paragraph.args = {
   ...defaultArgs,
-  variant: 'Paragraph' as VariantType,
+  variant: 'Paragraph' as TypographyVariantType,
   children: 'Jitera Automation Tool'
 }
 
