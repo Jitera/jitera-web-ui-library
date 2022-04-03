@@ -9,5 +9,9 @@ module.exports = {
   framework: '@storybook/react',
   core: {
     builder: 'webpack5'
-  }
+  },
+  babel: async (options) => ({
+    ...options,
+    plugins: [...options.plugins, 'babel-plugin-styled-components']
+  })
 }
