@@ -15,7 +15,7 @@ export enum VariantType {
 export type TypographyProps = TextProps & LinkProps & TitleProps & ParagraphProps
 
 export interface JiteraTypographyProps extends TypographyProps {
-  variant: VariantType
+  variant?: VariantType
 }
 
 const JiteraTypography = forwardRef<HTMLElement, JiteraTypographyProps>((props, ref) => {
