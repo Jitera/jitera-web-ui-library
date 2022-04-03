@@ -2,8 +2,9 @@ import React from 'react'
 import Layout, { BasicProps } from 'antd/lib/layout/layout'
 
 import { PreviewProps } from '@/types/preview'
+import { JiteraComponentProps } from '@/types/component'
 
-export interface JiteraLayoutProps extends PreviewProps, Omit<BasicProps, 'prefixCls'> {}
+export interface JiteraLayoutProps extends PreviewProps, JiteraComponentProps<BasicProps> {}
 
 const JiteraLayout = React.forwardRef<HTMLDivElement, JiteraLayoutProps>((props, ref) => {
   const { children, style, ...rest } = props

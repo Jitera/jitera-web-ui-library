@@ -6,6 +6,7 @@ import { TitleProps } from 'antd/lib/typography/Title'
 import { ParagraphProps } from 'antd/lib/typography/Paragraph'
 
 import { PreviewProps } from '@/types/preview'
+import { JiteraComponentProps } from '@/types/component'
 
 export enum TypographyVariantType {
   Title = 'Title',
@@ -19,7 +20,10 @@ export type TypographyElement = HTMLHeadingElement &
   HTMLParagraphElement &
   HTMLElement
 
-export type TypographyProps = TextProps & LinkProps & TitleProps & ParagraphProps
+export type TypographyProps = JiteraComponentProps<TextProps> &
+  JiteraComponentProps<LinkProps> &
+  JiteraComponentProps<TitleProps> &
+  JiteraComponentProps<ParagraphProps>
 
 export interface JiteraTypographyProps extends PreviewProps, TypographyProps {
   variant?: TypographyVariantType

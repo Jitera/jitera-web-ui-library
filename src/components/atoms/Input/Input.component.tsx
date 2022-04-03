@@ -3,9 +3,11 @@ import { Input, InputRef, InputProps } from 'antd'
 
 import { PreviewProps } from '@/types/preview'
 
+import { JiteraComponentProps } from '@/types/component'
+
 import { JiteraForm, JiteraFormItemProps } from '../Form/Form.component'
 
-export interface JiteraInputProps extends PreviewProps, InputProps {
+export interface JiteraInputProps extends PreviewProps, JiteraComponentProps<InputProps> {
   formItem?: boolean
   formItemProps?: Omit<JiteraFormItemProps, 'children'>
 }

@@ -3,8 +3,9 @@ import { Card, CardProps } from 'antd'
 import { CardInterface } from 'antd/lib/card'
 
 import { PreviewProps } from '@/types/preview'
+import { JiteraComponentProps } from '@/types/component'
 
-export interface JiteraCardProps extends PreviewProps, CardProps {}
+export interface JiteraCardProps extends PreviewProps, JiteraComponentProps<CardProps> {}
 
 const JiteraCard = React.forwardRef<CardInterface, JiteraCardProps>((props, ref) => {
   const { children, ...rest } = props
