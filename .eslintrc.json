@@ -20,8 +20,9 @@
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "unicorn/prefer-node-protocol": "off",
-    "@typescript-eslint/no-empty-interface": "warn",
     "unicorn/filename-case": "off",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "import/prefer-default-export": "off",
     "unicorn/prevent-abbreviations": [
       "error",
       {
