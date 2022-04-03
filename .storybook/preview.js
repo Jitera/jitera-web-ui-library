@@ -1,5 +1,7 @@
 import { addDecorator } from '@storybook/react'
-import 'antd/dist/antd.css'
-import '../dist/style.css'
+import { ThemeProvider } from '@jitera/jitera-web-ui-library'
 
-addDecorator((story) => story())
+import 'antd/dist/antd.css'
+import '@jitera/jitera-web-ui-library/dist/style.css'
+
+addDecorator((story) => <ThemeProvider>{story()}</ThemeProvider>)
