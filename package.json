@@ -2,7 +2,9 @@
   "name": "@jitera/jitera-web-ui-library",
   "version": "0.1.0",
   "description": "atoms and component for web project",
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -109,8 +111,8 @@
   },
   "lint-staged": {
     "**/*.@(ts|tsx)": [
-      "yarn lint",
-      "yarn format"
+      "eslint",
+      "prettier --write"
     ]
   }
 }
