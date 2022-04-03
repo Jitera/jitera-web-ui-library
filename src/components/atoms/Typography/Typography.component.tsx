@@ -6,6 +6,7 @@ import { TitleProps } from 'antd/lib/typography/Title'
 import { ParagraphProps } from 'antd/lib/typography/Paragraph'
 
 import { PreviewProps } from '@/types/preview'
+
 import { JiteraTitle } from '../Title/Title.component'
 import { JiteraText } from '../Text/Text.component'
 import { JiteraParagraph } from '../Paragraph/Paragraph.component'

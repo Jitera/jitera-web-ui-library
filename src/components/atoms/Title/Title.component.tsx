@@ -15,7 +15,7 @@ export const TITLE_ELEMENTS = Object.values(TitleElementEnum)
 
 export interface JiteraTitleProps extends PreviewProps, BlockProps {
   level?: TitleElementEnum
-  onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void
+  onClick?: (event?: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const JiteraTitle = React.forwardRef<HTMLSpanElement, JiteraTitleProps>((props, ref) => {

@@ -9,7 +9,7 @@ export interface JiteraCardProps extends PreviewProps, CardProps {}
 const JiteraCard = React.forwardRef<CardInterface, JiteraCardProps>((props, ref) => {
   const { children, ...rest } = props
   return (
-    // @ts-ignore Card has forwarded ref but somehow the type definition not.
+    // @ts-expect-error Card has forwarded ref but somehow the type definition not.
     <Card {...rest} ref={ref}>
       {children}
     </Card>

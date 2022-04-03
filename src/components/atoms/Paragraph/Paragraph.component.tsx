@@ -4,7 +4,7 @@ import Base, { BlockProps } from 'antd/lib/typography/Base'
 import { PreviewProps } from '@/types/preview'
 
 export interface JiteraParagraphProps extends PreviewProps, BlockProps {
-  onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void
+  onClick?: (event?: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const JiteraParagraph = React.forwardRef<HTMLParagraphElement, JiteraParagraphProps>(

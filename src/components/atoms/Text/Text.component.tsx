@@ -6,7 +6,7 @@ import { PreviewProps } from '@/types/preview'
 
 export interface JiteraTextProps extends PreviewProps, BlockProps {
   ellipsis?: boolean | Omit<EllipsisConfig, 'expandable' | 'rows' | 'onExpand'>
-  onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void
+  onClick?: (event?: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const JiteraText = React.forwardRef<HTMLSpanElement, JiteraTextProps>((props, ref) => {

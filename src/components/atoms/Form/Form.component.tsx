@@ -1,5 +1,5 @@
 import React, { ForwardRefExoticComponent, RefAttributes } from 'react'
-import { Form, FormInstance, FormProps, FormItemProps } from 'antd'
+import { Form, FormInstance, FormProps } from 'antd'
 
 import { PreviewProps } from '@/types/preview'
 
@@ -35,4 +35,5 @@ JiteraForm.Provider = Form.Provider
 JiteraForm.create = Form.create
 
 export { JiteraForm }
-export type { FormItemProps as JiteraFormItemProps }
+
+export { type FormItemProps as JiteraFormItemProps } from 'antd'

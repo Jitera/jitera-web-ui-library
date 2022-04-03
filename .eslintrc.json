@@ -1,0 +1,79 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:sonarjs/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:jsx-a11y/strict",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "unicorn/prefer-node-protocol": "off",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "unicorn/filename-case": "off",
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "replacements": {
+          "props": false,
+          "ref": false
+        }
+      }
+    ],
+    "react/function-component-definition": "off",
+    "import/extensions": [
+      "error",
+      {
+        "css": "always",
+        "png": "always",
+        "json": "always"
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
+    "import/no-unresolved": [2, { "ignore": ["^~icons", "^virtual"] }]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "eslint-import-resolver-custom-alias": {
+        "alias": {
+          "@": "./src"
+        },
+        "extensions": [".ts", ".tsx", "css", "png"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
+}
