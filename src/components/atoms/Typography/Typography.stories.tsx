@@ -1,10 +1,10 @@
 import { Story } from '@storybook/react'
-
 import {
+  JiteraConfigProvider,
   JiteraTypography,
   TypographyVariantType,
   JiteraTypographyProps
-} from './Typography.component'
+} from '@jitera/jitera-web-ui-library'
 
 const text = 'Jitera Automation Tool'
 
@@ -13,7 +13,9 @@ const defaultArguments = {
 } as JiteraTypographyProps
 
 const TypographyTemplate: Story<JiteraTypographyProps> = (arguments_) => (
-  <JiteraTypography {...arguments_} />
+  <JiteraConfigProvider>
+    <JiteraTypography {...arguments_} />
+  </JiteraConfigProvider>
 )
 
 export const Text = TypographyTemplate.bind({})

@@ -1,23 +1,27 @@
 import { Story } from '@storybook/react'
-
-import { JiteraButton } from '../Button/Button.component'
-import { JiteraInput } from '../Input/Input.component'
-
-import { JiteraForm, JiteraFormProps } from './Form.component'
+import {
+  JiteraConfigProvider,
+  JiteraButton,
+  JiteraInput,
+  JiteraForm,
+  JiteraFormProps
+} from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraFormProps = {}
 
 const FormTemplate: Story<JiteraFormProps> = (arguments_) => {
   return (
-    <JiteraForm
-      {...arguments_}
-      onFinish={(value) => {
-        console.log(value)
-      }}
-    >
-      <JiteraInput formItem formItemProps={{ label: 'Input', name: 'input' }} />
-      <JiteraButton htmlType="submit">Submit</JiteraButton>
-    </JiteraForm>
+    <JiteraConfigProvider>
+      <JiteraForm
+        {...arguments_}
+        onFinish={(value) => {
+          console.log(value)
+        }}
+      >
+        <JiteraInput formItem formItemProps={{ label: 'Input', name: 'input' }} />
+        <JiteraButton htmlType="submit">Submit</JiteraButton>
+      </JiteraForm>
+    </JiteraConfigProvider>
   )
 }
 

@@ -2,13 +2,19 @@ import { Story } from '@storybook/react'
 
 import { SearchOutlined } from '@ant-design/icons'
 
+import { JiteraConfigProvider } from '../ConfigProvider/ConfigProvider.component'
+
 import { JiteraButton, JiteraButtonProps } from './Button.component'
 
 const defaultArguments = {
   size: 'large'
 } as JiteraButtonProps
 
-const ButtonTemplate: Story<JiteraButtonProps> = (arguments_) => <JiteraButton {...arguments_} />
+const ButtonTemplate: Story<JiteraButtonProps> = (arguments_) => (
+  <JiteraConfigProvider>
+    <JiteraButton {...arguments_} />
+  </JiteraConfigProvider>
+)
 
 export const Default = ButtonTemplate.bind({})
 Default.args = {
