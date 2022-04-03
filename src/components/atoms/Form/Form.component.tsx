@@ -5,6 +5,7 @@ import { PreviewProps } from '@/types/preview'
 
 export interface JiteraFormProps extends PreviewProps, FormProps {
   formRef?: React.RefObject<FormInstance>
+  formStyle?: React.CSSProperties
 }
 
 type FormInterface = typeof Form
@@ -14,10 +15,10 @@ export interface JiteraFormInterface
     FormInterface {}
 
 const JiteraFormComponent = React.forwardRef<HTMLDivElement, JiteraFormProps>((props, ref) => {
-  const { children, formRef, ...rest } = props
+  const { children, formRef, style, formStyle, ...rest } = props
   return (
-    <div ref={ref}>
-      <Form {...rest} ref={formRef}>
+    <div ref={ref} style={{ ...style, height: '100%' }}>
+      <Form {...rest} style={formStyle} ref={formRef}>
         {children}
       </Form>
     </div>

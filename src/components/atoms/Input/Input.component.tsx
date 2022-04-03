@@ -10,13 +10,13 @@ export interface JiteraInputProps extends PreviewProps, InputProps {
 }
 
 const JiteraInput = React.forwardRef<InputRef, JiteraInputProps>((props, ref) => {
-  const { formItem, formItemProps = {}, isPreview, ...rest } = props
+  const { formItem, formItemProps = {}, ...rest } = props
   return formItem ? (
     <JiteraForm.Item {...formItemProps}>
-      <Input {...rest} disabled={isPreview} ref={ref} />
+      <Input {...rest} ref={ref} />
     </JiteraForm.Item>
   ) : (
-    <Input {...rest} disabled={isPreview} ref={ref} />
+    <Input {...rest} ref={ref} />
   )
 })
 
