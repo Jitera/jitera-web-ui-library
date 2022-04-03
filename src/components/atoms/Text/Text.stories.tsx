@@ -1,13 +1,14 @@
 import { Story } from '@storybook/react'
+
 import { JiteraText, JiteraTextProps } from './Text.component'
 
-const defaultArgs: JiteraTextProps = {}
+const defaultArguments: JiteraTextProps = {}
 
-const TextTemplate: Story<JiteraTextProps> = (args) => <JiteraText {...args} />
+const TextTemplate: Story<JiteraTextProps> = (arguments_) => <JiteraText {...arguments_} />
 
 export const Default = TextTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Lorem Ipsum'
 }
 

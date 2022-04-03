@@ -1,13 +1,14 @@
 import { Story } from '@storybook/react'
+
 import { JiteraTitle, JiteraTitleProps } from './Title.component'
 
-const defaultArgs: JiteraTitleProps = {}
+const defaultArguments: JiteraTitleProps = {}
 
-const TitleTemplate: Story<JiteraTitleProps> = (args) => <JiteraTitle {...args} />
+const TitleTemplate: Story<JiteraTitleProps> = (arguments_) => <JiteraTitle {...arguments_} />
 
 export const Default = TitleTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Lorem Ipsum'
 }
 

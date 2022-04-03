@@ -1,13 +1,14 @@
 import { Story } from '@storybook/react'
+
 import { JiteraLayout, JiteraLayoutProps } from './Layout.component'
 
-const defaultArgs: JiteraLayoutProps = {}
+const defaultArguments: JiteraLayoutProps = {}
 
-const LayoutTemplate: Story<JiteraLayoutProps> = (args) => <JiteraLayout {...args} />
+const LayoutTemplate: Story<JiteraLayoutProps> = (arguments_) => <JiteraLayout {...arguments_} />
 
 export const Default = LayoutTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Lorem Ipsum'
 }
 

@@ -1,44 +1,49 @@
 import { Story } from '@storybook/react'
+
 import {
   JiteraTypography,
   TypographyVariantType,
   JiteraTypographyProps
 } from './Typography.component'
 
-const defaultArgs = {
+const text = 'Jitera Automation Tool'
+
+const defaultArguments = {
   variant: 'Text'
 } as JiteraTypographyProps
 
-const TypographyTemplate: Story<JiteraTypographyProps> = (args) => <JiteraTypography {...args} />
+const TypographyTemplate: Story<JiteraTypographyProps> = (arguments_) => (
+  <JiteraTypography {...arguments_} />
+)
 
 export const Text = TypographyTemplate.bind({})
 Text.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   variant: 'Text' as TypographyVariantType,
-  children: 'Jitera Automation Tool',
+  children: text,
   type: 'danger'
 }
 
 export const Title = TypographyTemplate.bind({})
 Title.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   variant: 'Title' as TypographyVariantType,
   level: 2,
-  children: 'Jitera Automation Tool'
+  children: text
 }
 
 export const Link = TypographyTemplate.bind({})
 Link.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   variant: 'Link' as TypographyVariantType,
-  children: 'Jitera Automation Tool'
+  children: text
 }
 
 export const Paragraph = TypographyTemplate.bind({})
 Paragraph.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   variant: 'Paragraph' as TypographyVariantType,
-  children: 'Jitera Automation Tool'
+  children: text
 }
 
 export default {

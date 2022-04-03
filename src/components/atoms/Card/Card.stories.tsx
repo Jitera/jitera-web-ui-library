@@ -1,13 +1,14 @@
 import { Story } from '@storybook/react'
+
 import { JiteraCard, JiteraCardProps } from './Card.component'
 
-const defaultArgs: JiteraCardProps = {}
+const defaultArguments: JiteraCardProps = {}
 
-const CardTemplate: Story<JiteraCardProps> = (args) => <JiteraCard {...args} />
+const CardTemplate: Story<JiteraCardProps> = (arguments_) => <JiteraCard {...arguments_} />
 
 export const Default = CardTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Lorem Ipsum'
 }
 

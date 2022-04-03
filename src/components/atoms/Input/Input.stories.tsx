@@ -1,13 +1,14 @@
 import { Story } from '@storybook/react'
+
 import { JiteraInput, JiteraInputProps } from './Input.component'
 
-const defaultArgs: JiteraInputProps = {}
+const defaultArguments: JiteraInputProps = {}
 
-const InputTemplate: Story<JiteraInputProps> = (args) => <JiteraInput {...args} />
+const InputTemplate: Story<JiteraInputProps> = (arguments_) => <JiteraInput {...arguments_} />
 
 export const Default = InputTemplate.bind({})
 Default.args = {
-  ...defaultArgs
+  ...defaultArguments
 }
 
 export default {

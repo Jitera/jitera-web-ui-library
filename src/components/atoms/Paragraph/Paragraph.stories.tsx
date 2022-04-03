@@ -1,13 +1,16 @@
 import { Story } from '@storybook/react'
+
 import { JiteraParagraph, JiteraParagraphProps } from './Paragraph.component'
 
-const defaultArgs: JiteraParagraphProps = {}
+const defaultArguments: JiteraParagraphProps = {}
 
-const ParagraphTemplate: Story<JiteraParagraphProps> = (args) => <JiteraParagraph {...args} />
+const ParagraphTemplate: Story<JiteraParagraphProps> = (arguments_) => (
+  <JiteraParagraph {...arguments_} />
+)
 
 export const Default = ParagraphTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Lorem Ipsum'
 }
 

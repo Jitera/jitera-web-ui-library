@@ -1,9 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": [
-      "./tsconfig.json"
-    ]
+    "project": ["./tsconfig.json"]
   },
   "extends": [
     "airbnb",
@@ -75,5 +73,11 @@
         "alwaysTryTypes": true
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.stories.tsx"],
+      "rules": { "import/no-extraneous-dependencies": "off", "react/react-in-jsx-scope": "off" }
+    }
+  ]
 }

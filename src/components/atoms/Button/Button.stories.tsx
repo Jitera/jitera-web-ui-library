@@ -1,36 +1,38 @@
 import { Story } from '@storybook/react'
-import { JiteraButton, JiteraButtonProps } from './Button.component'
+
 import { SearchOutlined } from '@ant-design/icons'
 
-const defaultArgs = {
+import { JiteraButton, JiteraButtonProps } from './Button.component'
+
+const defaultArguments = {
   size: 'large'
 } as JiteraButtonProps
 
-const ButtonTemplate: Story<JiteraButtonProps> = (args) => <JiteraButton {...args} />
+const ButtonTemplate: Story<JiteraButtonProps> = (arguments_) => <JiteraButton {...arguments_} />
 
 export const Default = ButtonTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Default'
 }
 
 export const Primary = ButtonTemplate.bind({})
 Primary.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   type: 'primary',
   children: 'Primary'
 }
 
 export const Dash = ButtonTemplate.bind({})
 Dash.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   type: 'dashed',
   children: 'Dash'
 }
 
 export const Icon = ButtonTemplate.bind({})
 Icon.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   type: 'primary',
   children: 'Icon',
   icon: <SearchOutlined />
@@ -38,7 +40,7 @@ Icon.args = {
 
 export const Loading = ButtonTemplate.bind({})
 Loading.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   loading: true,
   type: 'primary',
   children: 'Loading'
@@ -46,7 +48,7 @@ Loading.args = {
 
 export const Disabled = ButtonTemplate.bind({})
 Disabled.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   disabled: true,
   type: 'primary',
   children: 'Disabled'

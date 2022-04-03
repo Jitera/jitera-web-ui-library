@@ -1,13 +1,14 @@
 import { Story } from '@storybook/react'
+
 import { JiteraFooter, JiteraFooterProps } from './Footer.component'
 
-const defaultArgs: JiteraFooterProps = {}
+const defaultArguments: JiteraFooterProps = {}
 
-const FooterTemplate: Story<JiteraFooterProps> = (args) => <JiteraFooter {...args} />
+const FooterTemplate: Story<JiteraFooterProps> = (arguments_) => <JiteraFooter {...arguments_} />
 
 export const Default = FooterTemplate.bind({})
 Default.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   children: 'Lorem Ipsum'
 }
 
