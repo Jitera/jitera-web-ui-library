@@ -1,16 +1,12 @@
 import { Story } from '@storybook/react'
-import {
-  JiteraConfigProvider,
-  JiteraLayout,
-  JiteraLayoutProps
-} from '@jitera/jitera-web-ui-library'
+import { ThemeProvider, JiteraLayout, JiteraLayoutProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraLayoutProps = {}
 
 const LayoutTemplate: Story<JiteraLayoutProps> = (arguments_) => (
-  <JiteraConfigProvider>
+  <ThemeProvider>
     <JiteraLayout {...arguments_} />
-  </JiteraConfigProvider>
+  </ThemeProvider>
 )
 
 export const Default = LayoutTemplate.bind({})

@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react'
-import { JiteraConfigProvider, JiteraCard, JiteraCardProps } from '@jitera/jitera-web-ui-library'
+import { ThemeProvider, JiteraCard, JiteraCardProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraCardProps = {}
 
 const CardTemplate: Story<JiteraCardProps> = (arguments_) => (
-  <JiteraConfigProvider>
+  <ThemeProvider>
     <JiteraCard {...arguments_} />
-  </JiteraConfigProvider>
+  </ThemeProvider>
 )
 
 export const Default = CardTemplate.bind({})

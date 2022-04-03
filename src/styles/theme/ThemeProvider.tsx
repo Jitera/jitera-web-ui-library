@@ -1,6 +1,8 @@
 import React, { ReactElement, useMemo, useState } from 'react'
 import { ConfigProvider } from 'antd'
 
+import { PREFIX_COMPONENT_CLASSNAME, PREFIX_ICON_CLASSNAME } from '../../constants'
+
 import { defaultTheme } from './default'
 import ThemeContext from './ThemeContext'
 
@@ -31,7 +33,11 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
   }, [themeValue])
 
-  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>
+  return (
+    <ConfigProvider prefixCls={PREFIX_COMPONENT_CLASSNAME} iconPrefixCls={PREFIX_ICON_CLASSNAME}>
+      <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>
+    </ConfigProvider>
+  )
 }
 
 export { ThemeProvider }

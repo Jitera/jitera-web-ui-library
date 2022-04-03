@@ -1,16 +1,12 @@
 import { Story } from '@storybook/react'
-import {
-  JiteraConfigProvider,
-  JiteraContent,
-  JiteraContentProps
-} from '@jitera/jitera-web-ui-library'
+import { ThemeProvider, JiteraContent, JiteraContentProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraContentProps = {}
 
 const ContentTemplate: Story<JiteraContentProps> = (arguments_) => (
-  <JiteraConfigProvider>
+  <ThemeProvider>
     <JiteraContent {...arguments_} />
-  </JiteraConfigProvider>
+  </ThemeProvider>
 )
 
 export const Default = ContentTemplate.bind({})

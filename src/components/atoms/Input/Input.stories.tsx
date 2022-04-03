@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react'
-import { JiteraConfigProvider, JiteraInput, JiteraInputProps } from '@jitera/jitera-web-ui-library'
+import { ThemeProvider, JiteraInput, JiteraInputProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraInputProps = {}
 
 const InputTemplate: Story<JiteraInputProps> = (arguments_) => (
-  <JiteraConfigProvider>
+  <ThemeProvider>
     <JiteraInput {...arguments_} />
-  </JiteraConfigProvider>
+  </ThemeProvider>
 )
 
 export const Default = InputTemplate.bind({})

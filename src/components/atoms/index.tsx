@@ -1,6 +1,5 @@
 export * from './Button/Button.component'
 export * from './Card/Card.component'
-export * from './ConfigProvider/ConfigProvider.component'
 export * from './Content/Content.component'
 export * from './Footer/Footer.component'
 export * from './Form/Form.component'

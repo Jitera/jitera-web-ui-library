@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react'
-import { JiteraConfigProvider, JiteraPage, JiteraPageProps } from '@jitera/jitera-web-ui-library'
+import { ThemeProvider, JiteraPage, JiteraPageProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraPageProps = {}
 
 const PageTemplate: Story<JiteraPageProps> = (arguments_) => (
-  <JiteraConfigProvider>
+  <ThemeProvider>
     <JiteraPage {...arguments_} />
-  </JiteraConfigProvider>
+  </ThemeProvider>
 )
 
 export const Default = PageTemplate.bind({})

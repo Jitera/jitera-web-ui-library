@@ -1,12 +1,12 @@
 import { Story } from '@storybook/react'
-import { JiteraConfigProvider, JiteraSider, JiteraSiderProps } from '@jitera/jitera-web-ui-library'
+import { ThemeProvider, JiteraSider, JiteraSiderProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraSiderProps = {}
 
 const SiderTemplate: Story<JiteraSiderProps> = (arguments_) => (
-  <JiteraConfigProvider>
+  <ThemeProvider>
     <JiteraSider {...arguments_} />
-  </JiteraConfigProvider>
+  </ThemeProvider>
 )
 
 export const Default = SiderTemplate.bind({})
