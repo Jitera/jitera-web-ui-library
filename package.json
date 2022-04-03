@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "antd": "~4.19.4",
-    "rc-util": "^5.19.3"
+    "rc-util": "~5.19.3"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "~16.2.1",
