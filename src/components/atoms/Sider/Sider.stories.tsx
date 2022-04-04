@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraSider, JiteraSiderProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraSider, JiteraSiderProps } from './Sider.component'
 
 const defaultArguments: JiteraSiderProps = {}
 

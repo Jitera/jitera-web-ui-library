@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraPage, JiteraPageProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraPage, JiteraPageProps } from './Page.component'
 
 const defaultArguments: JiteraPageProps = {}
 

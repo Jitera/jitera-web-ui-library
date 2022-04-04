@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react'
 import { SearchOutlined } from '@ant-design/icons'
-import { JiteraButton, JiteraButtonProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraButton, JiteraButtonProps } from './Button.component'
 
 const defaultArguments = {
   size: 'large'

@@ -1,6 +1,6 @@
 {
   "name": "@jitera/jitera-web-ui-library",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "atoms and component for web project",
   "sideEffects": [
     "*.css"
@@ -18,7 +18,8 @@
     "styled-components": "~5.3.5"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "~16.2.1",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@jitera/jitera-web-ui-library": "file:.yalc/@jitera/jitera-web-ui-library",
     "@storybook/addon-essentials": "~6.4.19",
     "@storybook/addon-interactions": "~6.4.19",
@@ -58,7 +59,7 @@
     "gulp": "~4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-less": "~5.0.0",
-    "husky": "~7.0.4",
+    "husky": "^7.0.4",
     "less": "~4.1.2",
     "less-plugin-npm-import": "~2.1.0",
     "lint-staged": "~12.3.7",
@@ -74,12 +75,18 @@
     "tsc-files": "~1.1.3",
     "typescript": "~4.6.3",
     "webpack": "~5.70.0",
-    "yalc": "^1.0.0-pre.53"
+    "yalc": "^1.0.0-pre.53",
+    "semantic-release": "^19.0.2"
   },
   "peerDependencies": {
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "react-scripts": "~5.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "scripts": {
     "storybook": "start-storybook -p 6006 -s public",
@@ -95,6 +102,15 @@
     "build:lib:dts": "tsc --project tsconfig.dts.json && tsc-alias --project tsconfig.dts.json && rollup -c rollup.config.dts.ts",
     "build:lib:style": "yarn gulp style",
     "build:lib:before": "rimraf dist && rimraf dist-dts && rimraf types",
-    "build:lib:after": "rimraf dist-dts"
+    "build:lib:after": "rimraf dist-dts",
+    "release": "standard-version",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jitera/jitera-web-ui-libray.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }

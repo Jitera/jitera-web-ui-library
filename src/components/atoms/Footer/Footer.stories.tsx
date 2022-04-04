@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraFooter, JiteraFooterProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraFooter, JiteraFooterProps } from './Footer.component'
 
 const defaultArguments: JiteraFooterProps = {}
 

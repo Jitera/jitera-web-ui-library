@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Story } from '@storybook/react'
-import { JiteraOTPInput, JiteraOTPInputProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraOTPInput, JiteraOTPInputProps } from './OTPInput.component'
 
 const defaultArguments = {} as JiteraOTPInputProps
 

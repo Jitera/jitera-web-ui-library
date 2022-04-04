@@ -1,9 +1,10 @@
 import { Story } from '@storybook/react'
+
 import {
   JiteraTypography,
   TypographyVariantType,
   JiteraTypographyProps
-} from '@jitera/jitera-web-ui-library'
+} from './Typography.component'
 
 const text = 'Jitera Automation Tool'
 

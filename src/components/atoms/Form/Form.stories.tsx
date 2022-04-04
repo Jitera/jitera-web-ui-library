@@ -1,10 +1,9 @@
 import { Story } from '@storybook/react'
-import {
-  JiteraButton,
-  JiteraInput,
-  JiteraForm,
-  JiteraFormProps
-} from '@jitera/jitera-web-ui-library'
+
+import { JiteraInput } from '../Input/Input.component'
+import { JiteraButton } from '../Button/Button.component'
+
+import { JiteraForm, JiteraFormProps } from './Form.component'
 
 const defaultArguments: JiteraFormProps = {}
 

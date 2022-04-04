@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraInput, JiteraInputProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraInput, JiteraInputProps } from './Input.component'
 
 const defaultArguments: JiteraInputProps = {}
 

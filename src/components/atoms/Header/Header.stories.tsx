@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraHeader, JiteraHeaderProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraHeader, JiteraHeaderProps } from './Header.component'
 
 const defaultArguments: JiteraHeaderProps = {}
 
