@@ -9,7 +9,7 @@ export interface LayoutProps extends PreviewProps, ComponentProps<AntBasicProps>
 const Layout = React.forwardRef<HTMLDivElement, LayoutProps>((props, ref) => {
   const { children, ...rest } = props
   return (
-    <AntLayout {...rest} prefixCls="-layout" ref={ref}>
+    <AntLayout {...rest} prefixCls="jitera-layout" ref={ref}>
       {children}
     </AntLayout>
   )
