@@ -19,6 +19,7 @@ jobs:
           node-version: 17
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+      - run: npm ci
       - name: Release
         env:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
