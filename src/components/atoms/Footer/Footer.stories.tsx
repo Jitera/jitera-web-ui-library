@@ -1,13 +1,9 @@
 import { Story } from '@storybook/react'
-import { ThemeProvider, JiteraFooter, JiteraFooterProps } from '@jitera/jitera-web-ui-library'
+import { JiteraFooter, JiteraFooterProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraFooterProps = {}
 
-const FooterTemplate: Story<JiteraFooterProps> = (arguments_) => (
-  <ThemeProvider>
-    <JiteraFooter {...arguments_} />
-  </ThemeProvider>
-)
+const FooterTemplate: Story<JiteraFooterProps> = (arguments_) => <JiteraFooter {...arguments_} />
 
 export const Default = FooterTemplate.bind({})
 Default.args = {

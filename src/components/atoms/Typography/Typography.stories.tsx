@@ -1,6 +1,5 @@
 import { Story } from '@storybook/react'
 import {
-  ThemeProvider,
   JiteraTypography,
   TypographyVariantType,
   JiteraTypographyProps
@@ -13,9 +12,7 @@ const defaultArguments = {
 } as JiteraTypographyProps
 
 const TypographyTemplate: Story<JiteraTypographyProps> = (arguments_) => (
-  <ThemeProvider>
-    <JiteraTypography {...arguments_} />
-  </ThemeProvider>
+  <JiteraTypography {...arguments_} />
 )
 
 export const Text = TypographyTemplate.bind({})

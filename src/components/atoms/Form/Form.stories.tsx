@@ -1,6 +1,5 @@
 import { Story } from '@storybook/react'
 import {
-  ThemeProvider,
   JiteraButton,
   JiteraInput,
   JiteraForm,
@@ -11,17 +10,15 @@ const defaultArguments: JiteraFormProps = {}
 
 const FormTemplate: Story<JiteraFormProps> = (arguments_) => {
   return (
-    <ThemeProvider>
-      <JiteraForm
-        {...arguments_}
-        onFinish={(value) => {
-          console.log(value)
-        }}
-      >
-        <JiteraInput formItem formItemProps={{ label: 'Input', name: 'input' }} />
-        <JiteraButton htmlType="submit">Submit</JiteraButton>
-      </JiteraForm>
-    </ThemeProvider>
+    <JiteraForm
+      {...arguments_}
+      onFinish={(value) => {
+        console.log(value)
+      }}
+    >
+      <JiteraInput formItem formItemProps={{ label: 'Input', name: 'input' }} />
+      <JiteraButton htmlType="submit">Submit</JiteraButton>
+    </JiteraForm>
   )
 }
 

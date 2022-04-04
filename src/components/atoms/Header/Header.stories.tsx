@@ -1,13 +1,9 @@
 import { Story } from '@storybook/react'
-import { ThemeProvider, JiteraHeader, JiteraHeaderProps } from '@jitera/jitera-web-ui-library'
+import { JiteraHeader, JiteraHeaderProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments: JiteraHeaderProps = {}
 
-const HeaderTemplate: Story<JiteraHeaderProps> = (arguments_) => (
-  <ThemeProvider>
-    <JiteraHeader {...arguments_} />
-  </ThemeProvider>
-)
+const HeaderTemplate: Story<JiteraHeaderProps> = (arguments_) => <JiteraHeader {...arguments_} />
 
 export const Default = HeaderTemplate.bind({})
 Default.args = {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Story } from '@storybook/react'
-import { ThemeProvider, JiteraOTPInput, JiteraOTPInputProps } from '@jitera/jitera-web-ui-library'
+import { JiteraOTPInput, JiteraOTPInputProps } from '@jitera/jitera-web-ui-library'
 
 const defaultArguments = {} as JiteraOTPInputProps
 
@@ -11,11 +11,7 @@ const OTPInputTemplate: Story<JiteraOTPInputProps> = (arguments_) => {
     setValue(otp)
   }
 
-  return (
-    <ThemeProvider>
-      <JiteraOTPInput {...arguments_} value={value} onChange={handleChange} />
-    </ThemeProvider>
-  )
+  return <JiteraOTPInput {...arguments_} value={value} onChange={handleChange} />
 }
 
 export const Default = OTPInputTemplate.bind({})
