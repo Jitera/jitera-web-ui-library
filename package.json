@@ -20,7 +20,6 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
-    "@jitera/jitera-web-ui-library": "file:.yalc/@jitera/jitera-web-ui-library",
     "@storybook/addon-essentials": "~6.4.19",
     "@storybook/addon-interactions": "~6.4.19",
     "@storybook/addon-links": "~6.4.19",
@@ -103,7 +102,6 @@
     "build:lib:style": "yarn gulp style",
     "build:lib:before": "rimraf dist && rimraf dist-dts && rimraf types",
     "build:lib:after": "rimraf dist-dts",
-    "release": "standard-version",
     "semantic-release": "semantic-release"
   },
   "repository": {
