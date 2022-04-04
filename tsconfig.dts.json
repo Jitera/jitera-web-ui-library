@@ -4,6 +4,7 @@
     "emitDeclarationOnly": true,
     "jsx": "react-jsx",
     "skipLibCheck": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "outDir": "dist-dts",
     "baseUrl": "./",
