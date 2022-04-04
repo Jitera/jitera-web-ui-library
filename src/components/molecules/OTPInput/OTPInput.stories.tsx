@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { Story } from '@storybook/react'
 
-import { JiteraOTPInput, JiteraOTPInputProps } from './OTPInput.component'
+import { OTPInput, OTPInputProps } from './OTPInput.component'
 
-const defaultArguments = {} as JiteraOTPInputProps
+const defaultArguments = {} as OTPInputProps
 
-const OTPInputTemplate: Story<JiteraOTPInputProps> = (arguments_) => {
+const OTPInputTemplate: Story<OTPInputProps> = (arguments_) => {
   const [value, setValue] = useState<string>('')
 
   const handleChange = (otp: string) => {
     setValue(otp)
   }
 
-  return <JiteraOTPInput {...arguments_} value={value} onChange={handleChange} />
+  return <OTPInput {...arguments_} value={value} onChange={handleChange} />
 }
 
 export const Default = OTPInputTemplate.bind({})
@@ -37,7 +37,7 @@ Disabled.args = {
 
 export default {
   title: 'Molecules/OTPInput',
-  component: JiteraOTPInput,
+  component: OTPInput,
   argTypes: {
     value: {
       description: 'Value of OTP Input'

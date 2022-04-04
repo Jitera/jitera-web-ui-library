@@ -1,10 +1,10 @@
 import { Story } from '@storybook/react'
 
-import { JiteraSider, JiteraSiderProps } from './Sider.component'
+import { Sider, SiderProps } from './Sider.component'
 
-const defaultArguments: JiteraSiderProps = {}
+const defaultArguments: SiderProps = {}
 
-const SiderTemplate: Story<JiteraSiderProps> = (arguments_) => <JiteraSider {...arguments_} />
+const SiderTemplate: Story<SiderProps> = (arguments_) => <Sider {...arguments_} />
 
 export const Default = SiderTemplate.bind({})
 Default.args = {
@@ -14,5 +14,5 @@ Default.args = {
 
 export default {
   title: 'Atoms/Sider',
-  component: JiteraSider
+  component: Sider
 }

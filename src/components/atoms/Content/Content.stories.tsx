@@ -1,10 +1,10 @@
 import { Story } from '@storybook/react'
 
-import { JiteraContent, JiteraContentProps } from './Content.component'
+import { Content, ContentProps } from './Content.component'
 
-const defaultArguments: JiteraContentProps = {}
+const defaultArguments: ContentProps = {}
 
-const ContentTemplate: Story<JiteraContentProps> = (arguments_) => <JiteraContent {...arguments_} />
+const ContentTemplate: Story<ContentProps> = (arguments_) => <Content {...arguments_} />
 
 export const Default = ContentTemplate.bind({})
 Default.args = {
@@ -14,5 +14,5 @@ Default.args = {
 
 export default {
   title: 'Atoms/Content',
-  component: JiteraContent
+  component: Content
 }

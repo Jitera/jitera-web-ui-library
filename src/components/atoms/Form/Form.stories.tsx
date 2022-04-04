@@ -1,23 +1,23 @@
 import { Story } from '@storybook/react'
 
-import { JiteraInput } from '../Input/Input.component'
-import { JiteraButton } from '../Button/Button.component'
+import { Input } from '../Input/Input.component'
+import { Button } from '../Button/Button.component'
 
-import { JiteraForm, JiteraFormProps } from './Form.component'
+import { Form, FormProps } from './Form.component'
 
-const defaultArguments: JiteraFormProps = {}
+const defaultArguments: FormProps = {}
 
-const FormTemplate: Story<JiteraFormProps> = (arguments_) => {
+const FormTemplate: Story<FormProps> = (arguments_) => {
   return (
-    <JiteraForm
+    <Form
       {...arguments_}
       onFinish={(value) => {
         console.log(value)
       }}
     >
-      <JiteraInput formItem formItemProps={{ label: 'Input', name: 'input' }} />
-      <JiteraButton htmlType="submit">Submit</JiteraButton>
-    </JiteraForm>
+      <Input formItem formItemProps={{ label: 'Input', name: 'input' }} />
+      <Button htmlType="submit">Submit</Button>
+    </Form>
   )
 }
 
@@ -28,5 +28,5 @@ Default.args = {
 
 export default {
   title: 'Atoms/Form',
-  component: JiteraForm
+  component: Form
 }

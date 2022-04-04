@@ -1,26 +1,26 @@
 import React from 'react'
-import { Input, InputRef, InputProps } from 'antd'
+import { Input as AntInput, InputRef as AntInputRef, InputProps as AntInputProps } from 'antd'
 
 import { PreviewProps } from '@/types/preview'
 
-import { JiteraComponentProps } from '@/types/component'
+import { ComponentProps } from '@/types/component'
 
-import { JiteraForm, JiteraFormItemProps } from '../Form/Form.component'
+import { Form, FormItemProps } from '../Form/Form.component'
 
-export interface JiteraInputProps extends PreviewProps, JiteraComponentProps<InputProps> {
+export interface InputProps extends PreviewProps, ComponentProps<AntInputProps> {
   formItem?: boolean
-  formItemProps?: Omit<JiteraFormItemProps, 'children'>
+  formItemProps?: Omit<FormItemProps, 'children'>
 }
 
-const JiteraInput = React.forwardRef<InputRef, JiteraInputProps>((props, ref) => {
+const Input = React.forwardRef<AntInputRef, InputProps>((props, ref) => {
   const { formItem, formItemProps = {}, ...rest } = props
   return formItem ? (
-    <JiteraForm.Item {...formItemProps}>
-      <Input {...rest} ref={ref} />
-    </JiteraForm.Item>
+    <Form.Item {...formItemProps}>
+      <AntInput {...rest} ref={ref} />
+    </Form.Item>
   ) : (
-    <Input {...rest} ref={ref} />
+    <AntInput {...rest} ref={ref} />
   )
 })
 
-export { JiteraInput }
+export { Input }
