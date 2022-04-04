@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraLayout, JiteraLayoutProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraLayout, JiteraLayoutProps } from './Layout.component'
 
 const defaultArguments: JiteraLayoutProps = {}
 

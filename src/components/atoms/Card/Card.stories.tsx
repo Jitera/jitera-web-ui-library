@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react'
-import { JiteraCard, JiteraCardProps } from '@jitera/jitera-web-ui-library'
+
+import { JiteraCard, JiteraCardProps } from './Card.component'
 
 const defaultArguments: JiteraCardProps = {}
 
