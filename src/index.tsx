@@ -1,8 +1,8 @@
 // Atoms
-export * from 'components/atoms'
+export * from './components/atoms'
 
 // Molecules
-export * from 'components/molecules'
+export * from './components/molecules'
 
 // Theme
-export * from 'styles/theme'
+export * from './styles/theme'

@@ -1,29 +1,42 @@
-import { forwardRef } from 'react'
+import React from 'react'
 import { Typography } from 'antd'
 import { TextProps } from 'antd/lib/typography/Text'
 import { LinkProps } from 'antd/lib/typography/Link'
 import { TitleProps } from 'antd/lib/typography/Title'
 import { ParagraphProps } from 'antd/lib/typography/Paragraph'
 
-export enum VariantType {
+import { PreviewProps } from '@/types/preview'
+import { JiteraComponentProps } from '@/types/component'
+
+export enum TypographyVariantType {
   Title = 'Title',
   Link = 'Link',
   Text = 'Text',
   Paragraph = 'Paragraph'
 }
 
-export type TypographyProps = TextProps & LinkProps & TitleProps & ParagraphProps
+export type TypographyElement = HTMLHeadingElement &
+  HTMLSpanElement &
+  HTMLParagraphElement &
+  HTMLElement
 
-export interface JiteraTypographyProps extends TypographyProps {
-  variant?: VariantType
+export type TypographyProps = JiteraComponentProps<TextProps> &
+  JiteraComponentProps<LinkProps> &
+  JiteraComponentProps<TitleProps> &
+  JiteraComponentProps<ParagraphProps>
+
+export interface JiteraTypographyProps extends PreviewProps, TypographyProps {
+  variant?: TypographyVariantType
 }
 
-const JiteraTypography = forwardRef<HTMLElement, JiteraTypographyProps>((props, ref) => {
-  const { variant = VariantType.Text, ...rest } = props
+const JiteraTypography = React.forwardRef<TypographyElement, JiteraTypographyProps>(
+  (props, ref) => {
+    const { variant = TypographyVariantType.Text, ...rest } = props
 
-  const Component = Typography[variant]
+    const Component = Typography[variant]
 
-  return <Component {...rest} ref={ref} />
-})
+    return <Component {...rest} ref={ref} />
+  }
+)
 
 export { JiteraTypography }

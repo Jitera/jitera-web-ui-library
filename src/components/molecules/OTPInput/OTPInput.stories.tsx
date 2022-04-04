@@ -1,27 +1,27 @@
-import { Story } from '@storybook/react'
-import { JiteraOTPInput, JiteraOTPInputProps } from './OTPInput.component'
 import { useState } from 'react'
+import { Story } from '@storybook/react'
+import { JiteraOTPInput, JiteraOTPInputProps } from '@jitera/jitera-web-ui-library'
 
-const defaultArgs = {} as JiteraOTPInputProps
+const defaultArguments = {} as JiteraOTPInputProps
 
-const OTPInputTemplate: Story<JiteraOTPInputProps> = (args) => {
+const OTPInputTemplate: Story<JiteraOTPInputProps> = (arguments_) => {
   const [value, setValue] = useState<string>('')
 
   const handleChange = (otp: string) => {
     setValue(otp)
   }
 
-  return <JiteraOTPInput {...args} value={value} onChange={handleChange} />
+  return <JiteraOTPInput {...arguments_} value={value} onChange={handleChange} />
 }
 
 export const Default = OTPInputTemplate.bind({})
 Default.args = {
-  ...defaultArgs
+  ...defaultArguments
 }
 
 export const HasError = OTPInputTemplate.bind({})
 HasError.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   value: '1111',
   hasErrored: true,
   errorMessage: 'The OTP has been expired'
@@ -29,7 +29,7 @@ HasError.args = {
 
 export const Disabled = OTPInputTemplate.bind({})
 Disabled.args = {
-  ...defaultArgs,
+  ...defaultArguments,
   value: '0000',
   isDisabled: true
 }

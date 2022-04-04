@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable import/prefer-default-export */
 // TODO: have script to convert from less variable of antd
 
 export const defaultTheme = {
