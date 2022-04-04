@@ -1,40 +1,40 @@
 import React, { ForwardRefExoticComponent, RefAttributes } from 'react'
-import { Form, FormInstance, FormProps } from 'antd'
+import { Form as AntForm, FormInstance as AntFormInstance, FormProps as AntFormProps } from 'antd'
 
 import { PreviewProps } from '@/types/preview'
-import { JiteraComponentProps } from '@/types/component'
+import { ComponentProps } from '@/types/component'
 
-export interface JiteraFormProps extends PreviewProps, JiteraComponentProps<FormProps> {
-  formRef?: React.RefObject<FormInstance>
+export interface FormProps extends PreviewProps, ComponentProps<AntFormProps> {
+  formRef?: React.RefObject<AntFormInstance>
   formStyle?: React.CSSProperties
 }
 
-type FormInterface = typeof Form
+type AntFormType = typeof AntForm
 
-export interface JiteraFormInterface
-  extends ForwardRefExoticComponent<JiteraFormProps & RefAttributes<HTMLDivElement>>,
-    FormInterface {}
+export interface FormInterface
+  extends ForwardRefExoticComponent<FormProps & RefAttributes<HTMLDivElement>>,
+    AntFormType {}
 
-const JiteraFormComponent = React.forwardRef<HTMLDivElement, JiteraFormProps>((props, ref) => {
+const FormComponent = React.forwardRef<HTMLDivElement, FormProps>((props, ref) => {
   const { children, formRef, style, formStyle, ...rest } = props
   return (
     <div ref={ref} style={{ ...style, height: '100%' }}>
-      <Form {...rest} style={formStyle} ref={formRef}>
+      <AntForm {...rest} style={formStyle} ref={formRef}>
         {children}
-      </Form>
+      </AntForm>
     </div>
   )
 })
 
-const JiteraForm = JiteraFormComponent as JiteraFormInterface
+const Form = FormComponent as FormInterface
 
-JiteraForm.ErrorList = Form.ErrorList
-JiteraForm.useForm = Form.useForm
-JiteraForm.Item = Form.Item
-JiteraForm.List = Form.List
-JiteraForm.Provider = Form.Provider
-JiteraForm.create = Form.create
+Form.ErrorList = AntForm.ErrorList
+Form.useForm = AntForm.useForm
+Form.Item = AntForm.Item
+Form.List = AntForm.List
+Form.Provider = AntForm.Provider
+Form.create = AntForm.create
 
-export { JiteraForm }
+export { Form }
 
-export { type FormItemProps as JiteraFormItemProps } from 'antd'
+export type { FormItemProps } from 'antd'

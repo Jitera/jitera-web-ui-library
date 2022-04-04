@@ -1,10 +1,10 @@
 import { Story } from '@storybook/react'
 
-import { JiteraHeader, JiteraHeaderProps } from './Header.component'
+import { Header, HeaderProps } from './Header.component'
 
-const defaultArguments: JiteraHeaderProps = {}
+const defaultArguments: HeaderProps = {}
 
-const HeaderTemplate: Story<JiteraHeaderProps> = (arguments_) => <JiteraHeader {...arguments_} />
+const HeaderTemplate: Story<HeaderProps> = (arguments_) => <Header {...arguments_} />
 
 export const Default = HeaderTemplate.bind({})
 Default.args = {
@@ -14,5 +14,5 @@ Default.args = {
 
 export default {
   title: 'Atoms/Header',
-  component: JiteraHeader
+  component: Header
 }

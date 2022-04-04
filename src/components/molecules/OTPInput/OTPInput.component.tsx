@@ -2,13 +2,13 @@ import React from 'react'
 import OtpInput, { OtpInputProps } from 'react-otp-input'
 
 import { useTheme } from '../../../styles/theme'
-import { JiteraTypography } from '../../atoms/Typography/Typography.component'
+import { Typography } from '../../atoms/Typography/Typography.component'
 
-export interface JiteraOTPInputProps extends OtpInputProps {
+export interface OTPInputProps extends OtpInputProps {
   errorMessage?: string
 }
 
-const JiteraOTPInput = React.forwardRef<OtpInput, JiteraOTPInputProps>((props, ref) => {
+const OTPInput = React.forwardRef<OtpInput, OTPInputProps>((props, ref) => {
   // eslint-disable-next-line unicorn/prevent-abbreviations
   const { numInputs = 4, value, onChange, errorMessage, ...rest } = props
 
@@ -31,9 +31,9 @@ const JiteraOTPInput = React.forwardRef<OtpInput, JiteraOTPInputProps>((props, r
           border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`
         }}
       />
-      {!!errorMessage && <JiteraTypography type="danger">{errorMessage}</JiteraTypography>}
+      {!!errorMessage && <Typography type="danger">{errorMessage}</Typography>}
     </>
   )
 })
 
-export { JiteraOTPInput }
+export { OTPInput }

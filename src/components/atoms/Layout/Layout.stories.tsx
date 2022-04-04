@@ -1,10 +1,10 @@
 import { Story } from '@storybook/react'
 
-import { JiteraLayout, JiteraLayoutProps } from './Layout.component'
+import { Layout, LayoutProps } from './Layout.component'
 
-const defaultArguments: JiteraLayoutProps = {}
+const defaultArguments: LayoutProps = {}
 
-const LayoutTemplate: Story<JiteraLayoutProps> = (arguments_) => <JiteraLayout {...arguments_} />
+const LayoutTemplate: Story<LayoutProps> = (arguments_) => <Layout {...arguments_} />
 
 export const Default = LayoutTemplate.bind({})
 Default.args = {
@@ -14,5 +14,5 @@ Default.args = {
 
 export default {
   title: 'Atoms/Layout',
-  component: JiteraLayout
+  component: Layout
 }

@@ -1,15 +1,15 @@
 import React from 'react'
-import { Button, ButtonProps } from 'antd'
+import { Button as AntButton, ButtonProps as AntButtonProps } from 'antd'
 
 import { PreviewProps } from '@/types/preview'
-import { JiteraComponentProps } from '@/types/component'
+import { ComponentProps } from '@/types/component'
 
-export interface JiteraButtonProps extends PreviewProps, JiteraComponentProps<ButtonProps> {}
+export interface ButtonProps extends PreviewProps, ComponentProps<AntButtonProps> {}
 
-const JiteraButton = React.forwardRef<HTMLButtonElement, JiteraButtonProps>((props, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { type = 'primary', ...rest } = props
 
-  return <Button type={type} {...rest} ref={ref} />
+  return <AntButton type={type} {...rest} ref={ref} />
 })
 
-export { JiteraButton }
+export { Button }

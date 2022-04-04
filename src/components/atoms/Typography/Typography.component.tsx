@@ -1,12 +1,12 @@
 import React from 'react'
-import { Typography } from 'antd'
-import { TextProps } from 'antd/lib/typography/Text'
-import { LinkProps } from 'antd/lib/typography/Link'
-import { TitleProps } from 'antd/lib/typography/Title'
-import { ParagraphProps } from 'antd/lib/typography/Paragraph'
+import { Typography as AntTypography } from 'antd'
+import { TextProps as AntTextProps } from 'antd/lib/typography/Text'
+import { LinkProps as AntLinkProps } from 'antd/lib/typography/Link'
+import { TitleProps as AntTitleProps } from 'antd/lib/typography/Title'
+import { ParagraphProps as AntParagraphProps } from 'antd/lib/typography/Paragraph'
 
 import { PreviewProps } from '@/types/preview'
-import { JiteraComponentProps } from '@/types/component'
+import { ComponentProps } from '@/types/component'
 
 export enum TypographyVariantType {
   Title = 'Title',
@@ -20,23 +20,21 @@ export type TypographyElement = HTMLHeadingElement &
   HTMLParagraphElement &
   HTMLElement
 
-export type TypographyProps = JiteraComponentProps<TextProps> &
-  JiteraComponentProps<LinkProps> &
-  JiteraComponentProps<TitleProps> &
-  JiteraComponentProps<ParagraphProps>
+export type CombinedTypographyProps = ComponentProps<AntTextProps> &
+  ComponentProps<AntLinkProps> &
+  ComponentProps<AntTitleProps> &
+  ComponentProps<AntParagraphProps>
 
-export interface JiteraTypographyProps extends PreviewProps, TypographyProps {
+export interface TypographyProps extends PreviewProps, CombinedTypographyProps {
   variant?: TypographyVariantType
 }
 
-const JiteraTypography = React.forwardRef<TypographyElement, JiteraTypographyProps>(
-  (props, ref) => {
-    const { variant = TypographyVariantType.Text, ...rest } = props
+const Typography = React.forwardRef<TypographyElement, TypographyProps>((props, ref) => {
+  const { variant = TypographyVariantType.Text, ...rest } = props
 
-    const Component = Typography[variant]
+  const Component = AntTypography[variant]
 
-    return <Component {...rest} ref={ref} />
-  }
-)
+  return <Component {...rest} ref={ref} />
+})
 
-export { JiteraTypography }
+export { Typography }

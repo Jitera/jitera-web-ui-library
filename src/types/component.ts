@@ -1,1 +1,1 @@
-export type JiteraComponentProps<T> = Omit<T, 'prefixCls' | 'iconPrefixCls'>
+export type ComponentProps<T> = Omit<T, 'prefixCls' | 'iconPrefixCls'>

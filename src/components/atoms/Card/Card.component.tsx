@@ -1,20 +1,20 @@
 import React from 'react'
-import { Card, CardProps } from 'antd'
+import { Card as AntCard, CardProps as AntCardProps } from 'antd'
 import { CardInterface } from 'antd/lib/card'
 
 import { PreviewProps } from '@/types/preview'
-import { JiteraComponentProps } from '@/types/component'
+import { ComponentProps } from '@/types/component'
 
-export interface JiteraCardProps extends PreviewProps, JiteraComponentProps<CardProps> {}
+export interface CardProps extends PreviewProps, ComponentProps<AntCardProps> {}
 
-const JiteraCard = React.forwardRef<CardInterface, JiteraCardProps>((props, ref) => {
+const Card = React.forwardRef<CardInterface, CardProps>((props, ref) => {
   const { children, ...rest } = props
   return (
     // @ts-expect-error Card has forwarded ref but somehow the type definition not.
-    <Card {...rest} ref={ref}>
+    <AntCard {...rest} ref={ref}>
       {children}
-    </Card>
+    </AntCard>
   )
 })
 
-export { JiteraCard }
+export { Card }

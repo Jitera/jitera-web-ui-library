@@ -1,20 +1,14 @@
 import { Story } from '@storybook/react'
 
-import {
-  JiteraTypography,
-  TypographyVariantType,
-  JiteraTypographyProps
-} from './Typography.component'
+import { Typography, TypographyVariantType, TypographyProps } from './Typography.component'
 
 const text = 'Jitera Automation Tool'
 
 const defaultArguments = {
   variant: 'Text'
-} as JiteraTypographyProps
+} as TypographyProps
 
-const TypographyTemplate: Story<JiteraTypographyProps> = (arguments_) => (
-  <JiteraTypography {...arguments_} />
-)
+const TypographyTemplate: Story<TypographyProps> = (arguments_) => <Typography {...arguments_} />
 
 export const Text = TypographyTemplate.bind({})
 Text.args = {
@@ -48,7 +42,7 @@ Paragraph.args = {
 
 export default {
   title: 'Atoms/Typography',
-  component: JiteraTypography,
+  component: Typography,
   argTypes: {
     variant: {
       description: 'Variant of the Typography',
