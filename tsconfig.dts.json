@@ -5,6 +5,7 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": false,
     "outDir": "dist-dts",
     "baseUrl": "./",
     "resolveJsonModule": true,
