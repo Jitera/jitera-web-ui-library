@@ -1,6 +1,6 @@
 {
   "name": "@jitera/jitera-web-ui-library",
-  "version": "1.1.0",
+  "version": "1.0.3",
   "description": "atoms and component for web project",
   "sideEffects": [
     "*.css"
@@ -34,7 +34,7 @@
     "@testing-library/react": "~12.0.0",
     "@testing-library/user-event": "~13.2.1",
     "@types/jest": "~27.0.1",
-    "@types/node": "~16.7.13",
+    "@types/node": "^17.0.23",
     "@types/react": "~17.0.20",
     "@types/react-dom": "~17.0.9",
     "@types/styled-components": "^5.1.24",

@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - fix/add_local_package_for_rollup_rimraf
 jobs:
   release:
     name: Release
