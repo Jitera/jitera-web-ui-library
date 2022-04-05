@@ -17,9 +17,7 @@ jobs:
         with:
           node-version: 14
       - name: Install dependencies
-        run: yarn install
-      - name: Build
-        run: yarn build
+        run: npm ci
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
