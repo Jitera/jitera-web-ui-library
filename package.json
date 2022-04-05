@@ -107,7 +107,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jitera/jitera-web-ui-libray.git"
+    "url": "https://github.com/Jitera/jitera-web-ui-library.git"
   },
   "publishConfig": {
     "access": "restricted"
