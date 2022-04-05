@@ -110,6 +110,6 @@
     "url": "https://github.com/Jitera/jitera-web-ui-library.git"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }
