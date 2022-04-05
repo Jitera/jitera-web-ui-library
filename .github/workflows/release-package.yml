@@ -16,17 +16,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 17
-      - name: Git init
-        run: git init
       - name: Install dependencies
-        run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
+        run: npm install --legacy-peer-deps
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
