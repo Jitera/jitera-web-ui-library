@@ -99,7 +99,7 @@
     "build": "yarn build:lib",
     "build:lib": "yarn build:lib:before && yarn build:lib:main && yarn build:lib:dts && yarn build:lib:style && yarn build:lib:after",
     "build:lib:main": "./node_modules/.bin/rollup -c",
-    "build:lib:dts": "tsc --project tsconfig.dts.json && tsc-alias --project tsconfig.dts.json && ./node_modules/.bin/rollup -c rollup.config.dts.ts",
+    "build:lib:dts": "tsc --project tsconfig.dts.json",
     "build:lib:style": "yarn gulp style",
     "build:lib:before": "./node_modules/.bin/rimraf dist && ./node_modules/.bin/rimraf dist-dts && ./node_modules/.bin/rimraf types",
     "build:lib:after": "./node_modules/.bin/rimraf dist-dts",
