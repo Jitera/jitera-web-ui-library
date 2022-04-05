@@ -6,6 +6,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": false,
+    "moduleResolution": "node",
     "outDir": "dist-dts",
     "baseUrl": "./",
     "resolveJsonModule": true,
