@@ -5,23 +5,12 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": false,
-    "moduleResolution": "node",
     "outDir": "dist-dts",
     "baseUrl": "./",
     "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"]
-    },
-    "target": "es2019",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "isolatedModules": true,
-    "noEmit": true,
+    }
   },
-  "include": ["src"],
+  "include": ["src"]
 }
