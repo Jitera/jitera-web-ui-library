@@ -2,9 +2,9 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - fix/add_local_package_for_rollup_rimraf
 jobs:
-  release:
+  build:
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -16,8 +16,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 17
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup yarn
+        run: npm install -g yarn
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
