@@ -16,8 +16,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 17
-      - name: Installing TypeScript
-        run: tsc -v
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Release
