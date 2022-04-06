@@ -12,7 +12,7 @@
     "dist"
   ],
   "dependencies": {
-    "antd": "4.19.5",
+    "antd": "MQuy/ant-design.git",
     "rc-util": "~5.19.3",
     "react-otp-input": "~2.4.0",
     "styled-components": "~5.3.5"

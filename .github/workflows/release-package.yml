@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - fix/test-antd
 jobs:
   build:
     name: Release
