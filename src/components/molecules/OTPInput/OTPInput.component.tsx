@@ -4,32 +4,66 @@ import OtpInput, { OtpInputProps } from 'react-otp-input'
 import { useTheme } from '../../../styles/theme'
 import { Text } from '../../atoms/Text/Text.component'
 
-export interface OTPInputProps extends OtpInputProps {
+export enum OTPInputType {
+  Box = 'box',
+  Underline = 'underline'
+}
+export interface OTPInputProps extends Omit<OtpInputProps, 'onChange' | 'numInputs'> {
   errorMessage?: string
+  style?: CSSStyleDeclaration
+  cellTextStyle?: CSSStyleDeclaration
+  cellStyle: CSSStyleDeclaration
+  pinCount: number
+  autoFocus?: boolean
+  otpInputType?: OTPInputType
+  onChange?: (value: string) => void
 }
 
-const OTPInput = React.forwardRef<OtpInput, OTPInputProps>((props, ref) => {
+const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) => {
   // eslint-disable-next-line unicorn/prevent-abbreviations
-  const { numInputs = 4, value, onChange, errorMessage, ...rest } = props
+  const {
+    pinCount = 4,
+    value,
+    onChange,
+    autoFocus,
+    errorMessage,
+    style = {},
+    cellTextStyle = {},
+    cellStyle = {},
+    otpInputType = 'box',
+    ...rest
+  } = props
 
   const { theme } = useTheme()
 
+  let customCellStyle = {}
+  if (otpInputType === OTPInputType.Underline) {
+    customCellStyle = {
+      borderLeft: 'unset',
+      borderRight: 'unset',
+      borderTop: 'unset'
+    }
+  }
+
   return (
-    <>
-      <div />
+    <div ref={ref}>
       <OtpInput
-        ref={ref}
         {...rest}
-        numInputs={numInputs}
+        numInputs={pinCount}
         value={value}
         onChange={onChange}
+        shouldAutoFocus={autoFocus}
+        containerStyle={style}
         inputStyle={{
           width: '3rem',
           height: '3rem',
           marginRight: '1rem',
           fontSize: '1.5rem',
           borderRadius: 4,
-          border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`
+          border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`,
+          ...cellStyle,
+          ...cellTextStyle,
+          ...customCellStyle
         }}
       />
       {!!errorMessage && <Text type="danger">{errorMessage}</Text>}

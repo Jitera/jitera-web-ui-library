@@ -56,6 +56,13 @@ export default {
       control: {
         type: 'boolean'
       }
+    },
+    otpInputType: {
+      description: 'OTP Input type',
+      control: {
+        type: 'select',
+        options: ['box', 'underline']
+      }
     }
   }
 }
