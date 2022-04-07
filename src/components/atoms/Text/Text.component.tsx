@@ -8,33 +8,30 @@ import { ParagraphProps as AntParagraphProps } from 'antd/lib/typography/Paragra
 import { PreviewProps } from '@/types/preview'
 import { ComponentProps } from '@/types/component'
 
-export enum TypographyVariantType {
+export enum TextVariantType {
   Title = 'Title',
   Link = 'Link',
   Text = 'Text',
   Paragraph = 'Paragraph'
 }
 
-export type TypographyElement = HTMLHeadingElement &
-  HTMLSpanElement &
-  HTMLParagraphElement &
-  HTMLElement
+export type TextElement = HTMLHeadingElement & HTMLSpanElement & HTMLParagraphElement & HTMLElement
 
-export type CombinedTypographyProps = ComponentProps<AntTextProps> &
+export type CombinedTextProps = ComponentProps<AntTextProps> &
   ComponentProps<AntLinkProps> &
   ComponentProps<AntTitleProps> &
   ComponentProps<AntParagraphProps>
 
-export interface TypographyProps extends PreviewProps, CombinedTypographyProps {
-  variant?: TypographyVariantType
+export interface TextProps extends PreviewProps, CombinedTextProps {
+  variant?: TextVariantType
 }
 
-const Typography = React.forwardRef<TypographyElement, TypographyProps>((props, ref) => {
-  const { variant = TypographyVariantType.Text, ...rest } = props
+const Text = React.forwardRef<TextElement, TextProps>((props, ref) => {
+  const { variant = TextVariantType.Text, ...rest } = props
 
   const Component = AntTypography[variant]
 
   return <Component {...rest} ref={ref} />
 })
 
-export { Typography }
+export { Text }

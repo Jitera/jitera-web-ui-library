@@ -5,9 +5,9 @@ import { CardInterface } from 'antd/lib/card'
 import { PreviewProps } from '@/types/preview'
 import { ComponentProps } from '@/types/component'
 
-export interface CardProps extends PreviewProps, ComponentProps<AntCardProps> {}
+export interface BoxProps extends PreviewProps, ComponentProps<AntCardProps> {}
 
-const Card = React.forwardRef<CardInterface, CardProps>((props, ref) => {
+const Box = React.forwardRef<CardInterface, BoxProps>((props, ref) => {
   const { children, ...rest } = props
   return (
     // @ts-expect-error Card has forwarded ref but somehow the type definition not.
@@ -17,4 +17,4 @@ const Card = React.forwardRef<CardInterface, CardProps>((props, ref) => {
   )
 })
 
-export { Card }
+export { Box }
