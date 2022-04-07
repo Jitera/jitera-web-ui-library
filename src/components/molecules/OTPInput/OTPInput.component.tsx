@@ -16,6 +16,7 @@ const OTPInput = React.forwardRef<OtpInput, OTPInputProps>((props, ref) => {
 
   return (
     <>
+      <div />
       <OtpInput
         ref={ref}
         {...rest}

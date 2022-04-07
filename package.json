@@ -1,6 +1,6 @@
 {
   "name": "@jitera/jitera-web-ui-library",
-  "version": "0.0.0-development",
+  "version": "1.0.3",
   "description": "atoms and component for web project",
   "sideEffects": [
     "*.css"
@@ -12,7 +12,7 @@
     "dist"
   ],
   "dependencies": {
-    "antd": "MQuy/ant-design.git#main",
+    "antd": "MQuy/ant-design.git",
     "rc-util": "~5.19.3",
     "react-otp-input": "~2.4.0",
     "styled-components": "~5.3.5"
@@ -34,7 +34,7 @@
     "@testing-library/react": "~12.0.0",
     "@testing-library/user-event": "~13.2.1",
     "@types/jest": "~27.0.1",
-    "@types/node": "~16.7.13",
+    "@types/node": "^17.0.23",
     "@types/react": "~17.0.20",
     "@types/react-dom": "~17.0.9",
     "@types/styled-components": "^5.1.24",
@@ -66,16 +66,17 @@
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "react-scripts": "~5.0.0",
+    "rimraf": "^3.0.2",
     "rollup": "~2.70.1",
     "rollup-plugin-dts": "~4.2.0",
     "rollup-plugin-prettier": "~2.2.2",
     "rollup-plugin-swc3": "~0.2.0",
+    "semantic-release": "^19.0.2",
     "tsc-alias": "~1.6.5",
     "tsc-files": "~1.1.3",
     "typescript": "~4.6.3",
     "webpack": "~5.70.0",
-    "yalc": "^1.0.0-pre.53",
-    "semantic-release": "^19.0.2"
+    "yalc": "^1.0.0-pre.53"
   },
   "peerDependencies": {
     "react": "~17.0.2",
@@ -97,18 +98,18 @@
     "prepublish": "yarn build",
     "build": "yarn build:lib",
     "build:lib": "yarn build:lib:before && yarn build:lib:main && yarn build:lib:dts && yarn build:lib:style && yarn build:lib:after",
-    "build:lib:main": "rollup -c",
-    "build:lib:dts": "tsc --project tsconfig.dts.json && tsc-alias --project tsconfig.dts.json && rollup -c rollup.config.dts.ts",
+    "build:lib:main": "./node_modules/.bin/rollup -c",
+    "build:lib:dts": "tsc --project tsconfig.dts.json && tsc-alias --project tsconfig.dts.json && ./node_modules/.bin/rollup -c rollup.config.dts.ts",
     "build:lib:style": "yarn gulp style",
-    "build:lib:before": "rimraf dist && rimraf dist-dts && rimraf types",
-    "build:lib:after": "rimraf dist-dts",
+    "build:lib:before": "./node_modules/.bin/rimraf dist && ./node_modules/.bin/rimraf dist-dts && ./node_modules/.bin/rimraf types",
+    "build:lib:after": "./node_modules/.bin/rimraf dist-dts",
     "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jitera/jitera-web-ui-libray.git"
+    "url": "https://github.com/Jitera/jitera-web-ui-library.git"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }
