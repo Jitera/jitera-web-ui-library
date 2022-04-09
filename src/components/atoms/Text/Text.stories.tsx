@@ -1,58 +1,58 @@
 import { Story } from '@storybook/react'
 
-import { Typography, TypographyVariantType, TypographyProps } from './Typography.component'
+import { Text as JiteraText, TextVariantType, TextProps } from './Text.component'
 
 const text = 'Jitera Automation Tool'
 
 const defaultArguments = {
   variant: 'Text'
-} as TypographyProps
+} as TextProps
 
-const TypographyTemplate: Story<TypographyProps> = (arguments_) => <Typography {...arguments_} />
+const TextTemplate: Story<TextProps> = (arguments_) => <JiteraText {...arguments_} />
 
-export const Text = TypographyTemplate.bind({})
+export const Text = TextTemplate.bind({})
 Text.args = {
   ...defaultArguments,
-  variant: 'Text' as TypographyVariantType,
+  variant: 'Text' as TextVariantType,
   children: text,
   type: 'danger'
 }
 
-export const Title = TypographyTemplate.bind({})
+export const Title = TextTemplate.bind({})
 Title.args = {
   ...defaultArguments,
-  variant: 'Title' as TypographyVariantType,
+  variant: 'Title' as TextVariantType,
   level: 2,
   children: text
 }
 
-export const Link = TypographyTemplate.bind({})
+export const Link = TextTemplate.bind({})
 Link.args = {
   ...defaultArguments,
-  variant: 'Link' as TypographyVariantType,
+  variant: 'Link' as TextVariantType,
   children: text
 }
 
-export const Paragraph = TypographyTemplate.bind({})
+export const Paragraph = TextTemplate.bind({})
 Paragraph.args = {
   ...defaultArguments,
-  variant: 'Paragraph' as TypographyVariantType,
+  variant: 'Paragraph' as TextVariantType,
   children: text
 }
 
 export default {
-  title: 'Atoms/Typography',
-  component: Typography,
+  title: 'Atoms/Text',
+  component: Text,
   argTypes: {
     variant: {
-      description: 'Variant of the Typography',
+      description: 'Variant of the Text',
       control: {
         type: 'select',
         options: ['Text', 'Title', 'Link', 'Paragraph']
       }
     },
     type: {
-      description: 'Type of typography loading icon ',
+      description: 'Type of Text loading icon ',
       control: {
         type: 'select',
         options: ['secondary', 'success', 'warning', 'danger', 'default']

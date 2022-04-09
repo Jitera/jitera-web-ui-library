@@ -2,7 +2,7 @@ import React from 'react'
 import OtpInput, { OtpInputProps } from 'react-otp-input'
 
 import { useTheme } from '../../../styles/theme'
-import { Typography } from '../../atoms/Typography/Typography.component'
+import { Text } from '../../atoms/Text/Text.component'
 
 export interface OTPInputProps extends OtpInputProps {
   errorMessage?: string
@@ -32,7 +32,7 @@ const OTPInput = React.forwardRef<OtpInput, OTPInputProps>((props, ref) => {
           border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`
         }}
       />
-      {!!errorMessage && <Typography type="danger">{errorMessage}</Typography>}
+      {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
     </>
   )
 })
