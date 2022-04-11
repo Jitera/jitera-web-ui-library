@@ -39,17 +39,7 @@ export function assertUnreachable(value: never): never {
   throw new Error(`Should not reach with ${value}`)
 }
 
-export function searchIcons(iconSet: IconSet, searchValue?: string | undefined) {
-  if (searchValue) {
-    return [
-      ...Object.entries(antdIcons),
-      ...Object.entries(bootstrapIcons),
-      ...Object.entries(featureIcons),
-      ...Object.entries(fontAwesomeIcons),
-      ...Object.entries(materialIcons)
-    ].filter((pair) => pair[0].toLowerCase().includes(searchValue.toLowerCase()))
-  }
-
+export function getIconSet(iconSet: IconSet) {
   switch (iconSet) {
     case IconSet.Antd:
       return Object.entries(antdIcons)
