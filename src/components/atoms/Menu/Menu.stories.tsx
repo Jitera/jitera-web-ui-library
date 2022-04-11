@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react'
 
-import { Menu, MenuItem, MenuProps } from './Menu.component'
+import { Menu, MenuProps } from './Menu.component'
+import { MenuItem } from './MenuItem.component'
 
 const defaultArguments: MenuProps = {}
 
