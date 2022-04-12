@@ -70,9 +70,6 @@ export function getIconSet(iconSet: IconSet) {
   }
 }
 
-export const DEFAULT_ICON_SIZE = 14
-export const DEFAULT_ICON_COLOR = '#000'
-
 export interface IconProps extends ComponentProps<IconBaseProps> {
   iconName: string
 }
@@ -81,8 +78,8 @@ export const Icon = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) =>
   return (
     <span ref={ref} style={{ display: 'inline-block', ...props.style }}>
       {getIconComponent(props.iconName, {
-        color: props.color ?? DEFAULT_ICON_COLOR,
-        size: props.size ?? DEFAULT_ICON_SIZE
+        color: props.color,
+        size: props.size
       })}
     </span>
   )
