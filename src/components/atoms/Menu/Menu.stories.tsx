@@ -7,7 +7,9 @@ const defaultArguments: MenuProps = {}
 
 const HeaderTemplate: Story<MenuProps> = (arguments_) => (
   <Menu {...arguments_}>
-    <MenuItem>Option</MenuItem>
+    <MenuItem>Option 1</MenuItem>
+    <MenuItem>Option 2</MenuItem>
+    <MenuItem>Option 3</MenuItem>
   </Menu>
 )
 
