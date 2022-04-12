@@ -1,7 +1,7 @@
 import React from 'react'
 import OtpInput, { OtpInputProps } from 'react-otp-input'
 
-import { isStyleObject, getClasses } from '@/utils/common'
+import { isStyleObject, getClasses } from '../../../utils/common'
 
 import { useTheme } from '../../../styles/theme'
 import { Text } from '../../atoms/Text/Text.component'
