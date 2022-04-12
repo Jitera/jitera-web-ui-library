@@ -1,6 +1,8 @@
 import React from 'react'
 import OtpInput, { OtpInputProps } from 'react-otp-input'
 
+import { isStyleObject, getClasses } from '@/utils/common'
+
 import { useTheme } from '../../../styles/theme'
 import { Text } from '../../atoms/Text/Text.component'
 
@@ -10,9 +12,9 @@ export enum OTPInputType {
 }
 export interface OTPInputProps extends Omit<OtpInputProps, 'onChange' | 'numInputs'> {
   errorMessage?: string
-  style?: CSSStyleDeclaration
-  cellTextStyle?: CSSStyleDeclaration
-  cellStyle: CSSStyleDeclaration
+  style?: Record<string, unknown> | string
+  cellTextStyle?: Record<string, unknown> | string
+  cellStyle: Record<string, unknown> | string
   pinCount: number
   autoFocus?: boolean
   otpInputType?: OTPInputType
@@ -45,6 +47,22 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
     }
   }
 
+  let inputStyle: Record<string, unknown> | string = ''
+
+  if (isStyleObject(cellStyle) && isStyleObject(cellTextStyle)) {
+    inputStyle = {
+      width: '3rem',
+      height: '3rem',
+      marginRight: '1rem',
+      fontSize: '1.5rem',
+      borderRadius: 4,
+      border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`,
+      ...(cellStyle as Record<string, unknown>),
+      ...(cellTextStyle as Record<string, unknown>),
+      ...customCellStyle
+    }
+  }
+
   return (
     <div ref={ref}>
       <OtpInput
@@ -54,20 +72,11 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
         onChange={onChange}
         shouldAutoFocus={autoFocus}
         containerStyle={style}
-        inputStyle={{
-          width: '3rem',
-          height: '3rem',
-          marginRight: '1rem',
-          fontSize: '1.5rem',
-          borderRadius: 4,
-          border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`,
-          ...cellStyle,
-          ...cellTextStyle,
-          ...customCellStyle
-        }}
+        inputStyle={inputStyle}
+        className={getClasses(cellStyle, cellTextStyle)}
       />
       {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-    </>
+    </div>
   )
 })
 
