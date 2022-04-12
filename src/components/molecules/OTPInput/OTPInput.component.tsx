@@ -1,39 +1,82 @@
 import React from 'react'
 import OtpInput, { OtpInputProps } from 'react-otp-input'
 
+import { isStyleObject, getClasses } from '../../../utils/common'
+
 import { useTheme } from '../../../styles/theme'
 import { Text } from '../../atoms/Text/Text.component'
 
-export interface OTPInputProps extends OtpInputProps {
+export enum OTPInputType {
+  Box = 'box',
+  Underline = 'underline'
+}
+export interface OTPInputProps extends Omit<OtpInputProps, 'onChange' | 'numInputs'> {
   errorMessage?: string
+  style?: Record<string, unknown> | string
+  cellTextStyle?: Record<string, unknown> | string
+  cellStyle: Record<string, unknown> | string
+  pinCount: number
+  autoFocus?: boolean
+  otpInputType?: OTPInputType
+  onChange?: (value: string) => void
 }
 
-const OTPInput = React.forwardRef<OtpInput, OTPInputProps>((props, ref) => {
+const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) => {
   // eslint-disable-next-line unicorn/prevent-abbreviations
-  const { numInputs = 4, value, onChange, errorMessage, ...rest } = props
+  const {
+    pinCount = 4,
+    value,
+    onChange,
+    autoFocus,
+    errorMessage,
+    style = {},
+    cellTextStyle = {},
+    cellStyle = {},
+    otpInputType = 'box',
+    ...rest
+  } = props
 
   const { theme } = useTheme()
 
+  let customCellStyle = {}
+  if (otpInputType === OTPInputType.Underline) {
+    customCellStyle = {
+      borderLeft: 'unset',
+      borderRight: 'unset',
+      borderTop: 'unset'
+    }
+  }
+
+  let inputStyle: Record<string, unknown> | string = ''
+
+  if (isStyleObject(cellStyle) && isStyleObject(cellTextStyle)) {
+    inputStyle = {
+      width: '3rem',
+      height: '3rem',
+      marginRight: '1rem',
+      fontSize: '1.5rem',
+      borderRadius: 4,
+      border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`,
+      ...(cellStyle as Record<string, unknown>),
+      ...(cellTextStyle as Record<string, unknown>),
+      ...customCellStyle
+    }
+  }
+
   return (
-    <>
-      <div />
+    <div ref={ref}>
       <OtpInput
-        ref={ref}
         {...rest}
-        numInputs={numInputs}
+        numInputs={pinCount}
         value={value}
         onChange={onChange}
-        inputStyle={{
-          width: '3rem',
-          height: '3rem',
-          marginRight: '1rem',
-          fontSize: '1.5rem',
-          borderRadius: 4,
-          border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`
-        }}
+        shouldAutoFocus={autoFocus}
+        containerStyle={style}
+        inputStyle={inputStyle}
+        className={getClasses(cellStyle, cellTextStyle)}
       />
       {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-    </>
+    </div>
   )
 })
 
