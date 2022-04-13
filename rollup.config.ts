@@ -1,4 +1,5 @@
 import { defineConfig } from 'rollup'
+import css from '@modular-css/rollup'
 import { swc, defineRollupSwcOption, minify, defineRollupSwcMinifyOption } from 'rollup-plugin-swc3'
 
 import package_ from './package.json'
@@ -9,11 +10,13 @@ export default defineConfig({
     {
       file: package_.main,
       exports: 'named',
-      format: 'cjs'
+      format: 'cjs',
+      assetFileNames: '[name][extname]'
     },
     {
       file: package_.module,
-      format: 'es'
+      format: 'es',
+      assetFileNames: '[name][extname]'
     }
   ],
   treeshake: {
@@ -35,6 +38,7 @@ export default defineConfig({
         }
       })
     ),
+    css(),
     minify(
       defineRollupSwcMinifyOption({
         mangle: true

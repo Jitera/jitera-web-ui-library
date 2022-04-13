@@ -9,7 +9,7 @@ export interface MenuProps extends PreviewProps, ComponentProps<AntMenuProps> {}
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   return (
-    <div ref={ref} style={{ display: 'contents' }}>
+    <div ref={ref}>
       <AntMenu {...props} prefixCls="jitera-menu" />
     </div>
   )
