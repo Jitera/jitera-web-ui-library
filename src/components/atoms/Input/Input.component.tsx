@@ -1,25 +1,94 @@
-import React from 'react'
-import { Input as AntInput, InputRef as AntInputRef, InputProps as AntInputProps } from 'antd'
+import React, { ChangeEvent, useState } from 'react'
+import { Input as AntInput, InputProps as AntInputProps } from 'antd'
+
+import { CSSProperties } from 'styled-components'
 
 import { PreviewProps } from '@/types/preview'
 
 import { ComponentProps } from '@/types/component'
 
+import { getClasses, isStyleObject } from '../../../utils/common'
+
 import { Form, FormItemProps } from '../Form/Form.component'
 
-export interface InputProps extends PreviewProps, ComponentProps<AntInputProps> {
+import { Text } from '../Text/Text.component'
+
+import styles from './Input.module.css'
+
+export interface InputProps extends PreviewProps, ComponentProps<Omit<AntInputProps, 'style'>> {
   formItem?: boolean
   formItemProps?: Omit<FormItemProps, 'children'>
+  style?: Record<string, unknown> | string
+  labelStyle?: Record<string, unknown> | string
+  label?: string
+  inputStyle?: Record<string, unknown> | string
+  isPasswordField?: boolean
+  placeholderStyle?: Record<string, unknown> | string
+  placeholder?: string
+  errorMessage?: string
 }
 
-const Input = React.forwardRef<AntInputRef, InputProps>((props, ref) => {
-  const { formItem, formItemProps = {}, ...rest } = props
-  return formItem ? (
-    <Form.Item {...formItemProps}>
-      <AntInput {...rest} ref={ref} />
-    </Form.Item>
-  ) : (
-    <AntInput {...rest} ref={ref} />
+const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
+  const {
+    formItem,
+    formItemProps = {},
+    style = {},
+    labelStyle = {},
+    label,
+    inputStyle = {},
+    placeholder,
+    placeholderStyle = {},
+    errorMessage,
+    isPasswordField,
+    ...rest
+  } = props
+  const [inputValue, setInputValue] = useState<number | string>('')
+
+  const WrapperComponent = formItem ? Form.Item : 'div'
+
+  const InternalInput = isPasswordField ? AntInput.Password : AntInput
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value)
+  }
+
+  return (
+    <WrapperComponent
+      style={style as CSSProperties}
+      {...formItemProps}
+      className={getClasses(styles.container, isStyleObject(style) ? '' : style)}
+      ref={ref}
+    >
+      <div>
+        <p
+          style={labelStyle as CSSProperties}
+          className={getClasses(styles.label, isStyleObject(labelStyle) ? '' : labelStyle)}
+        >
+          {label}
+        </p>
+      </div>
+      <div className={styles.inputWrapper}>
+        <InternalInput
+          style={inputStyle as CSSProperties}
+          className={getClasses(styles.input, isStyleObject(inputStyle) ? '' : inputStyle)}
+          onChange={handleChange}
+          {...rest}
+          placeholder=""
+        />
+        {!inputValue && (
+          <Text
+            style={placeholderStyle as CSSProperties}
+            className={getClasses(
+              styles.placeholder,
+              isStyleObject(placeholderStyle) ? '' : getClasses(placeholderStyle)
+            )}
+          >
+            {placeholder}
+          </Text>
+        )}
+      </div>
+      {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
+    </WrapperComponent>
   )
 })
 

@@ -7,6 +7,7 @@ import { ComponentProps } from '@/types/component'
 export interface FormProps extends PreviewProps, ComponentProps<AntFormProps> {
   formRef?: React.RefObject<AntFormInstance>
   formStyle?: React.CSSProperties
+  children?: React.ReactNode
 }
 
 type AntFormType = typeof AntForm
