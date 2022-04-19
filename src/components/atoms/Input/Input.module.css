@@ -1,0 +1,27 @@
+.container {
+  width: 500px;
+}
+
+.inputWrapper {
+  display: flex;
+  position: relative;
+}
+
+.placeholder {
+  position: absolute;
+  color: #d9d9d9;
+  top: 50%;
+  left: 12px;
+  transform: translate(0%, -50%);
+}
+
+.label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.input {
+  padding: 10;
+  width: 100%;
+  border-radius: 4px;
+}
