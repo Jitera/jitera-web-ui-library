@@ -2,9 +2,7 @@ import { Story } from '@storybook/react'
 
 import { Input, InputProps } from './Input.component'
 
-const defaultArguments: InputProps = {
-  label: 'Label'
-}
+const defaultArguments: InputProps = {}
 
 const InputTemplate: Story<InputProps> = (arguments_) => <Input {...arguments_} />
 
