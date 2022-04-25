@@ -19,8 +19,6 @@ export interface InputProps extends PreviewProps, ComponentProps<Omit<AntInputPr
   formItem?: boolean
   formItemProps?: Omit<FormItemProps, 'children'>
   style?: Record<string, unknown> | string
-  labelStyle?: Record<string, unknown> | string
-  label?: string
   inputStyle?: Record<string, unknown> | string
   isPasswordField?: boolean
   placeholderStyle?: Record<string, unknown> | string
@@ -33,8 +31,6 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
     formItem,
     formItemProps = {},
     style = {},
-    labelStyle = {},
-    label,
     inputStyle = {},
     placeholder,
     placeholderStyle = {},
@@ -59,14 +55,6 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
       className={getClasses(styles.container, isStyleObject(style) ? '' : style)}
       ref={ref}
     >
-      <div>
-        <p
-          style={labelStyle as CSSProperties}
-          className={getClasses(styles.label, isStyleObject(labelStyle) ? '' : labelStyle)}
-        >
-          {label}
-        </p>
-      </div>
       <div className={styles.inputWrapper}>
         <InternalInput
           style={inputStyle as CSSProperties}
