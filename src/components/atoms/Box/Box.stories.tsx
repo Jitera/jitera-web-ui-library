@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Box, BoxProps } from './Box.component'
 
-const defaultArguments: BoxProps = {}
+const defaultArguments: BoxProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const BoxTemplate: Story<BoxProps> = (arguments_) => <Box {...arguments_} />
 

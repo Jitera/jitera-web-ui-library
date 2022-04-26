@@ -1,17 +1,22 @@
 import React from 'react'
 import { Col as AntCol, ColProps as AntColProps } from 'antd'
 
-import { PreviewProps } from '@/types/preview'
-import { ComponentProps } from '@/types/component'
+import { ComponentProps } from '@src/types/component'
+
+import { PreviewProps } from '@src/types/preview'
+
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 export interface ColProps extends PreviewProps, ComponentProps<AntColProps> {}
 
 const Col = React.forwardRef<HTMLDivElement, ColProps>((props, ref) => {
-  const { children, ...rest } = props
+  const { children, isPreview, responsiveVisibility, ...rest } = props
   return (
-    <AntCol {...rest} ref={ref}>
-      {children}
-    </AntCol>
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+      <AntCol {...rest} ref={ref}>
+        {children}
+      </AntCol>
+    </VisibilityComponent>
   )
 })
 

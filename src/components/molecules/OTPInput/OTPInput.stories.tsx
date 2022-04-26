@@ -3,7 +3,19 @@ import { Story } from '@storybook/react'
 
 import { OTPInput, OTPInputProps } from './OTPInput.component'
 
-const defaultArguments = {} as OTPInputProps
+const defaultArguments = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+} as OTPInputProps
 
 const OTPInputTemplate: Story<OTPInputProps> = (arguments_) => {
   const [value, setValue] = useState<string>('')

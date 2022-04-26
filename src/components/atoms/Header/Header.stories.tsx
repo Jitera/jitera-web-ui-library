@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Header, HeaderProps } from './Header.component'
 
-const defaultArguments: HeaderProps = {}
+const defaultArguments: HeaderProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const HeaderTemplate: Story<HeaderProps> = (arguments_) => <Header {...arguments_} />
 

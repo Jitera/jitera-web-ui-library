@@ -1,6 +1,8 @@
 import React from 'react'
 import OtpInput, { OtpInputProps } from 'react-otp-input'
 
+import { PreviewProps } from '@src/types/preview'
+
 import { isStyleObject, getClasses } from '../../../utils/common'
 
 import { useTheme } from '../../../styles/theme'
@@ -10,7 +12,7 @@ export enum OTPInputType {
   Box = 'box',
   Underline = 'underline'
 }
-export interface OTPInputProps extends Omit<OtpInputProps, 'onChange' | 'numInputs'> {
+export interface OTPInputProps extends PreviewProps, Omit<OtpInputProps, 'onChange' | 'numInputs'> {
   errorMessage?: string
   style?: Record<string, unknown> | string
   cellTextStyle?: Record<string, unknown> | string

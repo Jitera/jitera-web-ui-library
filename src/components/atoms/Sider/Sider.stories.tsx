@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Sider, SiderProps } from './Sider.component'
 
-const defaultArguments: SiderProps = {}
+const defaultArguments: SiderProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const SiderTemplate: Story<SiderProps> = (arguments_) => <Sider {...arguments_} />
 

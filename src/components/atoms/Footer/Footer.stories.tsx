@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Footer, FooterProps } from './Footer.component'
 
-const defaultArguments: FooterProps = {}
+const defaultArguments: FooterProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const FooterTemplate: Story<FooterProps> = (arguments_) => <Footer {...arguments_} />
 

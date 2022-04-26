@@ -3,7 +3,19 @@ import { Story } from '@storybook/react'
 import { Menu, MenuProps } from './Menu.component'
 import { MenuIconPosition, MenuItem } from './MenuItem.component'
 
-const defaultArguments: MenuProps = {}
+const defaultArguments: MenuProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const HeaderTemplate: Story<MenuProps> = (arguments_) => (
   <Menu {...arguments_}>

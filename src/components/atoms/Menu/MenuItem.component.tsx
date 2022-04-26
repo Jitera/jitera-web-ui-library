@@ -2,8 +2,11 @@ import { MenuItemProps as AntMenuItemProps } from 'antd'
 import AntMenuItem from 'antd/lib/menu/MenuItem'
 import React from 'react'
 
-import { ComponentProps } from '@/types/component'
-import { PreviewProps } from '@/types/preview'
+import { ComponentProps } from '@src/types/component'
+
+import { PreviewProps } from '@src/types/preview'
+
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 import { assertUnreachable, Icon } from '../Icon/Icon.component'
 
@@ -24,17 +27,22 @@ export interface MenuItemProps extends PreviewProps, ComponentProps<AntMenuItemP
 }
 
 export const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
-  ({ label, iconName, iconPosition, spaceBetween, ...restProps }, ref) => {
+  (
+    { label, iconName, iconPosition, spaceBetween, responsiveVisibility, isPreview, ...restProps },
+    ref
+  ) => {
     return (
-      <li ref={ref}>
-        <ul>
-          <AntMenuItem {...restProps}>
-            {iconName && iconPosition && spaceBetween
-              ? renderTextWithIcon(iconName, iconPosition, spaceBetween, label)
-              : label}
-          </AntMenuItem>
-        </ul>
-      </li>
+      <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+        <li ref={ref}>
+          <ul>
+            <AntMenuItem {...restProps}>
+              {iconName && iconPosition && spaceBetween
+                ? renderTextWithIcon(iconName, iconPosition, spaceBetween, label)
+                : label}
+            </AntMenuItem>
+          </ul>
+        </li>
+      </VisibilityComponent>
     )
   }
 )

@@ -5,7 +5,19 @@ import { Row } from '../Row/Row.component'
 
 import { Col, ColProps } from './Col.component'
 
-const defaultArguments: ColProps = {}
+const defaultArguments: ColProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const ColTemplate: Story<ColProps> = (arguments_) => <Row {...arguments_} />
 

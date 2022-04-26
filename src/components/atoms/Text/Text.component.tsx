@@ -5,8 +5,11 @@ import { LinkProps as AntLinkProps } from 'antd/lib/typography/Link'
 import { TitleProps as AntTitleProps } from 'antd/lib/typography/Title'
 import { ParagraphProps as AntParagraphProps } from 'antd/lib/typography/Paragraph'
 
-import { PreviewProps } from '@/types/preview'
-import { ComponentProps } from '@/types/component'
+import { ComponentProps } from '@src/types/component'
+
+import { PreviewProps } from '@src/types/preview'
+
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 export enum TextVariantType {
   Title = 'Title',
@@ -27,11 +30,15 @@ export interface TextProps extends PreviewProps, CombinedTextProps {
 }
 
 const Text = React.forwardRef<TextElement, TextProps>((props, ref) => {
-  const { variant = TextVariantType.Text, ...rest } = props
+  const { variant = TextVariantType.Text, responsiveVisibility, isPreview, ...rest } = props
 
   const Component = AntTypography[variant]
 
-  return <Component {...rest} ref={ref} />
+  return (
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
+      <Component {...rest} ref={ref} />
+    </VisibilityComponent>
+  )
 })
 
 export { Text }

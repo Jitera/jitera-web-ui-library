@@ -1,8 +1,11 @@
 import React, { ForwardRefExoticComponent, RefAttributes } from 'react'
 import { Form as AntForm, FormInstance as AntFormInstance, FormProps as AntFormProps } from 'antd'
 
-import { PreviewProps } from '@/types/preview'
-import { ComponentProps } from '@/types/component'
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+
+import { ComponentProps } from '@src/types/component'
+
+import { PreviewProps } from '@src/types/preview'
 
 export interface FormProps extends PreviewProps, ComponentProps<AntFormProps> {
   formRef?: React.RefObject<AntFormInstance>
@@ -17,13 +20,15 @@ export interface FormInterface
     AntFormType {}
 
 const FormComponent = React.forwardRef<HTMLDivElement, FormProps>((props, ref) => {
-  const { children, formRef, style, formStyle, ...rest } = props
+  const { children, formRef, style, formStyle, responsiveVisibility, isPreview, ...rest } = props
   return (
-    <div ref={ref} style={{ ...style, height: '100%' }}>
-      <AntForm {...rest} style={formStyle} ref={formRef}>
-        {children}
-      </AntForm>
-    </div>
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+      <div ref={ref} style={{ ...style, height: '100%' }}>
+        <AntForm {...rest} style={formStyle} ref={formRef}>
+          {children}
+        </AntForm>
+      </div>
+    </VisibilityComponent>
   )
 })
 

@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Image, ImageProps } from './Image.component'
 
-const defaultArguments: ImageProps = {}
+const defaultArguments: ImageProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const ImageTemplate: Story<ImageProps> = (arguments_) => <Image {...arguments_} />
 

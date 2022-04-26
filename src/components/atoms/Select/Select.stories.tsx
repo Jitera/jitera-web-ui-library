@@ -6,6 +6,17 @@ const defaultArguments: SelectProps = {
   options: [
     { value: 'hello', label: 'Hello' },
     { value: 'world', label: 'World' }
+  ],
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
   ]
 }
 

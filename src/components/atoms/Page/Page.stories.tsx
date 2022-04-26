@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Page, PageProps } from './Page.component'
 
-const defaultArguments: PageProps = {}
+const defaultArguments: PageProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const PageTemplate: Story<PageProps> = (arguments_) => <Page {...arguments_} />
 

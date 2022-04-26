@@ -6,13 +6,16 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "outDir": "dist-dts",
-    "baseUrl": "./",
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "types": ["node"],
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@src/*": ["./*"],
+      "@styles/*": ["./stypes/*"],
+      "@components/*": ["./components/*"],
+      "@constants/*": ["./constants/*"],
+    },
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "dist-dts"]
