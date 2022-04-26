@@ -1,19 +1,24 @@
 import React from 'react'
 import { List as AntList, ListProps as AntListProps } from 'antd'
 
-import { PreviewProps } from '@/types/preview'
-import { ComponentProps } from '@/types/component'
+import { PreviewProps } from '@src/types/preview'
+
+import { ComponentProps } from '@src/types/component'
+
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 import styles from './List.module.css'
 
 export interface ListProps extends PreviewProps, ComponentProps<AntListProps<any>> {}
 
 const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
-  const { style, ...rest } = props
+  const { style, responsiveVisibility, isPreview, ...rest } = props
   return (
-    <div style={style} ref={ref}>
-      <AntList style={styles.inner} {...rest} />
-    </div>
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+      <div style={style} ref={ref}>
+        <AntList style={styles.inner as any} {...rest} />
+      </div>
+    </VisibilityComponent>
   )
 })
 
