@@ -4,7 +4,18 @@ import { SearchOutlined } from '@ant-design/icons'
 import { Button, ButtonProps } from './Button.component'
 
 const defaultArguments = {
-  size: 'large'
+  size: 'large',
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
 } as ButtonProps
 
 const ButtonTemplate: Story<ButtonProps> = (arguments_) => <Button {...arguments_} />

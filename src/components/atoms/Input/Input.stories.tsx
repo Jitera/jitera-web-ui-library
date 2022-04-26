@@ -2,7 +2,19 @@ import { Story } from '@storybook/react'
 
 import { Input, InputProps } from './Input.component'
 
-const defaultArguments: InputProps = {}
+const defaultArguments: InputProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const InputTemplate: Story<InputProps> = (arguments_) => <Input {...arguments_} />
 

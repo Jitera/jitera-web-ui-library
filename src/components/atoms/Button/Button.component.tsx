@@ -13,7 +13,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
   const { type = 'primary', isPreview, responsiveVisibility, ...rest } = props
 
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
       <AntButton type={type} {...rest} ref={ref} />
     </VisibilityComponent>
   )

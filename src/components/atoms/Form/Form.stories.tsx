@@ -5,7 +5,19 @@ import { Button } from '../Button/Button.component'
 
 import { Form, FormProps } from './Form.component'
 
-const defaultArguments: FormProps = {}
+const defaultArguments: FormProps = {
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
+}
 
 const FormTemplate: Story<FormProps> = (arguments_) => {
   return (

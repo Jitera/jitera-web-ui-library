@@ -35,7 +35,7 @@ const Text = React.forwardRef<TextElement, TextProps>((props, ref) => {
   const Component = AntTypography[variant]
 
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
       <Component {...rest} ref={ref} />
     </VisibilityComponent>
   )

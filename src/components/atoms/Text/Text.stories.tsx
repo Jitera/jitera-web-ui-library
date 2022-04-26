@@ -5,7 +5,18 @@ import { Text as JiteraText, TextVariantType, TextProps } from './Text.component
 const text = 'Jitera Automation Tool'
 
 const defaultArguments = {
-  variant: 'Text'
+  variant: 'Text',
+  responsiveVisibility: [
+    {
+      value: 'desktop'
+    },
+    {
+      value: 'tablet'
+    },
+    {
+      value: 'mobile'
+    }
+  ]
 } as TextProps
 
 const TextTemplate: Story<TextProps> = (arguments_) => <JiteraText {...arguments_} />
