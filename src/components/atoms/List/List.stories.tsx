@@ -2,7 +2,7 @@ import { Story } from '@storybook/react'
 
 import { List, ListProps } from './List.component'
 
-const defaultArguments: ListProps<any> = {
+const defaultArguments: ListProps = {
   style: {},
   dataSource: [
     { title: 'hello' },
@@ -13,7 +13,7 @@ const defaultArguments: ListProps<any> = {
   renderItem: (item) => <p>{item.title}</p>
 }
 
-const ListTemplate: Story<ListProps<any>> = (arguments_) => <List {...arguments_} />
+const ListTemplate: Story<ListProps> = (arguments_) => <List {...arguments_} />
 
 export const Default = ListTemplate.bind({})
 Default.args = {
