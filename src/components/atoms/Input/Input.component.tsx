@@ -3,9 +3,11 @@ import { Input as AntInput, InputProps as AntInputProps } from 'antd'
 
 import { CSSProperties } from 'styled-components'
 
-import { PreviewProps } from '@/types/preview'
+import { PreviewProps } from '@src/types/preview'
 
-import { ComponentProps } from '@/types/component'
+import { ComponentProps } from '@src/types/component'
+
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 import { getClasses, isStyleObject } from '../../../utils/common'
 
@@ -36,6 +38,8 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
     placeholderStyle = {},
     errorMessage,
     isPasswordField,
+    responsiveVisibility,
+    isPreview,
     ...rest
   } = props
   const [inputValue, setInputValue] = useState<number | string>('')
@@ -49,34 +53,36 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   }
 
   return (
-    <WrapperComponent
-      style={style as CSSProperties}
-      {...formItemProps}
-      className={getClasses(styles.container, isStyleObject(style) ? '' : style)}
-      ref={ref}
-    >
-      <div className={styles.inputWrapper}>
-        <InternalInput
-          style={inputStyle as CSSProperties}
-          className={getClasses(styles.input, isStyleObject(inputStyle) ? '' : inputStyle)}
-          onChange={handleChange}
-          {...rest}
-          placeholder=""
-        />
-        {!inputValue && (
-          <Text
-            style={placeholderStyle as CSSProperties}
-            className={getClasses(
-              styles.placeholder,
-              isStyleObject(placeholderStyle) ? '' : getClasses(placeholderStyle)
-            )}
-          >
-            {placeholder}
-          </Text>
-        )}
-      </div>
-      {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-    </WrapperComponent>
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+      <WrapperComponent
+        style={style as CSSProperties}
+        {...formItemProps}
+        className={getClasses(styles.container, isStyleObject(style) ? '' : style)}
+        ref={ref}
+      >
+        <div className={styles.inputWrapper}>
+          <InternalInput
+            style={inputStyle as CSSProperties}
+            className={getClasses(styles.input, isStyleObject(inputStyle) ? '' : inputStyle)}
+            onChange={handleChange}
+            {...rest}
+            placeholder=""
+          />
+          {!inputValue && (
+            <Text
+              style={placeholderStyle as CSSProperties}
+              className={getClasses(
+                styles.placeholder,
+                isStyleObject(placeholderStyle) ? '' : getClasses(placeholderStyle)
+              )}
+            >
+              {placeholder}
+            </Text>
+          )}
+        </div>
+        {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
+      </WrapperComponent>
+    </VisibilityComponent>
   )
 })
 

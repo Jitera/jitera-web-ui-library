@@ -2,8 +2,9 @@ import { MenuItemProps as AntMenuItemProps } from 'antd'
 import AntMenuItem from 'antd/lib/menu/MenuItem'
 import React from 'react'
 
-import { ComponentProps } from '@/types/component'
-import { PreviewProps } from '@/types/preview'
+import { ComponentProps } from '@src/types/component'
+
+import { PreviewProps } from '@src/types/preview'
 
 import { assertUnreachable, Icon } from '../Icon/Icon.component'
 

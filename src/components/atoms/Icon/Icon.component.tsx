@@ -7,7 +7,7 @@ import * as fontAwesomeIcons from 'react-icons/fa'
 import * as featureIcons from 'react-icons/fi'
 import * as materialIcons from 'react-icons/md'
 
-import { ComponentProps } from '@/types/component'
+import { ComponentProps } from '@src/types/component'
 
 export enum IconSet {
   All = 'all',

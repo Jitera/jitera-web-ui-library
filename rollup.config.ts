@@ -1,6 +1,7 @@
 import { defineConfig } from 'rollup'
 import css from '@modular-css/rollup'
-import { swc, defineRollupSwcOption, minify, defineRollupSwcMinifyOption } from 'rollup-plugin-swc3'
+import { minify, defineRollupSwcMinifyOption } from 'rollup-plugin-swc3'
+import typescript from '@rollup/plugin-typescript'
 
 import package_ from './package.json'
 
@@ -11,7 +12,8 @@ export default defineConfig({
       file: package_.main,
       exports: 'named',
       format: 'cjs',
-      assetFileNames: '[name][extname]'
+      assetFileNames: '[name][extname]',
+      inlineDynamicImports: true
     },
     {
       file: package_.module,
@@ -23,21 +25,7 @@ export default defineConfig({
     moduleSideEffects: false
   },
   plugins: [
-    swc(
-      defineRollupSwcOption({
-        jsc: {
-          parser: {
-            syntax: 'typescript',
-            tsx: true
-          },
-          transform: {
-            react: {
-              runtime: 'automatic'
-            }
-          }
-        }
-      })
-    ),
+    typescript({ target: 'es2019' }),
     css(),
     minify(
       defineRollupSwcMinifyOption({

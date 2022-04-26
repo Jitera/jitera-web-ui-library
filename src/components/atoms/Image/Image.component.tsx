@@ -1,17 +1,24 @@
 import React from 'react'
 
-import { PreviewProps } from '@/types/preview'
+import { PreviewProps } from '@src/types/preview'
+
+import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 export interface ImageProps
   extends PreviewProps,
     Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
-  source?: string | undefined
+  source?: string
+  alt?: string
 }
 
 const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
-  const { source, ...rest } = props
+  const { source, alt = '', responsiveVisibility, isPreview, ...rest } = props
   // eslint-disable-next-line jsx-a11y/alt-text
-  return <img ref={ref} src={source} {...rest} />
+  return (
+    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
+      <img ref={ref} src={source} {...rest} alt={alt} />
+    </VisibilityComponent>
+  )
 })
 
 export { Image }
