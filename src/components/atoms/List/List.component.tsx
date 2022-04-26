@@ -4,13 +4,15 @@ import { List as AntList, ListProps as AntListProps } from 'antd'
 import { PreviewProps } from '@/types/preview'
 import { ComponentProps } from '@/types/component'
 
-export interface ListProps<T> extends PreviewProps, ComponentProps<AntListProps<T>> {}
+import styles from './List.module.css'
 
-const List = React.forwardRef<HTMLDivElement, ListProps<any>>((props, ref) => {
+export interface ListProps extends PreviewProps, ComponentProps<AntListProps<any>> {}
+
+const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
   const { style, ...rest } = props
   return (
     <div style={style} ref={ref}>
-      <AntList style={{ width: '100%', height: 'auto' }} {...rest} />
+      <AntList style={styles.inner} {...rest} />
     </div>
   )
 })
