@@ -8,6 +8,11 @@ interface Props {
 }
 
 const PreviewResponsive = ({ visibility, children }: Props) => {
+  // handle use case old data
+  if (!visibility) {
+    return children
+  }
+
   // eslint-disable-next-line unicorn/prefer-query-selector
   const previewFrameWidth = document.getElementById('preview-frame')?.offsetWidth || 0
 
