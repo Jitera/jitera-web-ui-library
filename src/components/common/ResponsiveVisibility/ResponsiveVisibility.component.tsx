@@ -1,5 +1,7 @@
 import { ReactElement, useMemo } from 'react'
 
+import { DEFAULT_RESPONSIVE_VISIBILITY } from '@src/constants'
+
 import PreviewResponsive from '../PreviewResponsive/PreviewResponsive.component'
 
 import { InlineWrapper, Wrapper } from './ResponsiveVisibility.styles'
@@ -11,7 +13,12 @@ interface Props {
   isInline?: boolean
 }
 
-const ResponsiveVisibility = ({ visibility, isPreview, isInline, children }: Props) => {
+const ResponsiveVisibility = ({
+  visibility = DEFAULT_RESPONSIVE_VISIBILITY,
+  isPreview,
+  isInline,
+  children
+}: Props) => {
   const values = useMemo(
     () => visibility?.map((item: { value: string }) => item.value),
     [visibility]
