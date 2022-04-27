@@ -8,7 +8,7 @@ import VisibilityComponent from '@components/common/ResponsiveVisibility/Respons
 
 export interface BoxProps
   extends PreviewProps,
-    ComponentProps<{ children?: ReactNode | undefined; style: CSSProperties }> {}
+    ComponentProps<{ children?: ReactNode | undefined; style?: CSSProperties }> {}
 
 const Box = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   const { children, isPreview, responsiveVisibility, ...rest } = props
