@@ -16,7 +16,7 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, ref) => {
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <div style={style} ref={ref}>
-        <AntList style={styles.inner as any} {...rest} />
+        <AntList className={styles.inner} {...rest} />
       </div>
     </VisibilityComponent>
   )
