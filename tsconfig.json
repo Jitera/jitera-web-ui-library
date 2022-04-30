@@ -21,6 +21,7 @@
       "@styles/*": ["./stypes/*"],
       "@components/*": ["./components/*"],
       "@constants/*": ["./constants/*"],
+      "@types/*": ["./types/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
