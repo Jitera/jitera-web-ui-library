@@ -1,24 +1,28 @@
 import React from 'react'
 import {
   Radio as AntRadio,
+  RadioProps as AntRadioProps,
   RadioGroupProps as AntRadioGroupProps,
-  CheckboxOptionType as AntCheckboxOptionType,
   Space as AntSpace,
   SpaceProps as AntSpaceProps
 } from 'antd'
 
 import { PreviewProps } from '@src/types/preview'
-import { ComponentProps, RadioCheckboxStateColor } from '@src/types/component'
+import { ComponentProps, RadioStateColor } from '@src/types/component'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 import { RadioWrapper } from './Radio.styles'
 
+export interface RadioOptions extends AntRadioProps {
+  label: string
+}
+
 export interface RadioProps
-  extends RadioCheckboxStateColor,
+  extends RadioStateColor,
     PreviewProps,
     ComponentProps<Omit<AntRadioGroupProps, 'options'>> {
-  options: AntCheckboxOptionType[]
+  options: RadioOptions[]
   spaceProps?: AntSpaceProps
 }
 

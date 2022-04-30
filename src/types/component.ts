@@ -7,3 +7,9 @@ export interface RadioCheckboxStateColor {
   inactiveColor?: string
   labelStyle?: CSSObject
 }
+
+export type RadioStateColor = RadioCheckboxStateColor
+
+export interface CheckboxStateColor extends RadioCheckboxStateColor {
+  checkColor?: string
+}
