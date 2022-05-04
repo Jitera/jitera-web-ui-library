@@ -78,9 +78,9 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       <ReactSelect
         components={components}
         isDisabled={isPreview}
-        ref={ref as any}
         styles={customStyles}
         {...rest}
+        ref={ref as any}
       />
     </VisibilityComponent>
   )
