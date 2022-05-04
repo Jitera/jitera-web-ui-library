@@ -47,7 +47,7 @@ const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) =>
         labelStyle={labelStyle}
         checkColor={checkColor}
       >
-        <AntCheckbox.Group {...rest} ref={ref}>
+        <AntCheckbox.Group disabled={isPreview} {...rest} ref={ref}>
           <AntSpace {...spaceProps}>
             {options?.map((option) => (
               <AntCheckbox {...option}>{option.label}</AntCheckbox>
