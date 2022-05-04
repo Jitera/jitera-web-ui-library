@@ -65,6 +65,7 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
             style={inputStyle as CSSProperties}
             className={getClasses(styles.input, isStyleObject(inputStyle) ? '' : inputStyle)}
             onChange={handleChange}
+            disabled={isPreview}
             {...rest}
             placeholder=""
           />

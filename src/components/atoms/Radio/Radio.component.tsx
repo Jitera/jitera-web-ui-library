@@ -40,7 +40,7 @@ const Radio = React.forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <RadioWrapper activeColor={activeColor} inactiveColor={inactiveColor} labelStyle={labelStyle}>
-        <AntRadio.Group {...rest} ref={ref}>
+        <AntRadio.Group disabled={isPreview} {...rest} ref={ref}>
           <AntSpace {...spaceProps}>
             {options?.map((option) => (
               <AntRadio key={option.value as string} {...option}>

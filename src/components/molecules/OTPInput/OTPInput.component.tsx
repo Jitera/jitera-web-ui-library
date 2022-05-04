@@ -26,9 +26,8 @@ export interface OTPInputProps extends PreviewProps, Omit<OtpInputProps, 'onChan
 const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) => {
   // eslint-disable-next-line unicorn/prevent-abbreviations
   const {
+    isPreview,
     pinCount = 4,
-    value,
-    onChange,
     autoFocus,
     errorMessage,
     style = {},
@@ -68,10 +67,9 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
   return (
     <div ref={ref}>
       <OtpInput
+        isDisabled={isPreview}
         {...rest}
         numInputs={pinCount}
-        value={value}
-        onChange={onChange}
         shouldAutoFocus={autoFocus}
         containerStyle={style}
         inputStyle={inputStyle}
