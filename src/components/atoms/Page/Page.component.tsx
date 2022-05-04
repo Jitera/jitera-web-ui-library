@@ -4,26 +4,19 @@ import { PreviewProps } from '@src/types/preview'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
+import { PageWrapper } from './Page.styles'
+
 export interface PageProps extends PreviewProps, React.HTMLAttributes<HTMLDivElement> {}
 
 const Page = React.forwardRef<HTMLDivElement, PageProps>(({ ...props }, ref) => {
-  const { children, style, isPreview, responsiveVisibility, ...rest } = props
+  const { children, isPreview, responsiveVisibility, ...rest } = props
   const minHeight = isPreview ? '100%' : '100vh'
 
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <div
-        {...rest}
-        style={{
-          width: '100%',
-          minHeight,
-          backgroundColor: '#fff',
-          ...style
-        }}
-        ref={ref}
-      >
+      <PageWrapper minHeight={minHeight} {...rest} ref={ref}>
         {children}
-      </div>
+      </PageWrapper>
     </VisibilityComponent>
   )
 })
