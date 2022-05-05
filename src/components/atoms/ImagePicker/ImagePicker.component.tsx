@@ -17,7 +17,7 @@ const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, r
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <div ref={ref}>
-        <AntUpload {...rest} disabled={isPreview} listType="picture">
+        <AntUpload disabled={isPreview} listType="picture" {...rest}>
           {children}
         </AntUpload>
       </div>
