@@ -14,6 +14,13 @@ Default.args = {
   children: <Button>Upload</Button>
 }
 
+export const WithErrorMessage = ImagePickerTemplate.bind({})
+WithErrorMessage.args = {
+  ...defaultArguments,
+  children: <Button>Upload</Button>,
+  errorMessage: 'Lorem ipsum dolor sit amet amet'
+}
+
 export default {
   title: 'Atoms/ImagePicker',
   component: ImagePicker
