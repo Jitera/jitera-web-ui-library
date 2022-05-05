@@ -28,6 +28,14 @@ Default.args = {
   format: 'YYYY/MM/DD'
 }
 
+export const WithErrorMessage = DateTimePickerTemplate.bind({})
+WithErrorMessage.args = {
+  ...defaultArguments,
+  value: dayjs().set('month', 10).set('date', 5),
+  format: 'YYYY/MM/DD',
+  errorMessage: 'Lorem ipsum dolor sit amet amet'
+}
+
 export const DateTimePickerWithTime = DateTimePickerTemplate.bind({})
 DateTimePickerWithTime.args = {
   ...defaultArguments,
