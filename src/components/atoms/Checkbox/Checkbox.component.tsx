@@ -23,13 +23,14 @@ export interface CheckboxProps
   extends CheckboxStateColor,
     PreviewProps,
     ComponentProps<Omit<AntCheckboxGroupProps, 'options'>> {
-  options: CheckboxOptions[]
+  data: CheckboxOptions[]
   spaceProps?: AntSpaceProps
+  direction?: 'horizontal' | 'vertical' | undefined
 }
 
 const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   const {
-    options,
+    data,
     spaceProps,
     isPreview,
     responsiveVisibility,
@@ -37,6 +38,7 @@ const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) =>
     inactiveColor,
     checkColor,
     labelStyle,
+    direction,
     ...rest
   } = props
   return (
@@ -48,8 +50,8 @@ const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) =>
         checkColor={checkColor}
       >
         <AntCheckbox.Group disabled={isPreview} {...rest} ref={ref}>
-          <AntSpace {...spaceProps}>
-            {options?.map((option) => (
+          <AntSpace direction={direction} {...spaceProps}>
+            {data?.map((option) => (
               <AntCheckbox {...option}>{option.label}</AntCheckbox>
             ))}
           </AntSpace>

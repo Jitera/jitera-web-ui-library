@@ -1,7 +1,9 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { useMemo } from 'react'
 import { Input as AntInput, InputProps as AntInputProps } from 'antd'
 
 import { CSSProperties } from 'styled-components'
+
+import { Text } from '@components/atoms/Text/Text.component'
 
 import { PreviewProps } from '@src/types/preview'
 
@@ -9,17 +11,11 @@ import { ComponentProps } from '@src/types/component'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
-import { getClasses, isStyleObject } from '../../../utils/common'
-
-import { Form, FormItemProps } from '../Form/Form.component'
-
-import { Text } from '../Text/Text.component'
+import { getClasses, isStyleObject } from '@src/utils/common'
 
 import styles from './Input.module.css'
 
 export interface InputProps extends PreviewProps, ComponentProps<Omit<AntInputProps, 'style'>> {
-  formItem?: boolean
-  formItemProps?: Omit<FormItemProps, 'children'>
   style?: Record<string, unknown> | string
   inputStyle?: Record<string, unknown> | string
   isPasswordField?: boolean
@@ -30,59 +26,48 @@ export interface InputProps extends PreviewProps, ComponentProps<Omit<AntInputPr
 
 const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const {
-    formItem,
-    formItemProps = {},
     style = {},
     inputStyle = {},
     placeholder,
-    placeholderStyle = {},
     errorMessage,
     isPasswordField,
     responsiveVisibility,
     isPreview,
+    className,
     ...rest
   } = props
-  const [inputValue, setInputValue] = useState<number | string>('')
 
-  const WrapperComponent = formItem ? Form.Item : 'div'
+  const InternalInput = useMemo(
+    () => (isPasswordField ? AntInput.Password : AntInput),
+    [isPasswordField]
+  )
 
-  const InternalInput = isPasswordField ? AntInput.Password : AntInput
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
-  }
+  const inputStyleProps = useMemo(() => {
+    return isStyleObject(inputStyle)
+      ? {
+          style: inputStyle as CSSProperties,
+          className: styles.input
+        }
+      : {
+          className: getClasses(styles.input, inputStyle)
+        }
+  }, [inputStyle])
 
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <WrapperComponent
+      <div
         style={style as CSSProperties}
-        {...formItemProps}
-        className={getClasses(styles.container, isStyleObject(style) ? '' : style)}
+        className={getClasses(styles.container, className || '')}
         ref={ref}
       >
-        <div className={styles.inputWrapper}>
-          <InternalInput
-            style={inputStyle as CSSProperties}
-            className={getClasses(styles.input, isStyleObject(inputStyle) ? '' : inputStyle)}
-            onChange={handleChange}
-            disabled={isPreview}
-            {...rest}
-            placeholder=""
-          />
-          {!inputValue && (
-            <Text
-              style={placeholderStyle as CSSProperties}
-              className={getClasses(
-                styles.placeholder,
-                isStyleObject(placeholderStyle) ? '' : getClasses(placeholderStyle)
-              )}
-            >
-              {placeholder}
-            </Text>
-          )}
-        </div>
+        <InternalInput
+          {...inputStyleProps}
+          disabled={isPreview}
+          placeholder={placeholder}
+          {...rest}
+        />
         {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-      </WrapperComponent>
+      </div>
     </VisibilityComponent>
   )
 })

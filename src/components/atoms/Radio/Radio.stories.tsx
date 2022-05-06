@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'
 import { Radio, RadioProps } from './Radio.component'
 
 const defaultArguments: RadioProps = {
-  options: [
+  data: [
     { label: 'A', value: 'a' },
     { label: 'B', value: 'b' }
   ]

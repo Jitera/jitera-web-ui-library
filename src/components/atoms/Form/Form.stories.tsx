@@ -3,9 +3,11 @@ import { Story } from '@storybook/react'
 import { Input } from '../Input/Input.component'
 import { Button } from '../Button/Button.component'
 
-import { Form, FormProps } from './Form.component'
+import { BoxProps } from '../Box/Box.component'
 
-const defaultArguments: FormProps = {
+import { Form } from './Form.component'
+
+const defaultArguments: BoxProps = {
   responsiveVisibility: [
     {
       value: 'desktop'
@@ -19,15 +21,10 @@ const defaultArguments: FormProps = {
   ]
 }
 
-const FormTemplate: Story<FormProps> = (arguments_) => {
+const FormTemplate: Story<BoxProps> = (arguments_) => {
   return (
-    <Form
-      {...arguments_}
-      onFinish={(value) => {
-        console.log(value)
-      }}
-    >
-      <Input formItem formItemProps={{ label: 'Input', name: 'input' }} />
+    <Form {...arguments_}>
+      <Input />
       <Button htmlType="submit">Submit</Button>
     </Form>
   )

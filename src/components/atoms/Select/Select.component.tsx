@@ -5,7 +5,8 @@ import ReactSelect, {
   Props as ReactSelectProps,
   SelectInstance,
   DropdownIndicatorProps,
-  GroupBase
+  GroupBase,
+  OptionsOrGroups
 } from 'react-select'
 
 import { PreviewProps } from '@src/types/preview'
@@ -19,6 +20,7 @@ export interface SelectProps extends PreviewProps, ReactSelectProps {
   dropdownStyle?: CSSProperties
   optionStyle?: CSSProperties
   iconProps?: IconProps
+  data?: OptionsOrGroups<unknown, GroupBase<unknown>> | undefined
 }
 
 const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
@@ -27,6 +29,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     isPreview,
     responsiveVisibility,
     styles,
+    data,
     placeholderStyle,
     containerStyle,
     dropdownStyle,
@@ -79,6 +82,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
         components={components}
         isDisabled={isPreview}
         styles={customStyles}
+        options={data}
         {...rest}
         ref={ref as any}
       />
