@@ -13,6 +13,8 @@
   ],
   "dependencies": {
     "antd": "~4.20.0-alpha.0",
+    "dayjs": "~1.11.1",
+    "rc-picker": "~2.6.8",
     "rc-util": "~5.19.3",
     "react-icons": "~4.3.1",
     "react-otp-input": "~2.4.0",
