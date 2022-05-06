@@ -9,6 +9,7 @@ import { PreviewProps } from '@src/types/preview'
 
 import { ComponentProps } from '@src/types/component'
 
+import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 import { getClasses, isStyleObject } from '@src/utils/common'
@@ -22,18 +23,21 @@ export interface InputProps extends PreviewProps, ComponentProps<Omit<AntInputPr
   placeholderStyle?: Record<string, unknown> | string
   placeholder?: string
   errorMessage?: string
+  prefixIconProps?: IconProps
+  suffixIconProps?: IconProps
 }
 
 const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const {
     style = {},
     inputStyle = {},
-    placeholder,
     errorMessage,
     isPasswordField,
     responsiveVisibility,
     isPreview,
     className,
+    prefixIconProps,
+    suffixIconProps,
     ...rest
   } = props
 
@@ -53,6 +57,22 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
         }
   }, [inputStyle])
 
+  const prefixIcon = useMemo(() => {
+    if (!prefixIconProps) {
+      return
+    }
+    // eslint-disable-next-line consistent-return
+    return <Icon {...prefixIconProps} />
+  }, [prefixIconProps])
+
+  const suffixIcon = useMemo(() => {
+    if (!suffixIconProps) {
+      return
+    }
+    // eslint-disable-next-line consistent-return
+    return <Icon {...suffixIconProps} />
+  }, [suffixIconProps])
+
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <div
@@ -63,7 +83,8 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
         <InternalInput
           {...inputStyleProps}
           disabled={isPreview}
-          placeholder={placeholder}
+          prefix={prefixIcon}
+          suffix={suffixIcon}
           {...rest}
         />
         {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
