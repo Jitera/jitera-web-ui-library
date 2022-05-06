@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'
 import { Checkbox, CheckboxProps } from './Checkbox.component'
 
 const defaultArguments: CheckboxProps = {
-  options: [
+  data: [
     { label: 'A', value: 'a' },
     { label: 'B', value: 'b' }
   ]

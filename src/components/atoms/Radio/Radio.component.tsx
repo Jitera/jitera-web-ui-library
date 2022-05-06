@@ -22,28 +22,30 @@ export interface RadioProps
   extends RadioStateColor,
     PreviewProps,
     ComponentProps<Omit<AntRadioGroupProps, 'options'>> {
-  options: RadioOptions[]
+  data: RadioOptions[]
   spaceProps?: AntSpaceProps
+  direction?: 'horizontal' | 'vertical' | undefined
 }
 
 const Radio = React.forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
   const {
-    options,
+    data,
     spaceProps,
     isPreview,
     responsiveVisibility,
     activeColor,
     inactiveColor,
     labelStyle,
+    direction,
     ...rest
   } = props
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <RadioWrapper activeColor={activeColor} inactiveColor={inactiveColor} labelStyle={labelStyle}>
         <AntRadio.Group disabled={isPreview} {...rest} ref={ref}>
-          <AntSpace {...spaceProps}>
-            {options?.map((option) => (
-              <AntRadio key={option.value as string} {...option}>
+          <AntSpace direction={direction} {...spaceProps}>
+            {data?.map((option) => (
+              <AntRadio key={option.value as string} value={option.value} {...option}>
                 {option.label}
               </AntRadio>
             ))}

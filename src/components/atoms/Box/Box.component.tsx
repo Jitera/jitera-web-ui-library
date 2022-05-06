@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react'
+import React from 'react'
 
 import { ComponentProps } from '@src/types/component'
 
@@ -8,7 +8,7 @@ import VisibilityComponent from '@components/common/ResponsiveVisibility/Respons
 
 export interface BoxProps
   extends PreviewProps,
-    ComponentProps<{ children?: ReactNode | undefined; style?: CSSProperties }> {}
+    ComponentProps<React.HTMLAttributes<HTMLDivElement>> {}
 
 const Box = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   const { children, isPreview, responsiveVisibility, ...rest } = props
