@@ -93,7 +93,7 @@ export const CustomIcon = HamburgerMenuTemplate.bind({})
 CustomIcon.args = {
   ...defaultArguments,
   buttonProps: {
-    type: 'dashed'
+    buttonType: 'dashed'
   },
   iconProps: {
     iconName: 'MdOutlineLocalFireDepartment'

@@ -29,21 +29,21 @@ Default.args = {
 export const Primary = ButtonTemplate.bind({})
 Primary.args = {
   ...defaultArguments,
-  type: 'primary',
+  buttonType: 'primary',
   children: 'Primary'
 }
 
 export const Dash = ButtonTemplate.bind({})
 Dash.args = {
   ...defaultArguments,
-  type: 'dashed',
+  buttonType: 'dashed',
   children: 'Dash'
 }
 
 export const Icon = ButtonTemplate.bind({})
 Icon.args = {
   ...defaultArguments,
-  type: 'primary',
+  buttonType: 'primary',
   children: 'Icon',
   icon: <SearchOutlined />
 }
@@ -52,7 +52,7 @@ export const Loading = ButtonTemplate.bind({})
 Loading.args = {
   ...defaultArguments,
   loading: true,
-  type: 'primary',
+  buttonType: 'primary',
   children: 'Loading'
 }
 
@@ -60,7 +60,7 @@ export const Disabled = ButtonTemplate.bind({})
 Disabled.args = {
   ...defaultArguments,
   disabled: true,
-  type: 'primary',
+  buttonType: 'primary',
   children: 'Disabled'
 }
 
@@ -71,20 +71,20 @@ export default {
     size: {
       description: 'Size of the button',
       control: {
-        type: 'select',
+        buttonType: 'select',
         options: ['large', 'default', 'small']
       }
     },
     loading: {
       description: 'Enable loading icon ',
       control: {
-        type: 'boolean'
+        buttonType: 'boolean'
       }
     },
     disabled: {
       description: 'Disable the button',
       control: {
-        type: 'boolean'
+        buttonType: 'boolean'
       }
     },
     onClick: {

@@ -19,11 +19,12 @@ export enum HamburgerDrawerPlacementEnum {
 }
 
 export interface HamburgerDrawerProps
-  extends Omit<DrawerProps, 'headerStyle' | 'bodyStyle' | 'footerStyle'> {
+  extends Omit<DrawerProps, 'headerStyle' | 'bodyStyle' | 'footerStyle' | 'title'> {
   headerVisible?: boolean
 }
 
 export interface HamburgerMenuProps extends PreviewProps {
+  drawerTitle?: string
   buttonProps?: Omit<ButtonProps, 'style'>
   buttonStyle?: ButtonProps['style']
   drawerProps?: HamburgerDrawerProps
@@ -39,6 +40,7 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     responsiveVisibility,
     buttonProps,
     buttonStyle,
+    drawerTitle,
     drawerProps,
     headerStyle,
     bodyStyle,
@@ -46,7 +48,7 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     children
   } = props
   const [previewDrawerVisible, setPreviewDrawerVisible] = useState(false)
-  const { headerVisible, title, closable, ...restDrawerProps } = drawerProps as HamburgerDrawerProps
+  const { headerVisible, closable, ...restDrawerProps } = drawerProps as HamburgerDrawerProps
 
   const handleButtonClick = () => {
     setPreviewDrawerVisible(true)
@@ -62,7 +64,7 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
       }
     : {}
 
-  const defaultPreviewDrawerProps: HamburgerDrawerProps = isPreview
+  const defaultPreviewDrawerProps: DrawerProps = isPreview
     ? {
         destroyOnClose: true,
         visible: previewDrawerVisible,
@@ -80,9 +82,9 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
       }
     : {}
 
-  const defaultDrawerProps: HamburgerDrawerProps = !headerVisible
+  const defaultDrawerProps: DrawerProps = !headerVisible
     ? { title: undefined, closable: false }
-    : { title, closable }
+    : { title: drawerTitle, closable }
 
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
