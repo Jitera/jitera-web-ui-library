@@ -18,10 +18,15 @@ export enum HamburgerDrawerPlacementEnum {
   LEFT = 'left'
 }
 
+export interface HamburgerDrawerProps
+  extends Omit<DrawerProps, 'headerStyle' | 'bodyStyle' | 'footerStyle'> {
+  headerVisible?: boolean
+}
+
 export interface HamburgerMenuProps extends PreviewProps {
   buttonProps?: Omit<ButtonProps, 'style'>
   buttonStyle?: ButtonProps['style']
-  drawerProps?: Omit<DrawerProps, 'headerStyle' | 'bodyStyle' | 'footerStyle'>
+  drawerProps?: HamburgerDrawerProps
   headerStyle?: DrawerProps['headerStyle']
   bodyStyle?: DrawerProps['bodyStyle']
   iconProps?: IconProps
@@ -41,6 +46,7 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     children
   } = props
   const [previewDrawerVisible, setPreviewDrawerVisible] = useState(false)
+  const { headerVisible, title, closable, ...restDrawerProps } = drawerProps as HamburgerDrawerProps
 
   const handleButtonClick = () => {
     setPreviewDrawerVisible(true)
@@ -50,13 +56,13 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     setPreviewDrawerVisible(false)
   }
 
-  const defaultButtonProps: ButtonProps = isPreview
+  const defaultPreviewButtonProps: ButtonProps = isPreview
     ? {
         onClick: handleButtonClick
       }
     : {}
 
-  const defaultDrawerProps: DrawerProps = isPreview
+  const defaultPreviewDrawerProps: HamburgerDrawerProps = isPreview
     ? {
         destroyOnClose: true,
         visible: previewDrawerVisible,
@@ -74,17 +80,22 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
       }
     : {}
 
+  const defaultDrawerProps: HamburgerDrawerProps = !headerVisible
+    ? { title: undefined, closable: false }
+    : { title, closable }
+
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
       <div className={styles.Wrapper} ref={ref}>
-        <Button {...defaultButtonProps} style={buttonStyle} {...buttonProps}>
+        <Button {...defaultPreviewButtonProps} style={buttonStyle} {...buttonProps}>
           <Icon iconName="MdMenu" {...iconProps} />
         </Button>
         <Drawer
+          {...defaultPreviewDrawerProps}
           {...defaultDrawerProps}
           headerStyle={headerStyle}
           bodyStyle={bodyStyle}
-          {...drawerProps}
+          {...restDrawerProps}
         >
           {children}
         </Drawer>
