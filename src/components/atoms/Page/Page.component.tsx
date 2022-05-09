@@ -14,7 +14,13 @@ const Page = React.forwardRef<HTMLDivElement, PageProps>(({ ...props }, ref) => 
 
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <PageWrapper minHeight={minHeight} {...rest} ref={ref}>
+      <PageWrapper
+        className={isPreview ? 'preview-page' : undefined}
+        minHeight={minHeight}
+        isPreview={isPreview}
+        {...rest}
+        ref={ref}
+      >
         {children}
       </PageWrapper>
     </VisibilityComponent>

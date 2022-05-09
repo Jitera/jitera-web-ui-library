@@ -22,25 +22,33 @@ const HeaderTemplate: Story<MenuProps> = (arguments_) => (
     <MenuItem label="Option 1" />
     <MenuItem
       label="Option 2"
-      iconName="AiOutlineHome"
+      iconProps={{
+        iconName: 'AiOutlineHome'
+      }}
       iconPosition={MenuIconPosition.Left}
       spaceBetween={8}
     />
     <MenuItem
       label="Option 3"
-      iconName="AiOutlineHome"
+      iconProps={{
+        iconName: 'AiOutlineHome'
+      }}
       iconPosition={MenuIconPosition.Right}
       spaceBetween={8}
     />
     <MenuItem
       label="Option 2"
-      iconName="AiOutlineHome"
+      iconProps={{
+        iconName: 'AiOutlineHome'
+      }}
       iconPosition={MenuIconPosition.Top}
       spaceBetween={8}
     />
     <MenuItem
       label="Option 2"
-      iconName="AiOutlineHome"
+      iconProps={{
+        iconName: 'AiOutlineHome'
+      }}
       iconPosition={MenuIconPosition.Bottom}
       spaceBetween={8}
     />
