@@ -11,10 +11,11 @@ import VisibilityComponent from '@components/common/ResponsiveVisibility/Respons
 export interface MenuProps extends PreviewProps, ComponentProps<AntMenuProps> {}
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
+  const { isPreview, ...rest } = props
   return (
-    <VisibilityComponent visibility={props.responsiveVisibility} isPreview={props.isPreview}>
+    <VisibilityComponent visibility={props.responsiveVisibility} isPreview={isPreview}>
       <div ref={ref}>
-        <AntMenu {...props} prefixCls="jitera-menu" />
+        <AntMenu disabled={isPreview} {...rest} prefixCls="jitera-menu" />
       </div>
     </VisibilityComponent>
   )
