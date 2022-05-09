@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties, useMemo } from 'react'
 import {
   Checkbox as AntCheckbox,
   CheckboxProps as AntCheckboxProps,
@@ -13,6 +13,10 @@ import { ComponentProps, CheckboxStateColor } from '@src/types/component'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
+import { isWrap } from '@src/utils/wrap'
+
+import { isStyleObject, getClasses } from '@src/utils/common'
+
 import { CheckboxWrapper } from './Checkbox.styles'
 
 export interface CheckboxOptions extends AntCheckboxProps {
@@ -23,17 +27,21 @@ export interface CheckboxProps
   extends CheckboxStateColor,
     PreviewProps,
     ComponentProps<Omit<AntCheckboxGroupProps, 'options'>> {
+  wrap?: boolean | 'wrap-reverse' | 'wrap' | 'nowrap'
   data: CheckboxOptions[]
   spaceProps?: AntSpaceProps
+  containerStyle?: Record<string, unknown> | string
   direction?: 'horizontal' | 'vertical' | undefined
 }
 
 const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) => {
   const {
     data,
+    wrap = 'wrap',
     spaceProps,
     isPreview,
     responsiveVisibility,
+    containerStyle = {},
     activeColor,
     inactiveColor,
     checkColor,
@@ -41,16 +49,33 @@ const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) =>
     direction,
     ...rest
   } = props
+
+  const customSpaceProps = useMemo<AntSpaceProps>(() => {
+    return {
+      ...spaceProps,
+      wrap: isWrap(wrap)
+    }
+  }, [wrap, spaceProps])
+  const containerStyleProps = useMemo(() => {
+    return isStyleObject(containerStyle)
+      ? {
+          style: containerStyle as CSSProperties
+        }
+      : {
+          className: getClasses(containerStyle)
+        }
+  }, [containerStyle])
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <CheckboxWrapper
         activeColor={activeColor}
         inactiveColor={inactiveColor}
-        labelStyle={labelStyle}
         checkColor={checkColor}
+        labelStyle={labelStyle}
+        {...containerStyleProps}
       >
         <AntCheckbox.Group disabled={isPreview} {...rest} ref={ref}>
-          <AntSpace direction={direction} {...spaceProps}>
+          <AntSpace direction={direction} {...customSpaceProps}>
             {data?.map((option) => (
               <AntCheckbox {...option}>{option.label}</AntCheckbox>
             ))}
