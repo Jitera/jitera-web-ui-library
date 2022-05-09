@@ -8,12 +8,13 @@ import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
-export interface ButtonProps extends PreviewProps, ComponentProps<AntButtonProps> {
+export interface ButtonProps extends PreviewProps, ComponentProps<Omit<AntButtonProps, 'type'>> {
   iconProps?: IconProps
+  buttonType?: AntButtonProps['type']
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { type = 'primary', isPreview, responsiveVisibility, iconProps, ...rest } = props
+  const { buttonType = 'primary', isPreview, responsiveVisibility, iconProps, ...rest } = props
 
   const buttonIcon = useMemo(() => {
     if (!iconProps) {
@@ -24,7 +25,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
   }, [iconProps])
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
-      <AntButton type={type} icon={buttonIcon} {...rest} ref={ref} />
+      <AntButton type={buttonType} icon={buttonIcon} {...rest} ref={ref} />
     </VisibilityComponent>
   )
 })
