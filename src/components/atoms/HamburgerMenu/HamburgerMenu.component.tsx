@@ -47,32 +47,24 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     iconProps,
     children
   } = props
-  const [previewDrawerVisible, setPreviewDrawerVisible] = useState(false)
+  const [drawerVisible, setDrawerVisible] = useState(false)
   const { headerVisible, closable, ...restDrawerProps } = drawerProps as HamburgerDrawerProps
 
   const handleButtonClick = () => {
-    setPreviewDrawerVisible(true)
+    setDrawerVisible(true)
   }
 
   const handleDrawerClose = () => {
-    setPreviewDrawerVisible(false)
+    setDrawerVisible(false)
   }
-
-  const defaultPreviewButtonProps: ButtonProps = isPreview
-    ? {
-        onClick: handleButtonClick
-      }
-    : {}
 
   const defaultPreviewDrawerProps: DrawerProps = isPreview
     ? {
         destroyOnClose: true,
-        visible: previewDrawerVisible,
         getContainer: '.preview-page',
         style: {
           position: 'absolute'
         },
-        onClose: handleDrawerClose,
         afterVisibleChange: (isVisible) => {
           const drawerContent = document.querySelector('.jitera-drawer-content') as HTMLDivElement
           if (drawerContent) {
@@ -89,12 +81,14 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
       <div className={styles.Wrapper} ref={ref}>
-        <Button {...defaultPreviewButtonProps} style={buttonStyle} {...buttonProps}>
+        <Button onClick={handleButtonClick} style={buttonStyle} {...buttonProps}>
           <Icon iconName="MdMenu" {...iconProps} />
         </Button>
         <Drawer
           {...defaultPreviewDrawerProps}
           {...defaultDrawerProps}
+          visible={drawerVisible}
+          onClose={handleDrawerClose}
           headerStyle={headerStyle}
           bodyStyle={bodyStyle}
           {...restDrawerProps}

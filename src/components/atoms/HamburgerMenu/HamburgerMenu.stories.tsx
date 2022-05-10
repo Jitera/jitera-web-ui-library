@@ -1,12 +1,13 @@
 /* eslint-disable sonarjs/no-identical-functions */
 import { Story } from '@storybook/react'
-import { useState } from 'react'
 
 import { Box } from '../Box/Box.component'
 import { Menu } from '../Menu/Menu.component'
 import { MenuIconPosition, MenuItem } from '../Menu/MenuItem.component'
 
 import { HamburgerMenu, HamburgerMenuProps } from './HamburgerMenu.component'
+
+const MENU_ITEM_COUNT = 7
 
 const defaultArguments = {
   size: 'large',
@@ -25,26 +26,10 @@ const defaultArguments = {
 
 const HamburgerMenuTemplate: Story<HamburgerMenuProps> = (arguments_) => {
   const { buttonProps, drawerProps, iconProps } = arguments_
-  const [isVisible, setVisible] = useState(false)
   return (
-    <HamburgerMenu
-      buttonProps={{
-        onClick: () => {
-          setVisible(true)
-        },
-        ...buttonProps
-      }}
-      drawerProps={{
-        visible: isVisible,
-        onClose: () => {
-          setVisible(false)
-        },
-        ...drawerProps
-      }}
-      iconProps={iconProps}
-    >
+    <HamburgerMenu buttonProps={buttonProps} drawerProps={drawerProps} iconProps={iconProps}>
       <Menu>
-        {Array.from({ length: 7 }, (_, k) => (
+        {Array.from({ length: MENU_ITEM_COUNT }, (_, k) => (
           <MenuItem
             key={k}
             label={`Option ${k + 1}`}
@@ -102,7 +87,6 @@ CustomIcon.args = {
 
 export const InsideContainer: Story<HamburgerMenuProps> = (arguments_) => {
   const { buttonProps, drawerProps, iconProps } = arguments_
-  const [isVisible, setVisible] = useState(false)
   return (
     <>
       <Box
@@ -116,28 +100,19 @@ export const InsideContainer: Story<HamburgerMenuProps> = (arguments_) => {
         }}
       />
       <HamburgerMenu
-        buttonProps={{
-          onClick: () => {
-            setVisible(true)
-          },
-          ...buttonProps
-        }}
+        buttonProps={buttonProps}
         drawerProps={{
           getContainer: '.wew',
-          visible: isVisible,
           style: {
             position: 'absolute'
           },
           width: 280,
-          onClose: () => {
-            setVisible(false)
-          },
           ...drawerProps
         }}
         iconProps={iconProps}
       >
         <Menu>
-          {Array.from({ length: 7 }, (_, k) => (
+          {Array.from({ length: MENU_ITEM_COUNT }, (_, k) => (
             <MenuItem
               key={k}
               label={`Option ${k + 1}`}

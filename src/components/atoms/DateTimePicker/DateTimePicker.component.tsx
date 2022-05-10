@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dayjs } from 'dayjs'
 import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs'
-import generatePicker, { PickerDateProps } from 'antd/es/date-picker/generatePicker'
+import generatePicker, { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
 
 import { ComponentProps } from '@src/types/component'
 
