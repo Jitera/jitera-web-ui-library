@@ -1,5 +1,4 @@
-import { MenuItemProps as AntMenuItemProps } from 'antd'
-import AntMenuItem from 'antd/lib/menu/MenuItem'
+import { Menu as AntMenu, MenuItemProps as AntMenuItemProps } from 'antd'
 import React from 'react'
 
 import { ComponentProps } from '@src/types/component'
@@ -8,7 +7,7 @@ import { PreviewProps } from '@src/types/preview'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
-import { assertUnreachable, Icon } from '../Icon/Icon.component'
+import { assertUnreachable, Icon, IconProps } from '../Icon/Icon.component'
 
 import styles from './MenuItem.module.css'
 
@@ -19,25 +18,27 @@ export enum MenuIconPosition {
   Bottom = 'bottom'
 }
 
+const { Item: AntMenuItem } = AntMenu
+
 export interface MenuItemProps extends PreviewProps, ComponentProps<AntMenuItemProps> {
   label: string
-  iconName?: string
+  iconProps?: IconProps
   iconPosition?: MenuIconPosition
   spaceBetween?: number
 }
 
 export const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
   (
-    { label, iconName, iconPosition, spaceBetween, responsiveVisibility, isPreview, ...restProps },
+    { label, iconProps, iconPosition, spaceBetween, responsiveVisibility, isPreview, ...restProps },
     ref
   ) => {
     return (
       <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-        <li ref={ref}>
-          <ul>
+        <li className={styles.WrapperList} ref={ref}>
+          <ul className={styles.WrapperListList}>
             <AntMenuItem {...restProps}>
-              {iconName && iconPosition && spaceBetween
-                ? renderTextWithIcon(iconName, iconPosition, spaceBetween, label)
+              {iconProps && iconPosition && spaceBetween
+                ? renderTextWithIcon(iconProps, iconPosition, spaceBetween, label)
                 : label}
             </AntMenuItem>
           </ul>
@@ -48,7 +49,7 @@ export const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
 )
 
 function renderTextWithIcon(
-  iconName: string,
+  iconProps: IconProps,
   iconPosition: MenuIconPosition,
   spaceBetween: number,
   label: string
@@ -57,7 +58,7 @@ function renderTextWithIcon(
     case MenuIconPosition.Left:
       return (
         <div className={styles.horizontal} style={{ gap: spaceBetween }}>
-          <Icon iconName={iconName} />
+          <Icon {...iconProps} />
           {label}
         </div>
       )
@@ -65,13 +66,13 @@ function renderTextWithIcon(
       return (
         <div className={styles.horizontal} style={{ gap: spaceBetween }}>
           {label}
-          <Icon iconName={iconName} />
+          <Icon {...iconProps} />
         </div>
       )
     case MenuIconPosition.Top:
       return (
         <div className={styles.vertical} style={{ gap: spaceBetween }}>
-          <Icon iconName={iconName} />
+          <Icon {...iconProps} />
           {label}
         </div>
       )
@@ -79,7 +80,7 @@ function renderTextWithIcon(
       return (
         <div className={styles.vertical} style={{ gap: spaceBetween }}>
           {label}
-          <Icon iconName={iconName} />
+          <Icon {...iconProps} />
         </div>
       )
     default:
