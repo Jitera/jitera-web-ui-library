@@ -48,7 +48,8 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     children
   } = props
   const [drawerVisible, setDrawerVisible] = useState(false)
-  const { headerVisible, closable, ...restDrawerProps } = drawerProps as HamburgerDrawerProps
+  const { headerVisible, closable, ...restDrawerProps } = (drawerProps ||
+    {}) as HamburgerDrawerProps
 
   const handleButtonClick = () => {
     setDrawerVisible(true)

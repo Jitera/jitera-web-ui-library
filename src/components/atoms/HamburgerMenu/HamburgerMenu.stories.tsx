@@ -47,13 +47,17 @@ const HamburgerMenuTemplate: Story<HamburgerMenuProps> = (arguments_) => {
 
 export const Default = HamburgerMenuTemplate.bind({})
 Default.args = {
-  ...defaultArguments
+  ...defaultArguments,
+  drawerProps: {
+    headerVisible: false
+  }
 }
 
 export const Left = HamburgerMenuTemplate.bind({})
 Left.args = {
   ...defaultArguments,
   drawerProps: {
+    headerVisible: false,
     placement: 'left'
   }
 }
@@ -62,6 +66,7 @@ export const Bottom = HamburgerMenuTemplate.bind({})
 Bottom.args = {
   ...defaultArguments,
   drawerProps: {
+    headerVisible: false,
     placement: 'bottom'
   }
 }
@@ -70,6 +75,7 @@ export const Top = HamburgerMenuTemplate.bind({})
 Top.args = {
   ...defaultArguments,
   drawerProps: {
+    headerVisible: false,
     placement: 'top'
   }
 }
@@ -77,6 +83,9 @@ Top.args = {
 export const CustomIcon = HamburgerMenuTemplate.bind({})
 CustomIcon.args = {
   ...defaultArguments,
+  drawerProps: {
+    headerVisible: false
+  },
   buttonProps: {
     buttonType: 'dashed'
   },
@@ -102,11 +111,12 @@ export const InsideContainer: Story<HamburgerMenuProps> = (arguments_) => {
       <HamburgerMenu
         buttonProps={buttonProps}
         drawerProps={{
+          headerVisible: false,
           getContainer: '.wew',
           style: {
             position: 'absolute'
           },
-          width: 280,
+          width: 250,
           ...drawerProps
         }}
         iconProps={iconProps}
