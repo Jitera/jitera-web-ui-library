@@ -2,26 +2,32 @@ import { ReactElement, useMemo } from 'react'
 
 import { DEFAULT_RESPONSIVE_VISIBILITY } from '@src/constants'
 
+import { PreviewProps } from '@src/types/preview'
+
 import PreviewResponsive from '../PreviewResponsive/PreviewResponsive.component'
 
 import { InlineWrapper, Wrapper } from './ResponsiveVisibility.styles'
 
-interface Props {
-  visibility?: { value: string }[]
+interface Props extends PreviewProps {
+  visibility?: { value: string }[] | string[]
   isPreview?: boolean
   children: ReactElement
   isInline?: boolean
 }
 
 const ResponsiveVisibility = ({
-  visibility = DEFAULT_RESPONSIVE_VISIBILITY,
+  visibility,
+  responsiveVisibility,
   isPreview,
   isInline,
   children
 }: Props) => {
   const values = useMemo(
-    () => visibility?.map((item: { value: string }) => item.value),
-    [visibility]
+    () =>
+      (responsiveVisibility || visibility || DEFAULT_RESPONSIVE_VISIBILITY)?.map(
+        (item: { value: string } | string) => (typeof item === 'string' ? item : item.value)
+      ),
+    [responsiveVisibility, visibility]
   )
 
   if (isPreview) {

@@ -9,7 +9,7 @@ import VisibilityComponent from '@components/common/ResponsiveVisibility/Respons
 
 import { assertUnreachable, Icon, IconProps } from '../Icon/Icon.component'
 
-import styles from './MenuItem.module.css'
+import { Horizontal, MenuItemInner, MenuItemWrapper, Vertical } from './MenuItem.styles'
 
 export enum MenuIconPosition {
   Left = 'left',
@@ -34,15 +34,15 @@ export const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
   ) => {
     return (
       <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-        <li className={styles.WrapperList} ref={ref}>
-          <ul className={styles.WrapperListList}>
+        <MenuItemWrapper ref={ref as any}>
+          <MenuItemInner isPreview={isPreview}>
             <AntMenuItem {...restProps}>
               {iconProps && iconPosition && spaceBetween
                 ? renderTextWithIcon(iconProps, iconPosition, spaceBetween, label)
                 : label}
             </AntMenuItem>
-          </ul>
-        </li>
+          </MenuItemInner>
+        </MenuItemWrapper>
       </VisibilityComponent>
     )
   }
@@ -57,31 +57,31 @@ function renderTextWithIcon(
   switch (iconPosition) {
     case MenuIconPosition.Left:
       return (
-        <div className={styles.horizontal} style={{ gap: spaceBetween }}>
+        <Horizontal style={{ gap: spaceBetween }}>
           <Icon {...iconProps} />
           {label}
-        </div>
+        </Horizontal>
       )
     case MenuIconPosition.Right:
       return (
-        <div className={styles.horizontal} style={{ gap: spaceBetween }}>
+        <Horizontal style={{ gap: spaceBetween }}>
           {label}
           <Icon {...iconProps} />
-        </div>
+        </Horizontal>
       )
     case MenuIconPosition.Top:
       return (
-        <div className={styles.vertical} style={{ gap: spaceBetween }}>
+        <Vertical style={{ gap: spaceBetween }}>
           <Icon {...iconProps} />
           {label}
-        </div>
+        </Vertical>
       )
     case MenuIconPosition.Bottom:
       return (
-        <div className={styles.vertical} style={{ gap: spaceBetween }}>
+        <Vertical style={{ gap: spaceBetween }}>
           {label}
           <Icon {...iconProps} />
-        </div>
+        </Vertical>
       )
     default:
       return assertUnreachable(iconPosition)
