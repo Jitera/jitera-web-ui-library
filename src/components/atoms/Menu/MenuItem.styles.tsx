@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const MenuWrapper = styled.div<{ isPreview?: boolean }>`
   .jitera-menu-item-disabled,
   .jitera-menu-submenu-disabled {
-    ${(props) => (props.isPreview ? 'color: unset !important;' : '')}
+    ${(props) => (props.isPreview ? 'color: unset !important; cursor: unset;' : '')}
   }
 `
 
