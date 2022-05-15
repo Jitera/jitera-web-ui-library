@@ -35,7 +35,7 @@ export const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
     return (
       <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
         <MenuItemWrapper ref={ref as any}>
-          <MenuItemInner isPreview={isPreview}>
+          <MenuItemInner>
             <AntMenuItem {...restProps}>
               {iconProps && iconPosition && spaceBetween
                 ? renderTextWithIcon(iconProps, iconPosition, spaceBetween, label)
