@@ -4,6 +4,7 @@ import { Menu, MenuProps } from './Menu.component'
 import { MenuIconPosition, MenuItem } from './MenuItem.component'
 
 const defaultArguments: MenuProps = {
+  isPreview: true,
   responsiveVisibility: [
     {
       value: 'desktop'
@@ -19,7 +20,7 @@ const defaultArguments: MenuProps = {
 
 const HeaderTemplate: Story<MenuProps> = (arguments_) => (
   <Menu {...arguments_}>
-    <MenuItem disabled label="Option 1" />
+    <MenuItem label="Option 1" />
     <MenuItem
       label="Option 2"
       iconProps={{

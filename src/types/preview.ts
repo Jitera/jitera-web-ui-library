@@ -1,4 +1,4 @@
 export interface PreviewProps {
   isPreview?: boolean
-  responsiveVisibility?: { value: string }[] | string[]
+  responsiveVisibility?: string[] | { value: string }[]
 }

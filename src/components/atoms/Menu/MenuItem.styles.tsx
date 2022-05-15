@@ -1,17 +1,20 @@
 import styled from 'styled-components'
 
+export const MenuWrapper = styled.div<{ isPreview?: boolean }>`
+  .jitera-menu-item-disabled,
+  .jitera-menu-submenu-disabled {
+    ${(props) => (props.isPreview ? 'color: unset !important; cursor: unset;' : '')}
+  }
+`
+
 export const MenuItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
-export const MenuItemInner = styled.div<{ isPreview?: boolean }>`
+export const MenuItemInner = styled.div`
   width: 100%;
-  .jitera-menu-item-disabled,
-  .jitera-menu-submenu-disabled {
-    ${(props) => (props.isPreview ? 'color: none;' : '')}
-  }
 `
 
 export const Horizontal = styled.div`
