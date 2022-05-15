@@ -19,7 +19,7 @@ const defaultArguments: MenuProps = {
 
 const HeaderTemplate: Story<MenuProps> = (arguments_) => (
   <Menu {...arguments_}>
-    <MenuItem label="Option 1" />
+    <MenuItem disabled label="Option 1" />
     <MenuItem
       label="Option 2"
       iconProps={{
