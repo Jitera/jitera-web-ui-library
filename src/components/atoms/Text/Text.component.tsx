@@ -1,38 +1,51 @@
 import React from 'react'
-import { Typography as AntTypography } from 'antd'
-import { TextProps as AntTextProps } from 'antd/lib/typography/Text'
-import { LinkProps as AntLinkProps } from 'antd/lib/typography/Link'
-import { TitleProps as AntTitleProps } from 'antd/lib/typography/Title'
-import { ParagraphProps as AntParagraphProps } from 'antd/lib/typography/Paragraph'
-
-import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
 
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
-export enum TextVariantType {
-  Title = 'Title',
+export enum TextTypeEnum {
   Link = 'Link',
-  Text = 'Text',
-  Paragraph = 'Paragraph'
+  Text = 'Text'
 }
 
-export type TextElement = HTMLHeadingElement & HTMLSpanElement & HTMLParagraphElement & HTMLElement
+export type BaseTextProps = React.HTMLAttributes<HTMLDivElement>
 
-export type CombinedTextProps = ComponentProps<AntTextProps> &
-  ComponentProps<AntLinkProps> &
-  ComponentProps<AntTitleProps> &
-  ComponentProps<AntParagraphProps>
+const BaseText = React.forwardRef<HTMLDivElement, BaseTextProps>(({ children, ...props }, ref) => {
+  return (
+    <div {...props} ref={ref}>
+      {children}
+    </div>
+  )
+})
 
-export interface TextProps extends PreviewProps, CombinedTextProps {
-  variant?: TextVariantType
+export type BaseLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+
+const BaseLink = React.forwardRef<HTMLAnchorElement, BaseLinkProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <a {...props} ref={ref}>
+        {children}
+      </a>
+    )
+  }
+)
+
+const ComponentMapping = {
+  [TextTypeEnum.Text]: BaseText,
+  [TextTypeEnum.Link]: BaseLink
 }
 
-const Text = React.forwardRef<TextElement, TextProps>((props, ref) => {
-  const { variant = TextVariantType.Text, responsiveVisibility, isPreview, ...rest } = props
+export type TextProps = PreviewProps &
+  BaseTextProps &
+  BaseLinkProps & {
+    textType?: TextTypeEnum
+  }
 
-  const Component = AntTypography[variant]
+const Text = React.forwardRef<HTMLDivElement & HTMLAnchorElement, TextProps>((props, ref) => {
+  const { textType = TextTypeEnum.Text, responsiveVisibility, isPreview, ...rest } = props
+
+  const Component = ComponentMapping[textType]
 
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
