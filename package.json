@@ -1,6 +1,6 @@
 {
   "name": "@jitera/jitera-web-ui-library",
-  "version": "1.16.9",
+  "version": "1.10.9",
   "description": "atoms and component for web project",
   "sideEffects": [
     "*.css"
@@ -19,6 +19,8 @@
     "react-icons": "~4.3.1",
     "react-otp-input": "~2.4.0",
     "react-select": "~5.3.0",
+    "react-slick": "~0.29.0",
+    "slick-carousel": "~1.8.1",
     "styled-components": "~5.3.5",
     "tsconfig-paths-webpack-plugin": "~3.5.2"
   },
@@ -44,6 +46,7 @@
     "@types/node": "~17.0.23",
     "@types/react": "~18.0.5",
     "@types/react-dom": "~18.0.1",
+    "@types/react-slick": "~0.23.8",
     "@types/styled-components": "~5.1.24",
     "@typescript-eslint/eslint-plugin": "~5.14.0",
     "@typescript-eslint/parser": "~5.14.0",
