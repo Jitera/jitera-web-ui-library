@@ -3,6 +3,8 @@ import OtpInput, { OtpInputProps } from 'react-otp-input'
 
 import { PreviewProps } from '@src/types/preview'
 
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
+
 import { isStyleObject, getClasses } from '../../../utils/common'
 
 import { useTheme } from '../../../styles/theme'
@@ -27,6 +29,8 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
   // eslint-disable-next-line unicorn/prevent-abbreviations
   const {
     isPreview,
+    responsiveVisibility,
+    className,
     pinCount = 4,
     autoFocus,
     errorMessage,
@@ -64,8 +68,10 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
     }
   }
 
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <div ref={ref}>
+    <div className={classNames} ref={ref}>
       <OtpInput
         isDisabled={isPreview}
         {...rest}

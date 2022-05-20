@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 
 import { Drawer, DrawerProps } from 'antd'
 
+import clsx from 'clsx'
+
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { Button, ButtonProps } from '../Button/Button.component'
 import { Icon, IconProps } from '../Icon/Icon.component'
@@ -24,6 +26,7 @@ export interface HamburgerDrawerProps
 }
 
 export interface HamburgerMenuProps extends PreviewProps {
+  className?: string
   drawerTitle?: string
   buttonProps?: Omit<ButtonProps, 'style'>
   buttonStyle?: ButtonProps['style']
@@ -45,7 +48,8 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     headerStyle,
     bodyStyle,
     iconProps,
-    children
+    children,
+    className
   } = props
   const [drawerVisible, setDrawerVisible] = useState(false)
   const { headerVisible, closable, ...restDrawerProps } = (drawerProps ||
@@ -79,25 +83,25 @@ const HamburgerMenu = React.forwardRef<HTMLDivElement, HamburgerMenuProps>((prop
     ? { title: undefined, closable: false }
     : { title: drawerTitle, closable }
 
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
-      <div className={styles.Wrapper} ref={ref}>
-        <Button onClick={handleButtonClick} style={buttonStyle} {...buttonProps}>
-          <Icon iconName="MdMenu" {...iconProps} />
-        </Button>
-        <Drawer
-          {...defaultPreviewDrawerProps}
-          {...defaultDrawerProps}
-          visible={drawerVisible}
-          onClose={handleDrawerClose}
-          headerStyle={headerStyle}
-          bodyStyle={bodyStyle}
-          {...restDrawerProps}
-        >
-          {children}
-        </Drawer>
-      </div>
-    </VisibilityComponent>
+    <div className={clsx(styles.Wrapper, classNames)} ref={ref}>
+      <Button onClick={handleButtonClick} style={buttonStyle} {...buttonProps}>
+        <Icon iconName="MdMenu" {...iconProps} />
+      </Button>
+      <Drawer
+        {...defaultPreviewDrawerProps}
+        {...defaultDrawerProps}
+        visible={drawerVisible}
+        onClose={handleDrawerClose}
+        headerStyle={headerStyle}
+        bodyStyle={bodyStyle}
+        {...restDrawerProps}
+      >
+        {children}
+      </Drawer>
+    </div>
   )
 })
 

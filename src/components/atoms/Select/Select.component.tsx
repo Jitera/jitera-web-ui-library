@@ -11,8 +11,8 @@ import ReactSelect, {
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface SelectProps extends PreviewProps, ReactSelectProps {
   placeholderStyle?: CSSProperties
@@ -28,6 +28,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   const {
     isPreview,
     responsiveVisibility,
+    className,
     styles,
     data,
     placeholderStyle,
@@ -73,20 +74,20 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       }
     }
   }, [iconProps])
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore TODO: Figure out correct type for ref
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <ReactSelect
-        components={components}
-        isDisabled={isPreview}
-        styles={customStyles}
-        options={data}
-        {...rest}
-        ref={ref as any}
-      />
-    </VisibilityComponent>
+    <ReactSelect
+      className={classNames}
+      components={components}
+      isDisabled={isPreview}
+      styles={customStyles}
+      options={data}
+      {...rest}
+      ref={ref as any}
+    />
   )
 })
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface ImageProps
   extends PreviewProps,
@@ -12,13 +12,10 @@ export interface ImageProps
 }
 
 const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
-  const { source, alt = '', responsiveVisibility, isPreview, ...rest } = props
+  const { source, alt = '', responsiveVisibility, className, ...rest } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
   // eslint-disable-next-line jsx-a11y/alt-text
-  return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <img ref={ref} src={source} {...rest} alt={alt} />
-    </VisibilityComponent>
-  )
+  return <img ref={ref} src={source} className={classNames} {...rest} alt={alt} />
 })
 
 export { Image }

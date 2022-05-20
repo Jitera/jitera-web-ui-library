@@ -5,7 +5,7 @@ import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { Text } from '../Text/Text.component'
 
@@ -16,17 +16,16 @@ export interface ImagePickerProps
 }
 
 const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, ref) => {
-  const { children, isPreview, responsiveVisibility, errorMessage, ...rest } = props
+  const { children, isPreview, responsiveVisibility, errorMessage, className, ...rest } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <div ref={ref}>
-        <AntUpload disabled={isPreview} listType="picture" {...rest}>
-          {children}
-        </AntUpload>
-        {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-      </div>
-    </VisibilityComponent>
+    <div className={classNames} ref={ref}>
+      <AntUpload disabled={isPreview} listType="picture" {...rest}>
+        {children}
+      </AntUpload>
+      {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
+    </div>
   )
 })
 
