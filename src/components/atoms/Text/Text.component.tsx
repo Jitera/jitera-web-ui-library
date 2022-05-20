@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export enum TextTypeEnum {
   Link = 'Link',
@@ -43,15 +43,12 @@ export type TextProps = PreviewProps &
   }
 
 const Text = React.forwardRef<HTMLDivElement & HTMLAnchorElement, TextProps>((props, ref) => {
-  const { textType = TextTypeEnum.Text, responsiveVisibility, isPreview, ...rest } = props
+  const { textType = TextTypeEnum.Text, responsiveVisibility, className, ...rest } = props
 
   const Component = ComponentMapping[textType]
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
-  return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
-      <Component {...rest} ref={ref} />
-    </VisibilityComponent>
-  )
+  return <Component {...rest} className={classNames} ref={ref} />
 })
 
 export { Text }

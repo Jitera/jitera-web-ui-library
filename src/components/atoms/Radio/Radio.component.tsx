@@ -10,11 +10,11 @@ import {
 import { PreviewProps } from '@src/types/preview'
 import { ComponentProps, RadioStateColor } from '@src/types/component'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
-
 import { isWrap } from '@src/utils/wrap'
 
 import { isStyleObject, getClasses } from '@src/utils/common'
+
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { RadioWrapper } from './Radio.styles'
 
@@ -39,6 +39,7 @@ const Radio = React.forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
     spaceProps,
     isPreview,
     responsiveVisibility,
+    className,
     activeColor,
     inactiveColor,
     labelStyle,
@@ -63,25 +64,26 @@ const Radio = React.forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
           className: getClasses(containerStyle)
         }
   }, [containerStyle])
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <RadioWrapper
-        activeColor={activeColor}
-        inactiveColor={inactiveColor}
-        labelStyle={labelStyle}
-        {...containerStyleProps}
-      >
-        <AntRadio.Group disabled={isPreview} {...rest} ref={ref}>
-          <AntSpace direction={direction} {...customSpaceProps}>
-            {data?.map((option) => (
-              <AntRadio key={option.value as string} value={option.value} {...option}>
-                {option.label}
-              </AntRadio>
-            ))}
-          </AntSpace>
-        </AntRadio.Group>
-      </RadioWrapper>
-    </VisibilityComponent>
+    <RadioWrapper
+      className={classNames}
+      activeColor={activeColor}
+      inactiveColor={inactiveColor}
+      labelStyle={labelStyle}
+      {...containerStyleProps}
+    >
+      <AntRadio.Group disabled={isPreview} {...rest} ref={ref}>
+        <AntSpace direction={direction} {...customSpaceProps}>
+          {data?.map((option) => (
+            <AntRadio key={option.value as string} value={option.value} {...option}>
+              {option.label}
+            </AntRadio>
+          ))}
+        </AntSpace>
+      </AntRadio.Group>
+    </RadioWrapper>
   )
 })
 

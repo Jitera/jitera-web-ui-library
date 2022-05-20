@@ -4,3 +4,45 @@
 
 @ant-prefix: jitera;
 @iconfont-css-prefix: jiteraicon;
+
+/* Mobile */
+@media screen and (min-width: 314px) and (max-width: 719px) {
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-mobile,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-desktop.show-mobile,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-tablet.show-mobile {
+    display: contents !important;
+  }
+
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-desktop,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-tablet {
+    display: none !important;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 720px) and (max-width: 1279px) {
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-tablet,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-desktop.show-tablet,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-mobile.show-tablet {
+    display: contents !important;
+  }
+
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-desktop,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-mobile {
+    display: none !important;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-desktop,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-tablet.show-desktop,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-mobile.show-desktop {
+    display: contents !important;
+  }
+
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-tablet,
+  :not(.breakpoint-Desktop, .breakpoint-Tablet, .breakpoint-Mobile) .show-mobile {
+    display: none !important;
+  }
+}

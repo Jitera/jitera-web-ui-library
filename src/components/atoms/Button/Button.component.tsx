@@ -6,7 +6,7 @@ import { ComponentProps } from '@src/types/component'
 import { PreviewProps } from '@src/types/preview'
 import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface ButtonProps extends PreviewProps, ComponentProps<Omit<AntButtonProps, 'type'>> {
   iconProps?: IconProps
@@ -14,7 +14,7 @@ export interface ButtonProps extends PreviewProps, ComponentProps<Omit<AntButton
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { buttonType = 'primary', isPreview, responsiveVisibility, iconProps, ...rest } = props
+  const { buttonType = 'primary', responsiveVisibility, iconProps, className, ...rest } = props
 
   const buttonIcon = useMemo(() => {
     if (!iconProps) {
@@ -23,10 +23,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
     // eslint-disable-next-line consistent-return
     return <Icon {...iconProps} />
   }, [iconProps])
+
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview} isInline>
-      <AntButton type={buttonType} icon={buttonIcon} {...rest} ref={ref} />
-    </VisibilityComponent>
+    <AntButton type={buttonType} icon={buttonIcon} {...rest} className={classNames} ref={ref} />
   )
 })
 

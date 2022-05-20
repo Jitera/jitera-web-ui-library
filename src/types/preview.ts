@@ -1,4 +1,8 @@
+export interface IResponsiveVisibility {
+  value: string
+}
+
 export interface PreviewProps {
   isPreview?: boolean
-  responsiveVisibility?: string[] | { value: string }[]
+  responsiveVisibility?: IResponsiveVisibility[] | string[]
 }

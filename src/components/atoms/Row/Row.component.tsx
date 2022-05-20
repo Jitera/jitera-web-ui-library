@@ -4,19 +4,17 @@ import { Row as AntRow, RowProps as AntRowProps } from 'antd'
 import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
-
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface RowProps extends PreviewProps, ComponentProps<AntRowProps> {}
 
 const Row = React.forwardRef<HTMLDivElement, RowProps>((props, ref) => {
-  const { children, responsiveVisibility, isPreview, ...rest } = props
+  const { children, responsiveVisibility, className, ...rest } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <AntRow {...rest} ref={ref}>
-        {children}
-      </AntRow>
-    </VisibilityComponent>
+    <AntRow {...rest} className={classNames} ref={ref}>
+      {children}
+    </AntRow>
   )
 })
 
