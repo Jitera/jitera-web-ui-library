@@ -5,18 +5,18 @@ import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface ContentProps extends PreviewProps, ComponentProps<AntBasicProps> {}
 
 const Content = React.forwardRef<HTMLDivElement, ContentProps>((props, ref) => {
-  const { children, isPreview, responsiveVisibility, ...rest } = props
+  const { children, responsiveVisibility, className, ...rest } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <AntContent {...rest} prefixCls="jitera-layout-content" ref={ref}>
-        {children}
-      </AntContent>
-    </VisibilityComponent>
+    <AntContent {...rest} className={classNames} prefixCls="jitera-layout-content" ref={ref}>
+      {children}
+    </AntContent>
   )
 })
 

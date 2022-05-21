@@ -7,7 +7,7 @@ import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { Text } from '../Text/Text.component'
 
@@ -28,18 +28,25 @@ export interface DateTimePickerProps
 const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
 
 const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((props, ref) => {
-  const { isPreview, responsiveVisibility, picker = 'date', errorMessage, ...rest } = props
+  const {
+    isPreview,
+    responsiveVisibility,
+    picker = 'date',
+    errorMessage,
+    className,
+    ...rest
+  } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <div ref={ref}>
-        <AntDatePicker disabled={isPreview} picker={picker} {...rest} />
-        {!!errorMessage && (
-          <Text type="danger" style={{ display: 'block' }}>
-            {errorMessage}
-          </Text>
-        )}
-      </div>
-    </VisibilityComponent>
+    <div className={classNames} ref={ref}>
+      <AntDatePicker disabled={isPreview} picker={picker} {...rest} />
+      {!!errorMessage && (
+        <Text type="danger" style={{ display: 'block' }}>
+          {errorMessage}
+        </Text>
+      )}
+    </div>
   )
 })
 

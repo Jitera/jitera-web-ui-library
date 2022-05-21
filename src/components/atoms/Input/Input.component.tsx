@@ -3,6 +3,8 @@ import { Input as AntInput, InputProps as AntInputProps } from 'antd'
 
 import { CSSProperties } from 'styled-components'
 
+import clsx from 'clsx'
+
 import { Text } from '@components/atoms/Text/Text.component'
 
 import { PreviewProps } from '@src/types/preview'
@@ -10,9 +12,10 @@ import { PreviewProps } from '@src/types/preview'
 import { ComponentProps } from '@src/types/component'
 
 import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 
 import { getClasses, isStyleObject } from '@src/utils/common'
+
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import styles from './Input.module.css'
 
@@ -72,24 +75,23 @@ const Input = React.forwardRef<HTMLDivElement, InputProps>((props, ref) => {
     // eslint-disable-next-line consistent-return
     return <Icon {...suffixIconProps} />
   }, [suffixIconProps])
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <div
-        style={style as CSSProperties}
-        className={getClasses(styles.container, className || '')}
-        ref={ref}
-      >
-        <InternalInput
-          {...inputStyleProps}
-          disabled={isPreview}
-          prefix={prefixIcon}
-          suffix={suffixIcon}
-          {...rest}
-        />
-        {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-      </div>
-    </VisibilityComponent>
+    <div
+      style={style as CSSProperties}
+      className={clsx(getClasses(styles.container, className || ''), classNames)}
+      ref={ref}
+    >
+      <InternalInput
+        {...inputStyleProps}
+        disabled={isPreview}
+        prefix={prefixIcon}
+        suffix={suffixIcon}
+        {...rest}
+      />
+      {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
+    </div>
   )
 })
 

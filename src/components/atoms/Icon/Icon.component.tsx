@@ -8,6 +8,8 @@ import * as featureIcons from 'react-icons/fi'
 import * as materialIcons from 'react-icons/md'
 
 import { ComponentProps } from '@src/types/component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
+import { PreviewProps } from '@src/types/preview'
 
 export enum IconSet {
   All = 'all',
@@ -70,16 +72,18 @@ export function getIconSet(iconSet: IconSet) {
   }
 }
 
-export interface IconProps extends ComponentProps<IconBaseProps> {
+export interface IconProps extends PreviewProps, ComponentProps<IconBaseProps> {
   iconName: string
 }
 
 export const Icon = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
+  const { className, style, iconName, color, size, responsiveVisibility } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
   return (
-    <span ref={ref} style={{ display: 'inline-block', ...props.style }}>
-      {getIconComponent(props.iconName, {
-        color: props.color,
-        size: props.size
+    <span style={{ display: 'inline-block', ...style }} className={classNames} ref={ref}>
+      {getIconComponent(iconName, {
+        color,
+        size
       })}
     </span>
   )

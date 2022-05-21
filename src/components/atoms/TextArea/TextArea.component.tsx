@@ -4,15 +4,17 @@ import { TextAreaProps as AntTextAreaProps } from 'antd/lib/input/TextArea'
 
 import { CSSProperties } from 'styled-components'
 
+import clsx from 'clsx'
+
 import { Text } from '@components/atoms/Text/Text.component'
 
 import { PreviewProps } from '@src/types/preview'
 
 import { ComponentProps } from '@src/types/component'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
-
 import { getClasses, isStyleObject } from '@src/utils/common'
+
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import styles from './TextArea.module.css'
 
@@ -47,18 +49,17 @@ const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>((props, ref) =>
           className: getClasses(styles.textarea, inputStyle)
         }
   }, [inputStyle])
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <div
-        style={style as CSSProperties}
-        className={getClasses(styles.container, className || '')}
-        ref={ref}
-      >
-        <AntInput.TextArea {...inputStyleProps} disabled={isPreview} {...rest} />
-        {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-      </div>
-    </VisibilityComponent>
+    <div
+      style={style as CSSProperties}
+      className={clsx(getClasses(styles.container, className || ''), classNames)}
+      ref={ref}
+    >
+      <AntInput.TextArea {...inputStyleProps} disabled={isPreview} {...rest} />
+      {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
+    </div>
   )
 })
 

@@ -5,18 +5,17 @@ import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface FooterProps extends PreviewProps, ComponentProps<AntBasicProps> {}
 
 const Footer = React.forwardRef<HTMLDivElement, FooterProps>((props, ref) => {
-  const { children, style, isPreview, responsiveVisibility, ...rest } = props
+  const { children, style, responsiveVisibility, className, ...rest } = props
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <footer {...rest} style={style} ref={ref}>
-        {children}
-      </footer>
-    </VisibilityComponent>
+    <footer {...rest} className={classNames} style={style} ref={ref}>
+      {children}
+    </footer>
   )
 })
 

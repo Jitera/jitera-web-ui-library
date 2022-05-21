@@ -53,3 +53,36 @@
 .make-grid(~'Desktop', ~'-xl');
 .make-grid(~'Tablet', ~'-md');
 .make-grid(~'Mobile', ~'-xs');
+
+.breakpoint-Desktop .show-desktop,
+.breakpoint-Desktop .show-tablet.show-desktop,
+.breakpoint-Desktop .show-mobile.show-desktop {
+  display: contents !important;
+}
+
+.breakpoint-Desktop .show-tablet,
+.breakpoint-Desktop .show-mobile {
+  display: none !important;
+}
+
+.breakpoint-Tablet .show-tablet,
+.breakpoint-Tablet .show-desktop.show-tablet,
+.breakpoint-Tablet .show-mobile.show-tablet {
+  display: contents !important;
+}
+
+.breakpoint-Tablet .show-desktop,
+.breakpoint-Tablet .show-mobile {
+  display: none !important;
+}
+
+.breakpoint-Mobile .show-mobile,
+.breakpoint-Mobile .show-desktop.show-mobile,
+.breakpoint-Mobile .show-tablet.show-mobile {
+  display: contents !important;
+}
+
+.breakpoint-Mobile .show-desktop,
+.breakpoint-Mobile .show-tablet {
+  display: none !important;
+}

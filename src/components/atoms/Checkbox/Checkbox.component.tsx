@@ -11,11 +11,11 @@ import { CheckboxGroupProps as AntCheckboxGroupProps } from 'antd/lib/checkbox'
 import { PreviewProps } from '@src/types/preview'
 import { ComponentProps, CheckboxStateColor } from '@src/types/component'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
-
 import { isWrap } from '@src/utils/wrap'
 
 import { isStyleObject, getClasses } from '@src/utils/common'
+
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { CheckboxWrapper } from './Checkbox.styles'
 
@@ -47,6 +47,7 @@ const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) =>
     checkColor,
     labelStyle,
     direction,
+    className,
     ...rest
   } = props
 
@@ -65,24 +66,25 @@ const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>((props, ref) =>
           className: getClasses(containerStyle)
         }
   }, [containerStyle])
+  const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
+
   return (
-    <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-      <CheckboxWrapper
-        activeColor={activeColor}
-        inactiveColor={inactiveColor}
-        checkColor={checkColor}
-        labelStyle={labelStyle}
-        {...containerStyleProps}
-      >
-        <AntCheckbox.Group disabled={isPreview} {...rest} ref={ref}>
-          <AntSpace direction={direction} {...customSpaceProps}>
-            {data?.map((option) => (
-              <AntCheckbox {...option}>{option.label}</AntCheckbox>
-            ))}
-          </AntSpace>
-        </AntCheckbox.Group>
-      </CheckboxWrapper>
-    </VisibilityComponent>
+    <CheckboxWrapper
+      activeColor={activeColor}
+      inactiveColor={inactiveColor}
+      checkColor={checkColor}
+      labelStyle={labelStyle}
+      {...containerStyleProps}
+      className={classNames}
+    >
+      <AntCheckbox.Group disabled={isPreview} {...rest} ref={ref}>
+        <AntSpace direction={direction} {...customSpaceProps}>
+          {data?.map((option) => (
+            <AntCheckbox {...option}>{option.label}</AntCheckbox>
+          ))}
+        </AntSpace>
+      </AntCheckbox.Group>
+    </CheckboxWrapper>
   )
 })
 

@@ -5,7 +5,7 @@ import { ComponentProps } from '@src/types/component'
 
 import { PreviewProps } from '@src/types/preview'
 
-import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
+import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { assertUnreachable, Icon, IconProps } from '../Icon/Icon.component'
 
@@ -29,21 +29,20 @@ export interface MenuItemProps extends PreviewProps, ComponentProps<AntMenuItemP
 
 export const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
   (
-    { label, iconProps, iconPosition, spaceBetween, responsiveVisibility, isPreview, ...restProps },
+    { label, iconProps, iconPosition, spaceBetween, responsiveVisibility, className, ...restProps },
     ref
   ) => {
+    const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
     return (
-      <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
-        <MenuItemWrapper ref={ref as any}>
-          <MenuItemInner>
-            <AntMenuItem {...restProps}>
-              {iconProps && iconPosition && spaceBetween
-                ? renderTextWithIcon(iconProps, iconPosition, spaceBetween, label)
-                : label}
-            </AntMenuItem>
-          </MenuItemInner>
-        </MenuItemWrapper>
-      </VisibilityComponent>
+      <MenuItemWrapper className={classNames} ref={ref as any}>
+        <MenuItemInner>
+          <AntMenuItem {...restProps}>
+            {iconProps && iconPosition && spaceBetween
+              ? renderTextWithIcon(iconProps, iconPosition, spaceBetween, label)
+              : label}
+          </AntMenuItem>
+        </MenuItemInner>
+      </MenuItemWrapper>
     )
   }
 )
