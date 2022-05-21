@@ -11,7 +11,9 @@ import { ComponentProps } from '@src/types/component'
 import VisibilityComponent from '@components/common/ResponsiveVisibility/ResponsiveVisibility.component'
 import { ResponsiveSize } from '@src/constants/responsive'
 
-interface InnerCarouse {
+export interface CarouselProps
+  extends PreviewProps,
+    ComponentProps<React.HTMLAttributes<HTMLDivElement>> {
   infinite?: boolean
   variableWidth?: boolean
   adaptiveHeight?: boolean
@@ -21,17 +23,17 @@ interface InnerCarouse {
   className?: string
   style?: CSSProperties
   setting?: Settings
+  children?: ReactNode
   xl?: ResponsiveObject['settings']
   md?: ResponsiveObject['settings']
   xs?: ResponsiveObject['settings']
   renderItem?: (item: any, index?: number) => ReactNode
 }
 
-export interface CarouselProps extends PreviewProps, ComponentProps<InnerCarouse> {}
-
 const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) => {
   const {
     style,
+    children,
     responsiveVisibility,
     isPreview,
     dataSource,
@@ -51,7 +53,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
     xs = {
       slidesToShow: 1
     },
-    ...rest
+    className
   } = props
 
   const sliderProps = useMemo(() => {
@@ -81,7 +83,11 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
     }
   }, [setting, infinite, slidesToShow, variableWidth, adaptiveHeight, focusOnSelect, xl, md, xs])
   const items = useMemo(() => {
+    if (children) {
+      return children
+    }
     if (!dataSource?.length || !renderItem) {
+      // eslint-disable-next-line consistent-return
       return
     }
     // eslint-disable-next-line consistent-return
@@ -92,11 +98,11 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
       // eslint-disable-next-line react/no-array-index-key
       return <div key={`${item.id}_${index}`}>{renderItem(item, index)}</div>
     })
-  }, [variableWidth, dataSource, renderItem])
+  }, [children, variableWidth, dataSource, renderItem])
   return (
     <VisibilityComponent visibility={responsiveVisibility} isPreview={isPreview}>
       <div style={style} ref={ref}>
-        <Slider {...sliderProps} {...rest}>
+        <Slider {...sliderProps} className={className}>
           {items}
         </Slider>
       </div>
