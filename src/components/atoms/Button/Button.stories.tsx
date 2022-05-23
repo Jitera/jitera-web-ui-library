@@ -1,5 +1,4 @@
 import { Story } from '@storybook/react'
-import { SearchOutlined } from '@ant-design/icons'
 
 import { Button, ButtonProps } from './Button.component'
 
@@ -45,7 +44,9 @@ Icon.args = {
   ...defaultArguments,
   buttonType: 'primary',
   children: 'Icon',
-  icon: <SearchOutlined />
+  iconProps: {
+    iconName: 'AiFillHome'
+  }
 }
 
 export const Loading = ButtonTemplate.bind({})

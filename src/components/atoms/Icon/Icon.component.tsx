@@ -80,7 +80,11 @@ export const Icon = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) =>
   const { className, style, iconName, color, size, responsiveVisibility } = props
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
   return (
-    <span style={{ display: 'inline-block', ...style }} className={classNames} ref={ref}>
+    <span
+      style={{ display: 'inline-block', verticalAlign: 'middle', ...style }}
+      className={classNames}
+      ref={ref}
+    >
       {getIconComponent(iconName, {
         color,
         size
