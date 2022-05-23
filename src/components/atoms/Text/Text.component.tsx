@@ -39,7 +39,7 @@ const ComponentMapping = {
 export type TextProps = PreviewProps &
   BaseTextProps &
   BaseLinkProps & {
-    textType?: TextTypeEnum
+    textType?: `${TextTypeEnum}`
   }
 
 const Text = React.forwardRef<HTMLDivElement & HTMLAnchorElement, TextProps>((props, ref) => {
