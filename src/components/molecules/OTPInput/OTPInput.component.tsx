@@ -10,6 +10,8 @@ import { isStyleObject, getClasses } from '../../../utils/common'
 import { useTheme } from '../../../styles/theme'
 import { Text } from '../../atoms/Text/Text.component'
 
+import { OTPInputWrapper } from './OTPInput.styles'
+
 export enum OTPInputType {
   Box = 'box',
   Underline = 'underline'
@@ -58,7 +60,6 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
     inputStyle = {
       width: '3rem',
       height: '3rem',
-      marginRight: '1rem',
       fontSize: '1.5rem',
       borderRadius: 4,
       border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`,
@@ -71,7 +72,7 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   return (
-    <div className={classNames} ref={ref}>
+    <OTPInputWrapper className={classNames} ref={ref}>
       <OtpInput
         isDisabled={isPreview}
         {...rest}
@@ -79,10 +80,10 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
         shouldAutoFocus={autoFocus}
         containerStyle={style}
         inputStyle={inputStyle}
-        className={getClasses(cellStyle, cellTextStyle)}
+        className={getClasses('otp-cell', cellStyle, cellTextStyle)}
       />
       {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
-    </div>
+    </OTPInputWrapper>
   )
 })
 
