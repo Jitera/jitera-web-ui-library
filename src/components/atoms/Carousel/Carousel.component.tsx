@@ -8,7 +8,6 @@ import { PreviewProps } from '@src/types/preview'
 
 import { ComponentProps } from '@src/types/component'
 
-import { ResponsiveSize } from '@src/constants/responsive'
 import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface CarouselProps
@@ -32,6 +31,12 @@ export interface CarouselProps
   renderItem?: (item: any, index?: number) => ReactNode
 }
 
+const DEFAULT_RESPONSIVE_SIZE = {
+  MOBILE: 480,
+  TABLET: 768,
+  DESKTOP: 4000
+}
+
 const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) => {
   const {
     style,
@@ -41,27 +46,39 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
     renderItem,
     setting,
     arrows = false,
-    slidesToShow = 2,
+    slidesToShow = 4,
     variableWidth = false,
     infinite = false,
     adaptiveHeight = true,
     focusOnSelect = false,
-    itemPaddingHorizontal,
-    xlResponsive = {
-      slidesToShow: 2
-    },
-    mdResponsive = {
-      slidesToShow: 1
-    },
-    xsResponsive = {
-      slidesToShow: 1
-    },
+    xlResponsive,
+    mdResponsive,
+    xsResponsive,
     className
   } = props
 
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   const sliderProps = useMemo(() => {
+    const responsive: Settings['responsive'] = []
+    if (typeof xlResponsive === 'object' && xlResponsive?.slidesToShow) {
+      responsive.push({
+        breakpoint: DEFAULT_RESPONSIVE_SIZE.DESKTOP,
+        settings: xlResponsive
+      })
+    }
+    if (typeof mdResponsive === 'object' && mdResponsive?.slidesToShow) {
+      responsive.push({
+        breakpoint: DEFAULT_RESPONSIVE_SIZE.TABLET,
+        settings: mdResponsive
+      })
+    }
+    if (typeof xsResponsive === 'object' && xsResponsive?.slidesToShow) {
+      responsive.push({
+        breakpoint: DEFAULT_RESPONSIVE_SIZE.MOBILE,
+        settings: xsResponsive
+      })
+    }
     return {
       dots: false,
       arrows,
@@ -71,20 +88,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
       variableWidth,
       adaptiveHeight,
       focusOnSelect,
-      responsive: [
-        {
-          breakpoint: ResponsiveSize.LARGE,
-          settings: xlResponsive
-        },
-        {
-          breakpoint: ResponsiveSize.MEDIUM,
-          settings: mdResponsive
-        },
-        {
-          breakpoint: ResponsiveSize.SMALL,
-          settings: xsResponsive
-        }
-      ],
+      responsive,
       ...setting
     }
   }, [
@@ -105,17 +109,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
     }
     if (children) {
       return Children.map(children, (child) => {
-        return (
-          <div
-            style={{
-              width: '100%',
-              paddingLeft: itemPaddingHorizontal,
-              paddingRight: itemPaddingHorizontal
-            }}
-          >
-            {child}
-          </div>
-        )
+        return <div>{child}</div>
       })
     }
     if (!dataSource?.length || !renderItem) {
@@ -130,7 +124,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>((props, ref) =>
       // eslint-disable-next-line react/no-array-index-key
       return <div key={`${item.id}_${index}`}>{renderItem(item, index)}</div>
     })
-  }, [children, variableWidth, dataSource, renderItem, itemPaddingHorizontal])
+  }, [children, variableWidth, dataSource, renderItem])
   return (
     <div style={style} className={classNames} ref={ref}>
       <Slider {...sliderProps}>{items}</Slider>
