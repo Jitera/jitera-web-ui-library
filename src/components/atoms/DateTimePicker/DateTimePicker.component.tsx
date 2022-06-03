@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Dayjs } from 'dayjs'
 import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs'
 import generatePicker, { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
@@ -20,9 +20,10 @@ export enum PickerEnum {
 
 export interface DateTimePickerProps
   extends PreviewProps,
-    ComponentProps<Omit<PickerDateProps<Dayjs>, 'picker'>> {
-  picker?: PickerEnum
+    ComponentProps<Omit<PickerDateProps<Dayjs>, 'picker' | 'defaultValue'>> {
+  picker?: `${PickerEnum}`
   errorMessage?: string
+  defaultValue?: Pick<PickerDateProps<Dayjs>, 'defaultValue'> | string
 }
 
 const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
@@ -30,6 +31,7 @@ const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
 const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((props, ref) => {
   const {
     isPreview,
+    defaultValue,
     responsiveVisibility,
     picker = 'date',
     errorMessage,
@@ -38,9 +40,21 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((pr
   } = props
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
+  const memoDefaultValue = useMemo<Dayjs | undefined>(() => {
+    if (typeof defaultValue === 'string' || !defaultValue) {
+      return new Dayjs(defaultValue)
+    }
+    return defaultValue as Dayjs
+  }, [defaultValue])
+
   return (
     <div className={classNames} ref={ref}>
-      <AntDatePicker disabled={isPreview} picker={picker} {...rest} />
+      <AntDatePicker
+        disabled={isPreview}
+        picker={picker}
+        defaultValue={memoDefaultValue}
+        {...rest}
+      />
       {!!errorMessage && (
         <Text type="danger" style={{ display: 'block' }}>
           {errorMessage}
