@@ -20,7 +20,8 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
 
     ConfigProvider.config({
-      theme: mergedNextColor
+      theme: mergedNextColor,
+      prefixCls: 'jitera'
     })
 
     setThemeValue(mergedNextColor)

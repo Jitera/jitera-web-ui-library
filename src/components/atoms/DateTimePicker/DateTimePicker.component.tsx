@@ -1,7 +1,5 @@
 import React from 'react'
-import { Dayjs } from 'dayjs'
-import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs'
-import generatePicker, { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
+import { DatePicker as AntDatePicker, DatePickerProps as AntDatePickerProps } from 'antd'
 
 import { ComponentProps } from '@src/types/component'
 
@@ -20,12 +18,11 @@ export enum PickerEnum {
 
 export interface DateTimePickerProps
   extends PreviewProps,
-    ComponentProps<Omit<PickerDateProps<Dayjs>, 'picker'>> {
+    ComponentProps<Omit<AntDatePickerProps, 'picker'>> {
+  showTime?: boolean
   picker?: PickerEnum
   errorMessage?: string
 }
-
-const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
 
 const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((props, ref) => {
   const {
