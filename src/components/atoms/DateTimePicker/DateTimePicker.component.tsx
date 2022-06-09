@@ -11,6 +11,8 @@ import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { Text } from '../Text/Text.component'
 
+const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
+
 export enum PickerEnum {
   TIME = 'time',
   DATE = 'date',
@@ -41,7 +43,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((pr
 
   const memoDefaultValue = useMemo<Dayjs | undefined>(() => {
     if (typeof defaultValue === 'string' || !defaultValue) {
-      return new Dayjs(defaultValue)
+      return new Dayjs(defaultValue as string | number | Date | Dayjs)
     }
     return defaultValue as Dayjs
   }, [defaultValue])
