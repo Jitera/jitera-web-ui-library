@@ -13,7 +13,7 @@ import { TabWrapper } from './Tab.styles'
 const { TabPane } = Tabs
 
 export interface TabProps extends PreviewProps, ComponentProps<TabsProps> {
-  tabs?: { key?: string; title?: string }[]
+  tabs?: { [key: string]: { key?: string; title?: string } }
   activeColor?: string
   tabType?: TabsProps['type']
   tabLabelStyle?: {
