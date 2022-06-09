@@ -22,11 +22,10 @@ export interface DateTimePickerProps
   extends PreviewProps,
     ComponentProps<Omit<PickerDateProps<Dayjs>, 'picker' | 'defaultValue'>> {
   picker?: `${PickerEnum}`
+  showTime?: boolean
   errorMessage?: string
   defaultValue?: Pick<PickerDateProps<Dayjs>, 'defaultValue'> | string
 }
-
-const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
 
 const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((props, ref) => {
   const {
