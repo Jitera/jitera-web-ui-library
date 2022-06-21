@@ -7,7 +7,11 @@ import { ThemeProvider } from '@src/styles/theme'
 
 import { Box } from '../Box/Box.component'
 
-const modals: ((visible?: boolean) => void)[] = []
+export enum ModalPositionEnum {
+  DEFAULT = 'default',
+  TOP = 'top',
+  CENTER = 'center'
+}
 
 export interface ModalShowOptions
   extends Omit<
@@ -26,8 +30,10 @@ export interface ModalShowOptions
     | 'closeIcon'
     | 'bodyStyle'
   > {
-  position?: string
+  position?: ModalPositionEnum
 }
+
+const modals: ((visible?: boolean) => void)[] = []
 
 export const Modal = {
   show(ReactComponent: React.ReactNode, options: ModalShowOptions = {}) {
@@ -42,8 +48,9 @@ export const Modal = {
               closable={false}
               footer={null}
               modalRender={() => <Box style={{ pointerEvents: 'auto' }}>{ReactComponent}</Box>}
+              centered={options.position === ModalPositionEnum.CENTER}
               style={{
-                top: options.position,
+                top: options.position === ModalPositionEnum.TOP ? '0px' : undefined,
                 ...options.style
               }}
               {...options}
