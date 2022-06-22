@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs'
 import generatePicker, { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
 
@@ -43,7 +43,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((pr
 
   const memoDefaultValue = useMemo<Dayjs | undefined>(() => {
     if (typeof defaultValue === 'string' || !defaultValue) {
-      return new Dayjs(defaultValue as string | number | Date | Dayjs)
+      return dayjs(defaultValue as string | number | Date | Dayjs)
     }
     return defaultValue as Dayjs
   }, [defaultValue])
