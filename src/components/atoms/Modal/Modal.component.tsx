@@ -30,7 +30,7 @@ export interface ModalShowOptions
     | 'closeIcon'
     | 'bodyStyle'
   > {
-  position?: ModalPositionEnum
+  position?: `${ModalPositionEnum}`
 }
 
 const modals: ((visible?: boolean) => void)[] = []
