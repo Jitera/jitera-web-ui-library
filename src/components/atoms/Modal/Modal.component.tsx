@@ -46,6 +46,7 @@ export const Modal = {
             <AntModal
               visible={visible}
               closable={false}
+              onCancel={() => render(false)}
               footer={null}
               modalRender={() => <Box style={{ pointerEvents: 'auto' }}>{ReactComponent}</Box>}
               centered={options.position === ModalPositionEnum.CENTER}
