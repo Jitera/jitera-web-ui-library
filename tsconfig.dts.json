@@ -8,6 +8,7 @@
     "outDir": "dist-dts",
     "resolveJsonModule": true,
     "moduleResolution": "node",
+    "downlevelIteration": true,
     "types": ["node"],
     "baseUrl": "./src",
     "paths": {
