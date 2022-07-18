@@ -25,6 +25,10 @@
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["off"],
+    "no-restricted-syntax": "off",
+    "unicorn/no-null": "warn",
+    "unicorn/consistent-function-scoping": "warn",
+    "react/react-in-jsx-scope": "warn",
     "unicorn/prevent-abbreviations": [
       "error",
       {
@@ -86,5 +90,6 @@
       "files": ["*.stories.tsx"],
       "rules": { "import/no-extraneous-dependencies": "off", "react/react-in-jsx-scope": "off" }
     }
-  ]
+  ],
+  "ignorePatterns": ["rollup.config.dts.ts"]
 }

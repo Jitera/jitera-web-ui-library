@@ -1,6 +1,7 @@
 import { defineConfig } from 'rollup'
 import css from '@modular-css/rollup'
 import { minify, defineRollupSwcMinifyOption } from 'rollup-plugin-swc3'
+import url from '@rollup/plugin-url'
 import typescript from '@rollup/plugin-typescript'
 
 import package_ from './package.json'
@@ -25,6 +26,7 @@ export default defineConfig({
     moduleSideEffects: false
   },
   plugins: [
+    url(),
     typescript({ target: 'es2019' }),
     css(),
     minify(
