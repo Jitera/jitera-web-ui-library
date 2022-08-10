@@ -35,7 +35,7 @@ const Tab = React.forwardRef<HTMLDivElement, TabProps>((props, ref) => {
     }
     // eslint-disable-next-line consistent-return
     return Children.map(children, (child, index) => {
-      const tab = tabs?.[index]
+      const tab = tabs?.[index] || tabs?.[`${index}`]
       const title = tab?.title || `Tab ${index}`
       return (
         <TabPane tab={title} key={tab?.key || `${title}_${index}`}>
