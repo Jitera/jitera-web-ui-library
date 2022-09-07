@@ -10,7 +10,7 @@ import type { RichTextProps } from './types'
 export * from './types'
 
 export const RichText: React.FC<RichTextProps> = React.forwardRef<HTMLDivElement, RichTextProps>(
-  (props, ref) => {
+  ({ style, data }, ref) => {
     const initialConfig = {
       editorState: undefined,
       namespace: 'Playground',
@@ -21,11 +21,11 @@ export const RichText: React.FC<RichTextProps> = React.forwardRef<HTMLDivElement
       theme: JiteraRichTextTheme
     }
     return (
-      <LexicalComposer initialConfig={initialConfig}>
-        <div ref={ref}>
-          <Editor {...props} />
-        </div>
-      </LexicalComposer>
+      <div ref={ref} style={style}>
+        <LexicalComposer initialConfig={initialConfig}>
+          <Editor data={data} />
+        </LexicalComposer>
+      </div>
     )
   }
 )

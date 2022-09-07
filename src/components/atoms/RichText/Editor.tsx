@@ -19,7 +19,7 @@ import type { RichTextProps } from './types'
 const DEFAULT_STATE =
   '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
 
-export const Editor: React.FC<RichTextProps> = ({ data }) => {
+export const Editor: React.FC<Omit<RichTextProps, 'style'>> = ({ data }) => {
   const [editor] = useLexicalComposerContext()
   const internalState = useMemo(() => data || DEFAULT_STATE, [data])
   useEffect(() => {
