@@ -36,7 +36,9 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
     pinCount = 4,
     autoFocus,
     errorMessage,
-    style = {},
+    style = {
+      justifyContent: 'center'
+    },
     cellTextStyle = {},
     cellStyle = {},
     otpInputType = 'box',
@@ -54,18 +56,19 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
     }
   }
 
-  let inputStyle: Record<string, unknown> | string = ''
+  let inputStyle: Record<string, unknown> | string = {
+    ...customCellStyle,
+    width: '100%',
+    height: '100%',
+    fontSize: '1.5rem',
+    borderRadius: 4,
+    border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`
+  }
 
   if (isStyleObject(cellStyle) && isStyleObject(cellTextStyle)) {
     inputStyle = {
-      width: '3rem',
-      height: '3rem',
-      fontSize: '1.5rem',
-      borderRadius: 4,
-      border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`,
       ...(cellStyle as Record<string, unknown>),
       ...(cellTextStyle as Record<string, unknown>),
-      ...customCellStyle
     }
   }
 
