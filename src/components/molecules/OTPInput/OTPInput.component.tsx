@@ -60,7 +60,7 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
     ...customCellStyle,
     width: '100%',
     height: '100%',
-    fontSize: '1.5rem',
+    fontSize: '1rem',
     borderRadius: 4,
     border: `${theme.borderWidthBase} solid ${theme.borderColorBase}`
   }
