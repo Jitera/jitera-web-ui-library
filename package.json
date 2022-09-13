@@ -24,6 +24,8 @@
     "@lexical/rich-text": "~0.3.7",
     "@lexical/table": "~0.3.7",
     "@lexical/utils": "~0.3.7",
+    "@tanstack/react-table": "~8.5.13",
+    "@tanstack/table-core": "~8.5.13",
     "antd": "~4.21.3",
     "clsx": "~1.1.1",
     "dayjs": "~1.11.3",
