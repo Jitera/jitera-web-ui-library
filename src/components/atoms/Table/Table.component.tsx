@@ -7,6 +7,7 @@ import {
   ColumnDefTemplate,
   DeepKeys,
   PaginationState,
+  Row,
   RowData,
   SortingState
 } from '@tanstack/table-core'
@@ -14,6 +15,34 @@ import {
 import { CSSObject } from 'styled-components'
 
 import { Pagination, PaginationProps } from 'antd'
+
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DndContextProps,
+  MouseSensor,
+  TouchSensor,
+  DragEndEvent
+} from '@dnd-kit/core'
+
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy
+} from '@dnd-kit/sortable'
+
+import {
+  restrictToFirstScrollableAncestor,
+  restrictToParentElement,
+  restrictToVerticalAxis
+} from '@dnd-kit/modifiers'
+
+import { CSS } from '@dnd-kit/utilities'
 
 import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
 
@@ -27,6 +56,8 @@ import {
 } from './Table.styles'
 
 export { createColumnHelper } from '@tanstack/react-table'
+
+export { arrayMove } from '@dnd-kit/sortable'
 
 export interface TableColumnDefinition<DataModel extends RowData> {
   name: string
@@ -48,9 +79,11 @@ export interface TableProps<DataModel extends RowData> {
   styleThead?: CSSProperties
 
   isResizeable?: boolean
-
   isHeaderVisible?: boolean
   isFooterVisible?: boolean
+
+  isRowSortable?: boolean
+  onRowSortChange?: (currentIndex: number, newIndex: number) => void
 
   ascendingIconProps?: IconProps
   descendingIconProps?: IconProps
@@ -60,6 +93,50 @@ export interface TableProps<DataModel extends RowData> {
   totalPage?: number
   paginationProps?: Omit<PaginationProps, 'current' | 'total' | 'pageSize' | 'onChange'>
   onPaginationChange?: (pagination: PaginationState) => void
+}
+
+export interface TableRowProps<DataModel extends RowData>
+  extends Pick<TableProps<DataModel>, 'isRowSortable'> {
+  row: Row<DataModel>
+}
+
+const TableRow = <DataModel,>({ row, isRowSortable }: TableRowProps<DataModel>) => {
+  const { attributes, listeners, transform, isDragging, setNodeRef } = useSortable({
+    id: row.id
+  })
+  const style: CSSProperties = {
+    transform: CSS.Transform.toString({
+      x: transform?.x || 0,
+      y: transform?.y || 0,
+      scaleX: 1,
+      scaleY: 1
+    })
+  }
+  return (
+    <StyledTr
+      ref={setNodeRef}
+      key={row.id}
+      className={`j-table__tbody-tr j-table__tbody-tr--${row.id} ${
+        isDragging ? `j-table__tbody-tr--dragging` : undefined
+      }`}
+      style={style}
+    >
+      {isRowSortable ? (
+        <StyledTd {...listeners} {...attributes}>
+          <Icon className="j-table__tbody-td-drag" iconName="MdDragIndicator" />
+        </StyledTd>
+      ) : undefined}
+      {row.getVisibleCells().map((cell) => (
+        <StyledTd
+          key={cell.id}
+          className={`j-table__tbody-td j-table__tbody-td--${cell.id}`}
+          style={{ width: cell.column.getSize() }}
+        >
+          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        </StyledTd>
+      ))}
+    </StyledTr>
+  )
 }
 
 const TableInner = <DataModel,>(
@@ -72,6 +149,9 @@ const TableInner = <DataModel,>(
     isResizeable,
     isHeaderVisible = true,
     isFooterVisible,
+
+    isRowSortable,
+    onRowSortChange,
 
     ascendingIconProps,
     descendingIconProps,
@@ -112,6 +192,12 @@ const TableInner = <DataModel,>(
     onPaginationChange: isPaginationEnabled ? setPagination : undefined,
     onSortingChange: setSorting
   })
+  const dndSensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(MouseSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  )
   useEffect(() => {
     if (onSortingChange) {
       onSortingChange(sorting)
@@ -125,6 +211,13 @@ const TableInner = <DataModel,>(
   const handleAntdPaginationChange: PaginationProps['onChange'] = (page, _pageSize) => {
     table.setPageIndex(page - 1)
     table.setPageSize(_pageSize)
+  }
+  const handleRowSortChange: DndContextProps['onDragEnd'] = ({ active, over }) => {
+    const currentIndex = (active as DragEndEvent['active']).data.current?.sortable.index
+    const newIndex = (over as DragEndEvent['over'])?.data.current?.sortable.index
+    if (onRowSortChange) {
+      onRowSortChange(currentIndex, newIndex)
+    }
   }
   return (
     <StyledTableWrapper style={style} className={className}>
@@ -141,6 +234,7 @@ const TableInner = <DataModel,>(
                 key={headerGroup.id}
                 className={`j-table__thead-tr j-table__thead-tr--${headerGroup.id}`}
               >
+                {isRowSortable ? <StyledTh /> : undefined}
                 {headerGroup.headers.map((header) => (
                   <StyledTh
                     key={header.id}
@@ -172,19 +266,25 @@ const TableInner = <DataModel,>(
           </thead>
         ) : undefined}
         <tbody className="j-table__tbody">
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className={`j-table__tbody-tr j-table__tbody-tr--${row.id}`}>
-              {row.getVisibleCells().map((cell) => (
-                <StyledTd
-                  key={cell.id}
-                  className={`j-table__tbody-td j-table__tbody-td--${cell.id}`}
-                  style={{ width: cell.column.getSize() }}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </StyledTd>
+          <DndContext
+            sensors={dndSensors}
+            collisionDetection={closestCenter}
+            modifiers={[
+              restrictToFirstScrollableAncestor,
+              restrictToVerticalAxis,
+              restrictToParentElement
+            ]}
+            onDragEnd={handleRowSortChange}
+          >
+            <SortableContext
+              items={table.getRowModel().rows}
+              strategy={verticalListSortingStrategy}
+            >
+              {table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id} row={row} isRowSortable={isRowSortable} />
               ))}
-            </tr>
-          ))}
+            </SortableContext>
+          </DndContext>
         </tbody>
         {isFooterVisible ? (
           <tfoot>

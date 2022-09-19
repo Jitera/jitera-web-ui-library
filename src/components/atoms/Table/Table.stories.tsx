@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { Button } from '../Button/Button.component'
 
-import { Table, TableProps, TableColumnDefinition } from './Table.component'
+import { Table, TableProps, TableColumnDefinition, arrayMove } from './Table.component'
 
 export interface AnimeAired {
   startDate: number
@@ -154,16 +154,24 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
     },
     [getAnime]
   )
+  const handleRowSortChange = useCallback<TableProps<Anime>['onRowSortChange']>(
+    (currentIndex, newIndex) => {
+      setData(arrayMove(data, currentIndex, newIndex))
+    },
+    [data]
+  )
   return (
     <Table
       data={data}
       columns={columns}
       actions={actions}
       isResizeable
+      isRowSortable
       isPaginationEnabled
       totalPage={metadata?.total}
       onSortingChange={handleSortingChange}
       onPaginationChange={handlePaginationChange}
+      onRowSortChange={handleRowSortChange}
     />
   )
 }

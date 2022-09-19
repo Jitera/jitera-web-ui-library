@@ -27,6 +27,14 @@ export const StyledTable = styled.table`
 
 export const StyledTr = styled.tr`
   width: fit-content;
+
+  &.j-table__tbody-tr--dragging {
+    opacity: 0.5;
+  }
+
+  .j-table__tbody-td-drag {
+    cursor: row-resize;
+  }
 `
 
 export const StyledTh = styled.th<{ canSort?: boolean }>`
