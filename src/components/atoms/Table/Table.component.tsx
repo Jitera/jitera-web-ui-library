@@ -313,7 +313,7 @@ const TableInner = <DataModel,>(
   const formattedColumns = useMemo<ColumnDef<DataModel, any>[]>(
     () =>
       columns.map((column) => ({
-        accessorKey: !column.renderColumn ? column.path : undefined,
+        accessorKey: column.path,
         header: column.name,
         footer: column.name,
         cell: column.renderColumn ? column.renderColumn : (info: any) => info.getValue(),
