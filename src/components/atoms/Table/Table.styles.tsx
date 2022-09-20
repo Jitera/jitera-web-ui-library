@@ -43,6 +43,14 @@ export const StyledTh = styled.th<{ canSort?: boolean }>`
   position: relative;
   transition-property: width 0.1 linear;
 
+  &.j-table__thead-th--dragging {
+    opacity: 0.5;
+  }
+
+  .j-table__thead-th-drag {
+    cursor: col-resize;
+  }
+
   &:hover .j-table__resizer {
     opacity: 1;
   }

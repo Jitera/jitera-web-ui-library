@@ -100,6 +100,10 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
     next: null
   })
   const [data, setData] = useState<Anime[]>([])
+  const [columns, setColumns] = useState<TableColumnDefinition<Anime>[]>([
+    { name: 'Name', path: 'Name' },
+    { name: 'Score', path: 'Score' }
+  ])
   const { getData } = useLazyFetch()
   const getAnime = useCallback(
     (parameters: Record<string, string> = {}) => {
@@ -119,13 +123,6 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
     [getData]
   )
   useEffect(() => {}, [])
-  const columns = useMemo<TableColumnDefinition<Anime>[]>(
-    () => [
-      { name: 'Name', path: 'Name' },
-      { name: 'Score', path: 'Score' }
-    ],
-    []
-  )
   const actions = useMemo<TableColumnDefinition<Anime>[]>(
     () => [
       {
@@ -142,7 +139,7 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
     ],
     []
   )
-  const handleSortingChange = useCallback(
+  const handleDataSortingChange = useCallback(
     (sorting: SortingState) => {
       getAnime({ sort: sorting?.[0]?.desc ? 'desc' : 'asc', sortBy: sorting?.[0]?.id })
     },
@@ -154,24 +151,34 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
     },
     [getAnime]
   )
-  const handleRowSortChange = useCallback<TableProps<Anime>['onRowSortChange']>(
+  const handleRowSortingChange = useCallback<TableProps<Anime>['onRowSortingChange']>(
     (currentIndex, newIndex) => {
       setData(arrayMove(data, currentIndex, newIndex))
     },
     [data]
+  )
+  const handleColumnSortingChange = useCallback<TableProps<Anime>['onColumnSortingChange']>(
+    (currentIndex, newIndex) => {
+      setColumns(arrayMove(columns, currentIndex, newIndex))
+    },
+    [columns]
   )
   return (
     <Table
       data={data}
       columns={columns}
       actions={actions}
-      isResizeable
+      isDataSortable={false}
+      isColumnResizeable={false}
+      isColumnSortable
       isRowSortable
       isPaginationEnabled
+      paginationStyle={{ marginTop: '10px' }}
       totalPage={metadata?.total}
-      onSortingChange={handleSortingChange}
+      onDataSortingChange={handleDataSortingChange}
       onPaginationChange={handlePaginationChange}
-      onRowSortChange={handleRowSortChange}
+      onColumnSortingChange={handleColumnSortingChange}
+      onRowSortingChange={handleRowSortingChange}
     />
   )
 }
