@@ -86,8 +86,11 @@ export interface TableProps<DataModel extends RowData> {
   style?: CSSObject
   tableStyle?: CSSObject
   headerRowStyle?: CSSObject
+  headerColumnStyle?: CSSObject
   bodyRowStyle?: CSSObject
+  bodyColumnStyle?: CSSObject
   footerRowStyle?: CSSObject
+  footerColumnStyle?: CSSObject
 
   styleWrapper?: CSSProperties
   styleTable?: CSSProperties
@@ -116,7 +119,7 @@ export interface TableProps<DataModel extends RowData> {
 }
 
 export interface TableRowProps<DataModel extends RowData>
-  extends Pick<TableProps<DataModel>, 'isRowSortable' | 'bodyRowStyle'> {
+  extends Pick<TableProps<DataModel>, 'isRowSortable' | 'bodyRowStyle' | 'bodyColumnStyle'> {
   row: Row<DataModel>
 }
 
@@ -128,6 +131,7 @@ export interface TableHeaderProps<DataModel extends RowData>
     | 'isDataSortable'
     | 'ascendingIconProps'
     | 'descendingIconProps'
+    | 'headerColumnStyle'
   > {
   header: Header<DataModel, unknown>
 }
@@ -138,7 +142,8 @@ const TableHeader = <DataModel,>({
   isColumnSortable,
   isDataSortable,
   ascendingIconProps,
-  descendingIconProps
+  descendingIconProps,
+  headerColumnStyle
 }: // eslint-disable-next-line sonarjs/cognitive-complexity
 TableHeaderProps<DataModel>) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } = useSortable({
@@ -167,7 +172,11 @@ TableHeaderProps<DataModel>) => {
       }`}
       colSpan={header.colSpan}
       canSort={isDataSortable ? header.column.getCanSort() : undefined}
-      style={{ ...style, width: isColumnResizeable ? header.getSize() : undefined }}
+      style={{
+        ...headerColumnStyle,
+        ...style,
+        width: isColumnResizeable ? header.getSize() : undefined
+      }}
       onClick={isDataSortable ? header.column.getToggleSortingHandler() : undefined}
       onMouseDown={isColumnResizeable ? header.getResizeHandler() : undefined}
       onTouchStart={isColumnResizeable ? header.getResizeHandler() : undefined}
@@ -196,7 +205,12 @@ TableHeaderProps<DataModel>) => {
   )
 }
 
-const TableRow = <DataModel,>({ row, isRowSortable, bodyRowStyle }: TableRowProps<DataModel>) => {
+const TableRow = <DataModel,>({
+  row,
+  isRowSortable,
+  bodyRowStyle,
+  bodyColumnStyle
+}: TableRowProps<DataModel>) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } = useSortable({
     id: row.id
   })
@@ -226,7 +240,7 @@ const TableRow = <DataModel,>({ row, isRowSortable, bodyRowStyle }: TableRowProp
         <StyledTd
           key={cell.id}
           className={`j-table__tbody-td j-table__tbody-td--${cell.id}`}
-          style={{ width: cell.column.getSize() }}
+          style={{ ...bodyColumnStyle, width: cell.column.getSize() }}
         >
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </StyledTd>
@@ -245,8 +259,11 @@ const TableInner = <DataModel,>(
     style,
     tableStyle,
     headerRowStyle,
+    headerColumnStyle,
     bodyRowStyle,
+    bodyColumnStyle,
     footerRowStyle,
+    footerColumnStyle,
 
     isColumnResizeable,
     isHeaderVisible = true,
@@ -396,6 +413,7 @@ const TableInner = <DataModel,>(
                         isDataSortable={isDataSortable}
                         ascendingIconProps={ascendingIconProps}
                         descendingIconProps={descendingIconProps}
+                        headerColumnStyle={headerColumnStyle}
                       />
                     ))}
                   </SortableContext>
@@ -425,6 +443,7 @@ const TableInner = <DataModel,>(
                   row={row}
                   isRowSortable={isRowSortable}
                   bodyRowStyle={bodyRowStyle}
+                  bodyColumnStyle={bodyColumnStyle}
                 />
               ))}
             </SortableContext>
@@ -436,7 +455,7 @@ const TableInner = <DataModel,>(
               <StyledTr key={footerGroup.id} style={footerRowStyle}>
                 {isRowSortable ? <StyledTh /> : undefined}
                 {footerGroup.headers.map((header) => (
-                  <StyledTh key={header.id} colSpan={header.colSpan}>
+                  <StyledTh key={header.id} colSpan={header.colSpan} style={footerColumnStyle}>
                     {flexRender(header.column.columnDef.footer, header.getContext())}
                   </StyledTh>
                 ))}
