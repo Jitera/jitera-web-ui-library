@@ -232,7 +232,7 @@ const TableRow = <DataModel,>({
       style={{ ...bodyRowStyle, ...style }}
     >
       {isRowSortable ? (
-        <StyledTd {...listeners} {...attributes}>
+        <StyledTd style={bodyColumnStyle} {...listeners} {...attributes}>
           <Icon className="j-table__tbody-td-drag" iconName="MdDragIndicator" />
         </StyledTd>
       ) : undefined}
@@ -389,7 +389,7 @@ const TableInner = <DataModel,>(
                 className={`j-table__thead-tr j-table__thead-tr--${headerGroup.id}`}
                 style={headerRowStyle}
               >
-                {isRowSortable ? <StyledTh /> : undefined}
+                {isRowSortable ? <StyledTh style={headerColumnStyle} /> : undefined}
                 <DndContext
                   sensors={dndSensors}
                   collisionDetection={closestCenter}
@@ -453,7 +453,7 @@ const TableInner = <DataModel,>(
           <tfoot>
             {table.getFooterGroups().map((footerGroup) => (
               <StyledTr key={footerGroup.id} style={footerRowStyle}>
-                {isRowSortable ? <StyledTh /> : undefined}
+                {isRowSortable ? <StyledTh style={footerColumnStyle} /> : undefined}
                 {footerGroup.headers.map((header) => (
                   <StyledTh key={header.id} colSpan={header.colSpan} style={footerColumnStyle}>
                     {flexRender(header.column.columnDef.footer, header.getContext())}
