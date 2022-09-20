@@ -4,9 +4,9 @@ import { Icon, IconProps } from './Icon.component'
 
 const defaultArguments: IconProps = { iconName: 'AiOutlineHome' }
 
-const SiderTemplate: Story<IconProps> = (arguments_) => <Icon {...arguments_} />
+const IconTemplate: Story<IconProps> = (arguments_) => <Icon {...arguments_} />
 
-export const Default = SiderTemplate.bind({})
+export const Default = IconTemplate.bind({})
 Default.args = {
   ...defaultArguments
 }
