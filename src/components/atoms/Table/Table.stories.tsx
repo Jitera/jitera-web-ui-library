@@ -174,7 +174,7 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
       isFooterVisible
       isRowSortable
       isPaginationEnabled
-      tableStyle={{ background: '#ddd' }}
+      tableStyle={{ background: '#ddd', width: '100%' }}
       headerRowStyle={{ background: 'red', color: '#fff' }}
       footerRowStyle={{ background: 'blue', color: '#fff' }}
       paginationStyle={{ marginTop: '10px' }}

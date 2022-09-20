@@ -55,7 +55,9 @@ import {
   StyledTr,
   StyledTh,
   StyledTd,
-  StyledTableResizer
+  StyledTableResizer,
+  StyledPaginationWrapper,
+  PaginationPositionType
 } from './Table.styles'
 
 export { createColumnHelper } from '@tanstack/react-table'
@@ -89,6 +91,7 @@ export interface TableProps<DataModel extends RowData> {
   headerColumnStyle?: CSSObject
   bodyRowStyle?: CSSObject
   bodyColumnStyle?: CSSObject
+  sortColumnStyle?: CSSObject
   footerRowStyle?: CSSObject
   footerColumnStyle?: CSSObject
 
@@ -112,6 +115,7 @@ export interface TableProps<DataModel extends RowData> {
   onDataSortingChange?: (sorting: SortingState) => void
 
   isPaginationEnabled?: boolean
+  paginationPosition?: PaginationPositionType
   totalPage?: number
   paginationProps?: Omit<PaginationProps, 'current' | 'total' | 'pageSize' | 'onChange' | 'style'>
   paginationStyle?: PaginationProps['style']
@@ -119,7 +123,10 @@ export interface TableProps<DataModel extends RowData> {
 }
 
 export interface TableRowProps<DataModel extends RowData>
-  extends Pick<TableProps<DataModel>, 'isRowSortable' | 'bodyRowStyle' | 'bodyColumnStyle'> {
+  extends Pick<
+    TableProps<DataModel>,
+    'isRowSortable' | 'isColumnResizeable' | 'bodyRowStyle' | 'bodyColumnStyle' | 'sortColumnStyle'
+  > {
   row: Row<DataModel>
 }
 
@@ -175,7 +182,7 @@ TableHeaderProps<DataModel>) => {
       style={{
         ...headerColumnStyle,
         ...style,
-        width: isColumnResizeable ? header.getSize() : undefined
+        width: isColumnResizeable ? header.getSize() : headerColumnStyle?.width
       }}
       onClick={isDataSortable ? header.column.getToggleSortingHandler() : undefined}
       onMouseDown={isColumnResizeable ? header.getResizeHandler() : undefined}
@@ -208,8 +215,10 @@ TableHeaderProps<DataModel>) => {
 const TableRow = <DataModel,>({
   row,
   isRowSortable,
+  isColumnResizeable,
   bodyRowStyle,
-  bodyColumnStyle
+  bodyColumnStyle,
+  sortColumnStyle
 }: TableRowProps<DataModel>) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } = useSortable({
     id: row.id
@@ -232,7 +241,12 @@ const TableRow = <DataModel,>({
       style={{ ...bodyRowStyle, ...style }}
     >
       {isRowSortable ? (
-        <StyledTd style={bodyColumnStyle} {...listeners} {...attributes}>
+        <StyledTd
+          isSortColumn
+          style={{ ...bodyColumnStyle, ...sortColumnStyle }}
+          {...listeners}
+          {...attributes}
+        >
           <Icon className="j-table__tbody-td-drag" iconName="MdDragIndicator" />
         </StyledTd>
       ) : undefined}
@@ -240,7 +254,10 @@ const TableRow = <DataModel,>({
         <StyledTd
           key={cell.id}
           className={`j-table__tbody-td j-table__tbody-td--${cell.id}`}
-          style={{ ...bodyColumnStyle, width: cell.column.getSize() }}
+          style={{
+            ...bodyColumnStyle,
+            width: isColumnResizeable ? cell.column.getSize() : bodyColumnStyle?.width
+          }}
         >
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </StyledTd>
@@ -262,6 +279,7 @@ const TableInner = <DataModel,>(
     headerColumnStyle,
     bodyRowStyle,
     bodyColumnStyle,
+    sortColumnStyle,
     footerRowStyle,
     footerColumnStyle,
 
@@ -281,6 +299,7 @@ const TableInner = <DataModel,>(
     onDataSortingChange,
 
     isPaginationEnabled,
+    paginationPosition,
     totalPage,
     paginationProps,
     paginationStyle,
@@ -377,7 +396,7 @@ const TableInner = <DataModel,>(
         className="j-table"
         style={{
           ...tableStyle,
-          width: isColumnResizeable ? table.getCenterTotalSize() : undefined
+          width: isColumnResizeable ? table.getCenterTotalSize() : tableStyle?.width
         }}
       >
         {isHeaderVisible ? (
@@ -444,6 +463,7 @@ const TableInner = <DataModel,>(
                   isRowSortable={isRowSortable}
                   bodyRowStyle={bodyRowStyle}
                   bodyColumnStyle={bodyColumnStyle}
+                  sortColumnStyle={sortColumnStyle}
                 />
               ))}
             </SortableContext>
@@ -465,13 +485,15 @@ const TableInner = <DataModel,>(
         ) : undefined}
       </StyledTable>
       {isPaginationEnabled ? (
-        <Pagination
-          {...paginationProps}
-          style={paginationStyle}
-          current={pagination!.pageIndex + 1}
-          total={totalPage}
-          onChange={handleAntdPaginationChange}
-        />
+        <StyledPaginationWrapper paginationPosition={paginationPosition || 'right'}>
+          <Pagination
+            {...paginationProps}
+            style={paginationStyle}
+            current={pagination!.pageIndex + 1}
+            total={totalPage}
+            onChange={handleAntdPaginationChange}
+          />
+        </StyledPaginationWrapper>
       ) : undefined}
     </StyledTableWrapper>
   )

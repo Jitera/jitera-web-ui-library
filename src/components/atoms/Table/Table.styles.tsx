@@ -41,7 +41,6 @@ export const StyledTh = styled.th<{ canSort?: boolean }>`
   cursor: ${(props) => (props.canSort ? 'pointer' : null)};
   border: 1px solid #000;
   position: relative;
-  transition-property: width 0.1 linear;
 
   &.j-table__thead-th--dragging {
     opacity: 0.5;
@@ -56,13 +55,16 @@ export const StyledTh = styled.th<{ canSort?: boolean }>`
   }
 `
 
-export const StyledTd = styled.td`
+export const StyledTd = styled.td<{ isSortColumn?: boolean }>`
   border: 1px solid #000;
-  transition-property: width 0.1 linear;
+  ${(props) => (props.isSortColumn ? { textAlign: 'center' } : undefined)}
 `
 
-export const StyledPaginationWrapper = styled.div<{ style?: CSSObject }>`
-  && {
-    ${(props) => props.style}
-  }
+export type PaginationPositionType = 'left' | 'center' | 'right'
+
+export const StyledPaginationWrapper = styled.div<{
+  paginationPosition: PaginationPositionType
+}>`
+  display: flex;
+  justify-content: ${(props) => props.paginationPosition};
 `
