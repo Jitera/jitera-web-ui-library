@@ -62,6 +62,13 @@ export { createColumnHelper } from '@tanstack/react-table'
 
 export { arrayMove } from '@dnd-kit/sortable'
 
+declare module '@tanstack/table-core' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    action: boolean
+  }
+}
+
 export interface TableColumnDefinition<DataModel extends RowData> {
   name: string
   path?: DeepKeys<DataModel>
@@ -75,7 +82,12 @@ export interface TableProps<DataModel extends RowData> {
   data: DataModel[]
   columns: TableColumnDefinition<DataModel>[]
   actions?: TableColumnDefinition<DataModel>[]
+
   style?: CSSObject
+  tableStyle?: CSSObject
+  headerRowStyle?: CSSObject
+  bodyRowStyle?: CSSObject
+  footerRowStyle?: CSSObject
 
   styleWrapper?: CSSProperties
   styleTable?: CSSProperties
@@ -104,7 +116,7 @@ export interface TableProps<DataModel extends RowData> {
 }
 
 export interface TableRowProps<DataModel extends RowData>
-  extends Pick<TableProps<DataModel>, 'isRowSortable'> {
+  extends Pick<TableProps<DataModel>, 'isRowSortable' | 'bodyRowStyle'> {
   row: Row<DataModel>
 }
 
@@ -141,8 +153,8 @@ TableHeaderProps<DataModel>) => {
     })
   }
   const isColumnSortableInternal = useMemo(
-    () => isColumnSortable && header.id !== 'Action',
-    [header.id, isColumnSortable]
+    () => isColumnSortable && !header.column.columnDef.meta?.action,
+    [header.column.columnDef.meta?.action, isColumnSortable]
   )
   const activeListeners = isColumnSortableInternal ? listeners : undefined
   const activeAttributes = isColumnSortableInternal ? attributes : undefined
@@ -184,7 +196,7 @@ TableHeaderProps<DataModel>) => {
   )
 }
 
-const TableRow = <DataModel,>({ row, isRowSortable }: TableRowProps<DataModel>) => {
+const TableRow = <DataModel,>({ row, isRowSortable, bodyRowStyle }: TableRowProps<DataModel>) => {
   const { attributes, listeners, transform, isDragging, setNodeRef } = useSortable({
     id: row.id
   })
@@ -203,7 +215,7 @@ const TableRow = <DataModel,>({ row, isRowSortable }: TableRowProps<DataModel>) 
       className={`j-table__tbody-tr j-table__tbody-tr--${row.id} ${
         isDragging ? `j-table__tbody-tr--dragging` : ''
       }`}
-      style={style}
+      style={{ ...bodyRowStyle, ...style }}
     >
       {isRowSortable ? (
         <StyledTd {...listeners} {...attributes}>
@@ -229,7 +241,12 @@ const TableInner = <DataModel,>(
     data,
     columns,
     actions = [],
+
     style,
+    tableStyle,
+    headerRowStyle,
+    bodyRowStyle,
+    footerRowStyle,
 
     isColumnResizeable,
     isHeaderVisible = true,
@@ -259,18 +276,31 @@ const TableInner = <DataModel,>(
   const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 })
   const formattedColumns = useMemo<ColumnDef<DataModel, any>[]>(
     () =>
-      [...columns, ...actions].map((column) => ({
+      columns.map((column) => ({
         accessorKey: !column.renderColumn ? column.path : undefined,
         header: column.name,
         footer: column.name,
         cell: column.renderColumn ? column.renderColumn : (info: any) => info.getValue(),
         enableSorting: column.sortable
       })),
-    [columns, actions]
+    [columns]
+  )
+  const formattedActions = useMemo<ColumnDef<DataModel, any>[]>(
+    () =>
+      actions.map((action) => ({
+        meta: {
+          action: true
+        },
+        header: action.name,
+        footer: action.name,
+        cell: action.renderColumn,
+        enableSorting: false
+      })),
+    [actions]
   )
   const table = useReactTable({
     data,
-    columns: formattedColumns,
+    columns: [...formattedColumns, ...formattedActions],
     columnResizeMode: isColumnResizeable ? 'onChange' : undefined,
     pageCount: totalPage,
     state: {
@@ -328,7 +358,10 @@ const TableInner = <DataModel,>(
       <StyledTable
         ref={ref}
         className="j-table"
-        style={{ width: isColumnResizeable ? table.getCenterTotalSize() : undefined }}
+        style={{
+          ...tableStyle,
+          width: isColumnResizeable ? table.getCenterTotalSize() : undefined
+        }}
       >
         {isHeaderVisible ? (
           <thead className="j-table__thead">
@@ -337,6 +370,7 @@ const TableInner = <DataModel,>(
               <StyledTr
                 key={headerGroup.id}
                 className={`j-table__thead-tr j-table__thead-tr--${headerGroup.id}`}
+                style={headerRowStyle}
               >
                 {isRowSortable ? <StyledTh /> : undefined}
                 <DndContext
@@ -386,7 +420,12 @@ const TableInner = <DataModel,>(
               strategy={verticalListSortingStrategy}
             >
               {table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} row={row} isRowSortable={isRowSortable} />
+                <TableRow
+                  key={row.id}
+                  row={row}
+                  isRowSortable={isRowSortable}
+                  bodyRowStyle={bodyRowStyle}
+                />
               ))}
             </SortableContext>
           </DndContext>
@@ -394,13 +433,14 @@ const TableInner = <DataModel,>(
         {isFooterVisible ? (
           <tfoot>
             {table.getFooterGroups().map((footerGroup) => (
-              <tr key={footerGroup.id}>
+              <StyledTr key={footerGroup.id} style={footerRowStyle}>
+                {isRowSortable ? <StyledTh /> : undefined}
                 {footerGroup.headers.map((header) => (
                   <StyledTh key={header.id} colSpan={header.colSpan}>
                     {flexRender(header.column.columnDef.footer, header.getContext())}
                   </StyledTh>
                 ))}
-              </tr>
+              </StyledTr>
             ))}
           </tfoot>
         ) : undefined}
