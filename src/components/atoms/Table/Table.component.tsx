@@ -95,10 +95,6 @@ export interface TableProps<DataModel extends RowData> {
   footerRowStyle?: CSSObject
   footerColumnStyle?: CSSObject
 
-  styleWrapper?: CSSProperties
-  styleTable?: CSSProperties
-  styleThead?: CSSProperties
-
   isColumnResizeable?: boolean
   isHeaderVisible?: boolean
   isFooterVisible?: boolean
