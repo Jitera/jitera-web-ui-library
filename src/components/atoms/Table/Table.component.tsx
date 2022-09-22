@@ -85,7 +85,7 @@ export interface TableProps<DataModel extends RowData> {
   columns: TableColumnDefinition<DataModel>[]
   actions?: TableColumnDefinition<DataModel>[]
 
-  style?: CSSObject
+  wrapperStyle?: CSSObject
   tableStyle?: CSSObject
   headerRowStyle?: CSSObject
   headerColumnStyle?: CSSObject
@@ -273,7 +273,7 @@ const TableInner = <DataModel,>(
     columns,
     actions = [],
 
-    style,
+    wrapperStyle,
     tableStyle,
     headerRowStyle,
     headerColumnStyle,
@@ -390,7 +390,7 @@ const TableInner = <DataModel,>(
     }
   }
   return (
-    <StyledTableWrapper style={style} className={className}>
+    <StyledTableWrapper style={wrapperStyle} className={className}>
       <StyledTable
         ref={ref}
         className="j-table"
