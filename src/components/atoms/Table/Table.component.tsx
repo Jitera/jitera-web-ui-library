@@ -188,7 +188,7 @@ TableHeaderProps<DataModel>) => {
     >
       {flexRender(header.column.columnDef.header, header.getContext())}
       {isColumnSortableInternal ? (
-        <Icon className="j-table__thead-th-drag" iconName="MdDragIndicator" />
+        <Icon className="j-table__thead-th-drag-indicator" iconName="MdDragIndicator" />
       ) : undefined}
       {isDataSortable
         ? {
@@ -240,10 +240,11 @@ const TableRow = <DataModel,>({
         <StyledTd
           isSortColumn
           style={{ ...bodyColumnStyle, ...sortColumnStyle }}
+          className="j-table__tbody-td j-table__tbody-td--drag"
           {...listeners}
           {...attributes}
         >
-          <Icon className="j-table__tbody-td-drag" iconName="MdDragIndicator" />
+          <Icon iconName="MdDragIndicator" />
         </StyledTd>
       ) : undefined}
       {row.getVisibleCells().map((cell) => (
@@ -404,7 +405,12 @@ const TableInner = <DataModel,>(
                 className={`j-table__thead-tr j-table__thead-tr--${headerGroup.id}`}
                 style={headerRowStyle}
               >
-                {isRowSortable ? <StyledTh style={headerColumnStyle} /> : undefined}
+                {isRowSortable ? (
+                  <StyledTh
+                    className="j-table__thead-th j-table__thead-th--drag"
+                    style={headerColumnStyle}
+                  />
+                ) : undefined}
                 <DndContext
                   sensors={dndSensors}
                   collisionDetection={closestCenter}
@@ -469,9 +475,19 @@ const TableInner = <DataModel,>(
           <tfoot>
             {table.getFooterGroups().map((footerGroup) => (
               <StyledTr key={footerGroup.id} style={footerRowStyle}>
-                {isRowSortable ? <StyledTh style={footerColumnStyle} /> : undefined}
+                {isRowSortable ? (
+                  <StyledTh
+                    className="j-table__tfooter-th j-table__tfooter-th--drag"
+                    style={footerColumnStyle}
+                  />
+                ) : undefined}
                 {footerGroup.headers.map((header) => (
-                  <StyledTh key={header.id} colSpan={header.colSpan} style={footerColumnStyle}>
+                  <StyledTh
+                    key={header.id}
+                    className={`j-table__thead-th j-table__thead-th--${header.id}`}
+                    colSpan={header.colSpan}
+                    style={footerColumnStyle}
+                  >
                     {flexRender(header.column.columnDef.footer, header.getContext())}
                   </StyledTh>
                 ))}
