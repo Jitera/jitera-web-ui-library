@@ -32,7 +32,7 @@ export const StyledTr = styled.tr`
     opacity: 0.5;
   }
 
-  .j-table__tbody-td-drag {
+  .j-table__tbody-td.j-table__tbody-td--drag {
     cursor: row-resize;
   }
 `
@@ -46,7 +46,7 @@ export const StyledTh = styled.th<{ canSort?: boolean }>`
     opacity: 0.5;
   }
 
-  .j-table__thead-th-drag {
+  .j-table__thead-th-drag-indicator {
     cursor: col-resize;
   }
 
