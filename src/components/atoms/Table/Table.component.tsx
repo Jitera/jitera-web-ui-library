@@ -57,7 +57,10 @@ import {
   StyledTd,
   StyledTableResizer,
   StyledPaginationWrapper,
-  PaginationPositionType
+  PaginationPositionType,
+  StyledTHead,
+  StyledTBody,
+  StyledTFoot
 } from './Table.styles'
 
 export { createColumnHelper } from '@tanstack/react-table'
@@ -87,13 +90,22 @@ export interface TableProps<DataModel extends RowData> {
 
   wrapperStyle?: CSSObject
   tableStyle?: CSSObject
+
+  headerStyle?: CSSObject
   headerRowStyle?: CSSObject
   headerColumnStyle?: CSSObject
+
+  bodyStyle?: CSSObject
   bodyRowStyle?: CSSObject
   bodyColumnStyle?: CSSObject
+
   sortColumnStyle?: CSSObject
+
+  footerStyle?: CSSObject
   footerRowStyle?: CSSObject
   footerColumnStyle?: CSSObject
+
+  paginationWrapperStyle?: CSSObject
 
   isColumnResizeable?: boolean
   isHeaderVisible?: boolean
@@ -175,7 +187,7 @@ TableHeaderProps<DataModel>) => {
       }`}
       colSpan={header.colSpan}
       canSort={isDataSortable ? header.column.getCanSort() : undefined}
-      style={{
+      customStyle={{
         ...headerColumnStyle,
         ...style,
         width: isColumnResizeable ? header.getSize() : headerColumnStyle?.width
@@ -234,12 +246,12 @@ const TableRow = <DataModel,>({
       className={`j-table__tbody-tr j-table__tbody-tr--${row.id} ${
         isDragging ? `j-table__tbody-tr--dragging` : ''
       }`}
-      style={{ ...bodyRowStyle, ...style }}
+      customStyle={{ ...bodyRowStyle, ...style }}
     >
       {isRowSortable ? (
         <StyledTd
           isSortColumn
-          style={{ ...bodyColumnStyle, ...sortColumnStyle }}
+          customStyle={{ ...bodyColumnStyle, ...sortColumnStyle }}
           className="j-table__tbody-td j-table__tbody-td--drag"
           {...listeners}
           {...attributes}
@@ -251,7 +263,7 @@ const TableRow = <DataModel,>({
         <StyledTd
           key={cell.id}
           className={`j-table__tbody-td j-table__tbody-td--${cell.id}`}
-          style={{
+          customStyle={{
             ...bodyColumnStyle,
             width: isColumnResizeable ? cell.column.getSize() : bodyColumnStyle?.width
           }}
@@ -272,13 +284,22 @@ const TableInner = <DataModel,>(
 
     wrapperStyle,
     tableStyle,
+
+    headerStyle,
     headerRowStyle,
     headerColumnStyle,
+
+    bodyStyle,
     bodyRowStyle,
     bodyColumnStyle,
+
     sortColumnStyle,
+
+    footerStyle,
     footerRowStyle,
     footerColumnStyle,
+
+    paginationWrapperStyle,
 
     isColumnResizeable,
     isHeaderVisible = true,
@@ -387,28 +408,28 @@ const TableInner = <DataModel,>(
     }
   }
   return (
-    <StyledTableWrapper style={wrapperStyle} className={className}>
+    <StyledTableWrapper customStyle={wrapperStyle} className={className}>
       <StyledTable
         ref={ref}
         className="j-table"
-        style={{
+        customStyle={{
           ...tableStyle,
           width: isColumnResizeable ? table.getCenterTotalSize() : tableStyle?.width
         }}
       >
         {isHeaderVisible ? (
-          <thead className="j-table__thead">
+          <StyledTHead className="j-table__thead" customStyle={headerStyle}>
             {/* eslint-disable-next-line sonarjs/cognitive-complexity */}
             {table.getHeaderGroups().map((headerGroup) => (
               <StyledTr
                 key={headerGroup.id}
                 className={`j-table__thead-tr j-table__thead-tr--${headerGroup.id}`}
-                style={headerRowStyle}
+                customStyle={headerRowStyle}
               >
                 {isRowSortable ? (
                   <StyledTh
                     className="j-table__thead-th j-table__thead-th--drag"
-                    style={headerColumnStyle}
+                    customStyle={headerColumnStyle}
                   />
                 ) : undefined}
                 <DndContext
@@ -441,9 +462,9 @@ const TableInner = <DataModel,>(
                 </DndContext>
               </StyledTr>
             ))}
-          </thead>
+          </StyledTHead>
         ) : undefined}
-        <tbody className="j-table__tbody">
+        <StyledTBody className="j-table__tbody" customStyle={bodyStyle}>
           <DndContext
             sensors={dndSensors}
             collisionDetection={closestCenter}
@@ -470,34 +491,41 @@ const TableInner = <DataModel,>(
               ))}
             </SortableContext>
           </DndContext>
-        </tbody>
+        </StyledTBody>
         {isFooterVisible ? (
-          <tfoot>
+          <StyledTFoot className="j-table__tfoot" customStyle={footerStyle}>
             {table.getFooterGroups().map((footerGroup) => (
-              <StyledTr key={footerGroup.id} style={footerRowStyle}>
+              <StyledTr
+                key={footerGroup.id}
+                className={`j-table__tfoot-tr j-table__tfoot-tr--${footerGroup.id}`}
+                style={footerRowStyle}
+              >
                 {isRowSortable ? (
                   <StyledTh
                     className="j-table__tfooter-th j-table__tfooter-th--drag"
-                    style={footerColumnStyle}
+                    customStyle={footerColumnStyle}
                   />
                 ) : undefined}
                 {footerGroup.headers.map((header) => (
                   <StyledTh
                     key={header.id}
-                    className={`j-table__thead-th j-table__thead-th--${header.id}`}
+                    className={`j-table__tfoot-th j-table__tfoot-th--${header.id}`}
                     colSpan={header.colSpan}
-                    style={footerColumnStyle}
+                    customStyle={footerColumnStyle}
                   >
                     {flexRender(header.column.columnDef.footer, header.getContext())}
                   </StyledTh>
                 ))}
               </StyledTr>
             ))}
-          </tfoot>
+          </StyledTFoot>
         ) : undefined}
       </StyledTable>
       {isPaginationEnabled ? (
-        <StyledPaginationWrapper paginationPosition={paginationPosition || 'right'}>
+        <StyledPaginationWrapper
+          paginationPosition={paginationPosition || 'right'}
+          customStyle={paginationWrapperStyle}
+        >
           <Pagination
             {...paginationProps}
             style={paginationStyle}

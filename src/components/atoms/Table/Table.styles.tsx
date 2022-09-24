@@ -1,8 +1,8 @@
 import styled, { CSSObject } from 'styled-components'
 
-export const StyledTableWrapper = styled.div<{ style?: CSSObject }>`
+export const StyledTableWrapper = styled.div<{ customStyle?: CSSObject }>`
   && {
-    ${(props) => props.style}
+    ${(props) => props.customStyle}
   }
 `
 
@@ -19,14 +19,28 @@ export const StyledTableResizer = styled.div<{ isResizing: boolean }>`
   touch-action: none;
 `
 
-export const StyledTable = styled.table`
+export const StyledTable = styled.table<{ customStyle?: CSSObject }>`
   border-collapse: collapse;
   border: 1px solid #000;
   width: fit-content;
+  ${(props) => props.customStyle}
 `
 
-export const StyledTr = styled.tr`
+export const StyledTHead = styled.thead<{ customStyle?: CSSObject }>`
+  ${(props) => props.customStyle}
+`
+
+export const StyledTBody = styled.tbody<{ customStyle?: CSSObject }>`
+  ${(props) => props.customStyle}
+`
+
+export const StyledTFoot = styled.tfoot<{ customStyle?: CSSObject }>`
+  ${(props) => props.customStyle}
+`
+
+export const StyledTr = styled.tr<{ customStyle?: CSSObject }>`
   width: fit-content;
+  ${(props) => props.customStyle}
 
   &.j-table__tbody-tr--dragging {
     opacity: 0.5;
@@ -37,10 +51,11 @@ export const StyledTr = styled.tr`
   }
 `
 
-export const StyledTh = styled.th<{ canSort?: boolean }>`
+export const StyledTh = styled.th<{ canSort?: boolean; customStyle?: CSSObject }>`
   cursor: ${(props) => (props.canSort ? 'pointer' : null)};
   border: 1px solid #000;
   position: relative;
+  ${(props) => props.customStyle}
 
   &.j-table__thead-th--dragging {
     opacity: 0.5;
@@ -55,16 +70,19 @@ export const StyledTh = styled.th<{ canSort?: boolean }>`
   }
 `
 
-export const StyledTd = styled.td<{ isSortColumn?: boolean }>`
+export const StyledTd = styled.td<{ isSortColumn?: boolean; customStyle?: CSSObject }>`
   border: 1px solid #000;
   ${(props) => (props.isSortColumn ? { textAlign: 'center' } : undefined)}
+  ${(props) => props.customStyle}
 `
 
 export type PaginationPositionType = 'left' | 'center' | 'right'
 
 export const StyledPaginationWrapper = styled.div<{
   paginationPosition: PaginationPositionType
+  customStyle?: CSSObject
 }>`
   display: flex;
   justify-content: ${(props) => props.paginationPosition};
+  ${(props) => props.customStyle}
 `
