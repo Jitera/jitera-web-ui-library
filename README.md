@@ -1,6 +1,6 @@
 # Getting Started with Jitera Web UI Library
 
-React base UI Component for Jitera automation Tool
+A public React library providing UI components and making it simple for you to build web application
 
 ## Available Scripts
 
@@ -10,9 +10,6 @@ In the project directory, you can run:
 
 Runs the storybook in the development mode.\
 Open [http://localhost:6006](http://localhost:6006) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
 ### `yarn lint` or `yarn format`
 
