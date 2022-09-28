@@ -2,7 +2,7 @@
 
 A public React library providing UI components and making it simple for you to build web application
 
-## Available Scripts
+## Developments
 
 In the project directory, you can run:
 
