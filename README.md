@@ -6,15 +6,19 @@ A public React library providing UI components and making it simple for you to b
 
 In the project directory, you can run:
 
-### `yarn storybook`
-
 Runs the storybook in the development mode.\
 Open [http://localhost:6006](http://localhost:6006) to view it in the browser.
-
-### `yarn lint` or `yarn format`
+```
+yarn storybook
+```
 
 Format Code
-
-### `yarn build`
+```
+yarn lint
+yarn format
+```
 
 Builds the app for publishing as NPM Package to the `dist` folder.
+```
+yarn build
+```
