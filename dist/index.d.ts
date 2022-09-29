@@ -198,13 +198,17 @@ declare const Text: React.ForwardRefExoticComponent<
     } & React.RefAttributes<HTMLDivElement & HTMLAnchorElement>
 >
 
+interface SelectPropsDatum {
+  name: string
+  value: string
+}
 interface SelectProps extends PreviewProps, Props {
   placeholderStyle?: CSSProperties
   containerStyle?: CSSProperties
   dropdownStyle?: CSSProperties
   optionStyle?: CSSProperties
   iconProps?: IconProps
-  data?: OptionsOrGroups<unknown, GroupBase<unknown>> | undefined
+  data?: OptionsOrGroups<SelectPropsDatum, GroupBase<SelectPropsDatum>> | undefined
 }
 declare const Select: React.ForwardRefExoticComponent<
   SelectProps & React.RefAttributes<SelectInstance<unknown, false, GroupBase<unknown>>>
@@ -2418,6 +2422,7 @@ export {
   RowProps,
   Select,
   SelectProps,
+  SelectPropsDatum,
   Sider,
   SiderProps,
   SubMenu,
