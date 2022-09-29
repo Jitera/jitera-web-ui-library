@@ -327,7 +327,10 @@ const TableInner = <DataModel,>(
   // eslint-disable-next-line sonarjs/cognitive-complexity
 ) => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 })
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: paginationProps?.defaultPageSize || 20
+  })
   const formattedColumns = useMemo<ColumnDef<DataModel, any>[]>(
     () =>
       columns.map((column) => ({
