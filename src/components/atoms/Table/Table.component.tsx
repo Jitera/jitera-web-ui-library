@@ -526,7 +526,7 @@ const TableInner = <DataModel,>(
       </StyledTable>
       {isPaginationEnabled ? (
         <StyledPaginationWrapper
-          paginationPosition={paginationPosition || 'right'}
+          paginationPosition={paginationPosition || 'left'}
           customStyle={paginationWrapperStyle}
         >
           <Pagination
