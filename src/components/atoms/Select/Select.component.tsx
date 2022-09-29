@@ -15,7 +15,7 @@ import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
 import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 export interface SelectPropsDatum {
-  name: string
+  label: string
   value: string
 }
 
