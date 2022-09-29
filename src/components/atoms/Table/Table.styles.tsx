@@ -2,6 +2,7 @@ import styled, { CSSObject } from 'styled-components'
 
 export const StyledTableWrapper = styled.div<{ customStyle?: CSSObject }>`
   && {
+    width: fit-content;
     ${(props) => props.customStyle}
   }
 `
