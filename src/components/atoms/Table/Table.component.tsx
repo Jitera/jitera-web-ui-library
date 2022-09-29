@@ -124,8 +124,12 @@ export interface TableProps<DataModel extends RowData> {
 
   isPaginationEnabled?: boolean
   paginationPosition?: PaginationPositionType
-  totalPage?: number
-  paginationProps?: Omit<PaginationProps, 'current' | 'total' | 'pageSize' | 'onChange' | 'style'>
+  pageSize?: number
+  totalData?: number
+  paginationProps?: Omit<
+    PaginationProps,
+    'current' | 'total' | 'pageSize' | 'defaultPageSize' | 'onChange' | 'style'
+  >
   paginationStyle?: PaginationProps['style']
   onPaginationChange?: (pagination: PaginationState) => void
 }
@@ -318,7 +322,8 @@ const TableInner = <DataModel,>(
 
     isPaginationEnabled,
     paginationPosition,
-    totalPage,
+    pageSize,
+    totalData,
     paginationProps,
     paginationStyle,
     onPaginationChange
@@ -329,7 +334,7 @@ const TableInner = <DataModel,>(
   const [sorting, setSorting] = useState<SortingState>([])
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: paginationProps?.defaultPageSize || 20
+    pageSize: pageSize || 20
   })
   const formattedColumns = useMemo<ColumnDef<DataModel, any>[]>(
     () =>
@@ -359,7 +364,10 @@ const TableInner = <DataModel,>(
     data,
     columns: [...formattedColumns, ...formattedActions],
     columnResizeMode: isColumnResizeable ? 'onChange' : undefined,
-    pageCount: totalPage,
+    pageCount:
+      Number.isInteger(totalData) && Number.isInteger(pageSize)
+        ? Math.ceil((totalData as number) / (pageSize as number))
+        : -1,
     state: {
       sorting: isDataSortable ? sorting : undefined,
       pagination: isPaginationEnabled ? pagination : undefined
@@ -533,7 +541,8 @@ const TableInner = <DataModel,>(
             {...paginationProps}
             style={paginationStyle}
             current={pagination!.pageIndex + 1}
-            total={totalPage}
+            pageSize={pageSize}
+            total={totalData}
             onChange={handleAntdPaginationChange}
           />
         </StyledPaginationWrapper>

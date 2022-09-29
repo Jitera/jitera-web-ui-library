@@ -178,8 +178,8 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
       headerRowStyle={{ background: 'red', color: '#fff' }}
       footerRowStyle={{ background: 'blue', color: '#fff' }}
       paginationStyle={{ marginTop: '10px' }}
-      paginationProps={{ defaultPageSize: 20 }}
-      totalPage={metadata?.total}
+      pageSize={20}
+      totalData={metadata?.total}
       onDataSortingChange={handleDataSortingChange}
       onPaginationChange={handlePaginationChange}
       onColumnSortingChange={handleColumnSortingChange}
