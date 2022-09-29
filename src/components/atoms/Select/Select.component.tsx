@@ -14,13 +14,18 @@ import { PreviewProps } from '@src/types/preview'
 import { Icon, IconProps } from '@components/atoms/Icon/Icon.component'
 import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
+export interface SelectPropsDatum {
+  name: string
+  value: string
+}
+
 export interface SelectProps extends PreviewProps, ReactSelectProps {
   placeholderStyle?: CSSProperties
   containerStyle?: CSSProperties
   dropdownStyle?: CSSProperties
   optionStyle?: CSSProperties
   iconProps?: IconProps
-  data?: OptionsOrGroups<unknown, GroupBase<unknown>> | undefined
+  data?: OptionsOrGroups<SelectPropsDatum, GroupBase<SelectPropsDatum>> | undefined
 }
 
 const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
@@ -36,6 +41,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     dropdownStyle,
     optionStyle,
     iconProps,
+    onChange,
     ...rest
   } = props
 
@@ -85,6 +91,11 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       isDisabled={isPreview}
       styles={customStyles}
       options={data}
+      onChange={(newValue, actionMeta) => {
+        if (onChange) {
+          onChange((newValue as SelectPropsDatum).value, actionMeta)
+        }
+      }}
       {...rest}
       ref={ref as any}
     />
