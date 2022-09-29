@@ -199,7 +199,7 @@ declare const Text: React.ForwardRefExoticComponent<
 >
 
 interface SelectPropsDatum {
-  name: string
+  label: string
   value: string
 }
 interface SelectProps extends PreviewProps, Props {
