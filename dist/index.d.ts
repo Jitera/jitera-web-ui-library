@@ -439,8 +439,12 @@ interface TableProps<DataModel extends RowData> {
   onDataSortingChange?: (sorting: SortingState) => void
   isPaginationEnabled?: boolean
   paginationPosition?: PaginationPositionType
-  totalPage?: number
-  paginationProps?: Omit<PaginationProps, 'current' | 'total' | 'pageSize' | 'onChange' | 'style'>
+  pageSize?: number
+  totalData?: number
+  paginationProps?: Omit<
+    PaginationProps,
+    'current' | 'total' | 'pageSize' | 'defaultPageSize' | 'onChange' | 'style'
+  >
   paginationStyle?: PaginationProps['style']
   onPaginationChange?: (pagination: PaginationState) => void
 }
@@ -495,7 +499,8 @@ declare const TableInner: <DataModel>(
     onDataSortingChange,
     isPaginationEnabled,
     paginationPosition,
-    totalPage,
+    pageSize,
+    totalData,
     paginationProps,
     paginationStyle,
     onPaginationChange
