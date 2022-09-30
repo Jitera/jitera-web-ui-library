@@ -179,7 +179,9 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
       footerRowStyle={{ background: 'blue', color: '#fff' }}
       paginationStyle={{ marginTop: '10px' }}
       pageSize={20}
-      totalData={metadata?.total}
+      totalPage={
+        Number.isInteger(metadata?.total) ? Math.ceil((metadata?.total as number) / 20) : undefined
+      }
       onDataSortingChange={handleDataSortingChange}
       onPaginationChange={handlePaginationChange}
       onColumnSortingChange={handleColumnSortingChange}

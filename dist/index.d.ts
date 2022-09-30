@@ -440,7 +440,7 @@ interface TableProps<DataModel extends RowData> {
   isPaginationEnabled?: boolean
   paginationPosition?: PaginationPositionType
   pageSize?: number
-  totalData?: number
+  totalPage?: number
   paginationProps?: Omit<
     PaginationProps,
     'current' | 'total' | 'pageSize' | 'defaultPageSize' | 'onChange' | 'style'
@@ -500,7 +500,7 @@ declare const TableInner: <DataModel>(
     isPaginationEnabled,
     paginationPosition,
     pageSize,
-    totalData,
+    totalPage,
     paginationProps,
     paginationStyle,
     onPaginationChange

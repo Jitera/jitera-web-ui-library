@@ -125,7 +125,7 @@ export interface TableProps<DataModel extends RowData> {
   isPaginationEnabled?: boolean
   paginationPosition?: PaginationPositionType
   pageSize?: number
-  totalData?: number
+  totalPage?: number
   paginationProps?: Omit<
     PaginationProps,
     'current' | 'total' | 'pageSize' | 'defaultPageSize' | 'onChange' | 'style'
@@ -323,7 +323,7 @@ const TableInner = <DataModel,>(
     isPaginationEnabled,
     paginationPosition,
     pageSize,
-    totalData,
+    totalPage,
     paginationProps,
     paginationStyle,
     onPaginationChange
@@ -364,10 +364,7 @@ const TableInner = <DataModel,>(
     data,
     columns: [...formattedColumns, ...formattedActions],
     columnResizeMode: isColumnResizeable ? 'onChange' : undefined,
-    pageCount:
-      Number.isInteger(totalData) && Number.isInteger(pageSize)
-        ? Math.ceil((totalData as number) / (pageSize as number))
-        : -1,
+    pageCount: isPaginationEnabled ? totalPage : undefined,
     state: {
       sorting: isDataSortable ? sorting : undefined,
       pagination: isPaginationEnabled ? pagination : undefined
@@ -384,6 +381,11 @@ const TableInner = <DataModel,>(
     useSensor(TouchSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   )
+  useEffect(() => {
+    if (isPaginationEnabled && !(Number.isInteger(pageSize) && Number.isInteger(totalPage))) {
+      throw new Error('`pageSize` and `totalPage` should be required if pagination enabled')
+    }
+  }, [isPaginationEnabled, pageSize, totalPage])
   useEffect(() => {
     if (onDataSortingChange) {
       onDataSortingChange(sorting)
@@ -542,7 +544,11 @@ const TableInner = <DataModel,>(
             style={paginationStyle}
             current={pagination!.pageIndex + 1}
             pageSize={pageSize}
-            total={totalData}
+            total={
+              Number.isInteger(pageSize) && Number.isInteger(totalPage)
+                ? (pageSize as number) * (totalPage as number)
+                : undefined
+            }
             onChange={handleAntdPaginationChange}
           />
         </StyledPaginationWrapper>
