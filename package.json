@@ -127,7 +127,6 @@
     "check-types": "tsc --noemit",
     "lint": "eslint \"src/**/*.@(js|jsx|ts|tsx)\" --fix",
     "prepare": "husky install",
-    "prepublish": "yarn build",
     "build": "yarn build:lib",
     "build:lib": "yarn build:lib:before && yarn build:lib:main && yarn build:lib:dts && yarn build:lib:style && yarn build:lib:after",
     "build:lib:main": "./node_modules/.bin/rollup -c",
