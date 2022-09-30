@@ -41,7 +41,6 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     dropdownStyle,
     optionStyle,
     iconProps,
-    onChange,
     ...rest
   } = props
 
@@ -91,11 +90,6 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       isDisabled={isPreview}
       styles={customStyles}
       options={data}
-      onChange={(newValue, actionMeta) => {
-        if (onChange) {
-          onChange((newValue as SelectPropsDatum).value, actionMeta)
-        }
-      }}
       {...rest}
       ref={ref as any}
     />
