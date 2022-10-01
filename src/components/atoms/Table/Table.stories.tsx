@@ -6,7 +6,13 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { Button } from '../Button/Button.component'
 
-import { Table, TableProps, TableColumnDefinition, arrayMove } from './Table.component'
+import {
+  Table,
+  TableProps,
+  TableColumnDefinition,
+  arrayMove,
+  DEFAULT_TABLE_BORDER_STYLES
+} from './Table.component'
 
 export interface AnimeAired {
   startDate: number
@@ -174,8 +180,10 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
       isFooterVisible
       isRowSortable
       isPaginationEnabled
-      tableStyle={{ background: '#ddd', width: '100%' }}
+      tableStyle={{ background: '#ddd', width: '100%', ...DEFAULT_TABLE_BORDER_STYLES }}
       headerRowStyle={{ background: 'red', color: '#fff' }}
+      headerColumnStyle={{ ...DEFAULT_TABLE_BORDER_STYLES }}
+      bodyColumnStyle={{ ...DEFAULT_TABLE_BORDER_STYLES }}
       footerRowStyle={{ background: 'blue', color: '#fff' }}
       paginationStyle={{ marginTop: '10px' }}
       pageSize={20}

@@ -467,6 +467,11 @@ interface TableHeaderProps<DataModel extends RowData>
   > {
   header: Header$1<DataModel, unknown>
 }
+declare const DEFAULT_TABLE_BORDER_STYLES: {
+  borderWidth: string
+  borderColor: string
+  borderStyle: string
+}
 declare const TableInner: <DataModel>(
   {
     className,
@@ -2377,6 +2382,7 @@ export {
   ColProps,
   Content,
   ContentProps,
+  DEFAULT_TABLE_BORDER_STYLES,
   DateTimePicker,
   DateTimePickerProps,
   Divider,

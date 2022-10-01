@@ -155,6 +155,12 @@ export interface TableHeaderProps<DataModel extends RowData>
   header: Header<DataModel, unknown>
 }
 
+export const DEFAULT_TABLE_BORDER_STYLES = {
+  borderWidth: '1px',
+  borderColor: '#000',
+  borderStyle: 'solid'
+}
+
 const TableHeader = <DataModel,>({
   header,
   isColumnResizeable,

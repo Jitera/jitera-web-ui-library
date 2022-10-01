@@ -22,7 +22,6 @@ export const StyledTableResizer = styled.div<{ isResizing: boolean }>`
 
 export const StyledTable = styled.table<{ customStyle?: CSSObject }>`
   border-collapse: collapse;
-  border: 1px solid #000;
   width: fit-content;
   ${(props) => props.customStyle}
 `
@@ -54,7 +53,6 @@ export const StyledTr = styled.tr<{ customStyle?: CSSObject }>`
 
 export const StyledTh = styled.th<{ canSort?: boolean; customStyle?: CSSObject }>`
   cursor: ${(props) => (props.canSort ? 'pointer' : null)};
-  border: 1px solid #000;
   position: relative;
   ${(props) => props.customStyle}
 
@@ -72,7 +70,6 @@ export const StyledTh = styled.th<{ canSort?: boolean; customStyle?: CSSObject }
 `
 
 export const StyledTd = styled.td<{ isSortColumn?: boolean; customStyle?: CSSObject }>`
-  border: 1px solid #000;
   ${(props) => (props.isSortColumn ? { textAlign: 'center' } : undefined)}
   ${(props) => props.customStyle}
 `
