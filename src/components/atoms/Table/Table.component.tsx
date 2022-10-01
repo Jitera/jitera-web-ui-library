@@ -328,7 +328,7 @@ const TableInner = <DataModel,>(
     paginationStyle,
     onPaginationChange
   }: TableProps<DataModel>,
-  ref: React.ForwardedRef<HTMLTableElement>
+  ref: React.ForwardedRef<HTMLDivElement>
   // eslint-disable-next-line sonarjs/cognitive-complexity
 ) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -421,9 +421,8 @@ const TableInner = <DataModel,>(
     }
   }
   return (
-    <StyledTableWrapper customStyle={wrapperStyle} className={className}>
+    <StyledTableWrapper ref={ref} customStyle={wrapperStyle} className={className}>
       <StyledTable
-        ref={ref}
         className="j-table"
         customStyle={{
           ...tableStyle,
@@ -558,5 +557,5 @@ const TableInner = <DataModel,>(
 }
 
 export const Table = React.forwardRef(TableInner) as <DataModel>(
-  props: TableProps<DataModel> & { ref?: React.ForwardedRef<HTMLTableElement> }
+  props: TableProps<DataModel> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof TableInner>

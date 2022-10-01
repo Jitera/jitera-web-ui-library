@@ -505,11 +505,11 @@ declare const TableInner: <DataModel>(
     paginationStyle,
     onPaginationChange
   }: TableProps<DataModel>,
-  ref: React.ForwardedRef<HTMLTableElement>
+  ref: React.ForwardedRef<HTMLDivElement>
 ) => JSX.Element
 declare const Table: <DataModel>(
   props: TableProps<DataModel> & {
-    ref?: React.ForwardedRef<HTMLTableElement>
+    ref?: React.ForwardedRef<HTMLDivElement>
   }
 ) => ReturnType<typeof TableInner>
 
