@@ -312,7 +312,7 @@ const TableInner = <DataModel,>(
     paginationWrapperStyle,
 
     isColumnResizeable,
-    isHeaderVisible = true,
+    isHeaderVisible,
     isFooterVisible,
 
     isColumnSortable,
