@@ -12,6 +12,7 @@ import {
   RowData,
   SortingState
 } from '@tanstack/table-core'
+import { getProperty as safeGet } from 'dot-prop'
 
 import { CSSObject } from 'styled-components'
 
@@ -120,7 +121,7 @@ export interface TableProps<DataModel extends RowData> {
   isDataSortable?: boolean
   ascendingIconProps?: IconProps
   descendingIconProps?: IconProps
-  onDataSortingChange?: (sorting: SortingState) => void
+  onDataSortingChange?: (sortBy: string, sort: string) => void
 
   isPaginationEnabled?: boolean
   paginationPosition?: PaginationPositionType
@@ -131,7 +132,7 @@ export interface TableProps<DataModel extends RowData> {
     'current' | 'total' | 'pageSize' | 'defaultPageSize' | 'onChange' | 'style'
   >
   paginationStyle?: PaginationProps['style']
-  onPaginationChange?: (pagination: PaginationState) => void
+  onPaginationChange?: (pageIndex: string, pageSize: string) => void
 }
 
 export interface TableRowProps<DataModel extends RowData>
@@ -393,13 +394,14 @@ const TableInner = <DataModel,>(
     }
   }, [isPaginationEnabled, pageSize, totalPage])
   useEffect(() => {
-    if (onDataSortingChange) {
-      onDataSortingChange(sorting)
+    const sortingState = safeGet(sorting, '[0]')
+    if (onDataSortingChange && sortingState) {
+      onDataSortingChange(sortingState.id, sortingState.desc ? 'desc' : 'asc')
     }
   }, [onDataSortingChange, sorting])
   useEffect(() => {
     if (onPaginationChange) {
-      onPaginationChange(pagination)
+      onPaginationChange(String(pagination.pageIndex + 1), String(pagination.pageSize))
     }
   }, [onPaginationChange, pagination])
   const handleAntdPaginationChange: PaginationProps['onChange'] = (page, _pageSize) => {

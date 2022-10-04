@@ -37,8 +37,6 @@ import {
   DeepKeys,
   ColumnDefTemplate,
   CellContext,
-  SortingState,
-  PaginationState,
   Row as Row$1,
   Header as Header$1
 } from '@tanstack/table-core'
@@ -437,7 +435,7 @@ interface TableProps<DataModel extends RowData> {
   isDataSortable?: boolean
   ascendingIconProps?: IconProps
   descendingIconProps?: IconProps
-  onDataSortingChange?: (sorting: SortingState) => void
+  onDataSortingChange?: (sortBy: string, sort: string) => void
   isPaginationEnabled?: boolean
   paginationPosition?: PaginationPositionType
   pageSize?: number
@@ -447,7 +445,7 @@ interface TableProps<DataModel extends RowData> {
     'current' | 'total' | 'pageSize' | 'defaultPageSize' | 'onChange' | 'style'
   >
   paginationStyle?: PaginationProps['style']
-  onPaginationChange?: (pagination: PaginationState) => void
+  onPaginationChange?: (pageIndex: string, pageSize: string) => void
 }
 interface TableRowProps<DataModel extends RowData>
   extends Pick<

@@ -1,6 +1,5 @@
 import { useCallback } from '@storybook/addons'
 import { Story } from '@storybook/react'
-import { PaginationState, SortingState } from '@tanstack/table-core'
 import { Space } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -145,15 +144,15 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
     ],
     []
   )
-  const handleDataSortingChange = useCallback(
-    (sorting: SortingState) => {
-      getAnime({ sort: sorting?.[0]?.desc ? 'desc' : 'asc', sortBy: sorting?.[0]?.id })
+  const handleDataSortingChange = useCallback<TableProps<Anime>['onDataSortingChange']>(
+    (sortBy, sort) => {
+      getAnime({ sort, sortBy })
     },
     [getAnime]
   )
-  const handlePaginationChange = useCallback(
-    (pagination: PaginationState) => {
-      getAnime({ page: String(pagination.pageIndex + 1), size: String(pagination.pageSize) })
+  const handlePaginationChange = useCallback<TableProps<Anime>['onPaginationChange']>(
+    (pageIndex, pageSize) => {
+      getAnime({ page: pageIndex, size: pageSize })
     },
     [getAnime]
   )
@@ -174,9 +173,10 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
       data={data}
       columns={columns}
       actions={actions}
-      isDataSortable={false}
+      isDataSortable
       isColumnResizeable={false}
-      isColumnSortable
+      isHeaderVisible
+      // isColumnSortable
       isFooterVisible
       isRowSortable
       isPaginationEnabled
