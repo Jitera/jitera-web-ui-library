@@ -12,6 +12,7 @@ import {
   RowData,
   SortingState
 } from '@tanstack/table-core'
+import { getProperty as safeGet } from 'dot-prop'
 
 import { CSSObject } from 'styled-components'
 
@@ -393,7 +394,7 @@ const TableInner = <DataModel,>(
     }
   }, [isPaginationEnabled, pageSize, totalPage])
   useEffect(() => {
-    const sortingState = sorting?.[0]
+    const sortingState = safeGet(sorting, '[0]')
     if (onDataSortingChange && sortingState) {
       onDataSortingChange(sortingState.id, sortingState.desc ? 'desc' : 'asc')
     }
