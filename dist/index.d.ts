@@ -42,6 +42,7 @@ import {
   Row as Row$1,
   Header as Header$1
 } from '@tanstack/table-core'
+import { DragEndEvent } from '@dnd-kit/core'
 import { OtpInputProps } from 'react-otp-input'
 export { createColumnHelper } from '@tanstack/react-table'
 export { arrayMove } from '@dnd-kit/sortable'
@@ -430,9 +431,9 @@ interface TableProps<DataModel extends RowData> {
   isHeaderVisible?: boolean
   isFooterVisible?: boolean
   isColumnSortable?: boolean
-  onColumnSortingChange?: (currentIndex: number, newIndex: number) => void
+  onColumnSortingChange?: (currentIndex: number, newIndex: number, event: DragEndEvent) => void
   isRowSortable?: boolean
-  onRowSortingChange?: (currentIndex: number, newIndex: number) => void
+  onRowSortingChange?: (currentIndex: number, newIndex: number, event: DragEndEvent) => void
   isDataSortable?: boolean
   ascendingIconProps?: IconProps
   descendingIconProps?: IconProps

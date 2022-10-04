@@ -112,10 +112,10 @@ export interface TableProps<DataModel extends RowData> {
   isFooterVisible?: boolean
 
   isColumnSortable?: boolean
-  onColumnSortingChange?: (currentIndex: number, newIndex: number) => void
+  onColumnSortingChange?: (currentIndex: number, newIndex: number, event: DragEndEvent) => void
 
   isRowSortable?: boolean
-  onRowSortingChange?: (currentIndex: number, newIndex: number) => void
+  onRowSortingChange?: (currentIndex: number, newIndex: number, event: DragEndEvent) => void
 
   isDataSortable?: boolean
   ascendingIconProps?: IconProps
@@ -417,13 +417,13 @@ const TableInner = <DataModel,>(
   const handleRowSortingChange: DndContextProps['onDragEnd'] = (event) => {
     const { currentIndex, newIndex } = getCurrentNewIndex(event)
     if (onRowSortingChange) {
-      onRowSortingChange(currentIndex, newIndex)
+      onRowSortingChange(currentIndex, newIndex, event)
     }
   }
   const handleColumnSortingChange: DndContextProps['onDragEnd'] = (event) => {
     const { currentIndex, newIndex } = getCurrentNewIndex(event)
     if (onColumnSortingChange) {
-      onColumnSortingChange(currentIndex, newIndex)
+      onColumnSortingChange(currentIndex, newIndex, event)
     }
   }
   return (
