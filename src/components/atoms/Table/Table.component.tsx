@@ -288,8 +288,8 @@ const TableRow = <DataModel,>({
 const TableInner = <DataModel,>(
   {
     className,
-    data,
-    columns,
+    data = [],
+    columns = [],
     actions = [],
 
     wrapperStyle,
