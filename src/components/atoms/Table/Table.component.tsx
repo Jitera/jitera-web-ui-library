@@ -337,6 +337,7 @@ const TableInner = <DataModel,>(
   ref: React.ForwardedRef<HTMLDivElement>
   // eslint-disable-next-line sonarjs/cognitive-complexity
 ) => {
+  const internalData = useMemo(() => data, [data])
   const [sorting, setSorting] = useState<SortingState>([])
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -366,9 +367,13 @@ const TableInner = <DataModel,>(
       })),
     [actions]
   )
+  const internalColumns = useMemo(
+    () => [...formattedColumns, ...formattedActions],
+    [formattedColumns, formattedActions]
+  )
   const table = useReactTable({
-    data,
-    columns: [...formattedColumns, ...formattedActions],
+    data: internalData,
+    columns: internalColumns,
     columnResizeMode: isColumnResizeable ? 'onChange' : undefined,
     pageCount: isPaginationEnabled ? totalPage : undefined,
     state: {
