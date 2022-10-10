@@ -68,7 +68,7 @@ const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>((props, ref) =>
   if (isStyleObject(cellStyle) && isStyleObject(cellTextStyle)) {
     inputStyle = {
       ...(cellStyle as Record<string, unknown>),
-      ...(cellTextStyle as Record<string, unknown>),
+      ...(cellTextStyle as Record<string, unknown>)
     }
   }
 

@@ -54,6 +54,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((pr
         disabled={isPreview}
         picker={picker}
         defaultValue={memoDefaultValue}
+        prefixCls="jitera-picker"
         {...rest}
       />
       {!!errorMessage && (

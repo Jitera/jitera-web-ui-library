@@ -1,6 +1,6 @@
 import { addDecorator } from '@storybook/react'
 import { ThemeProvider } from '../dist'
 
-import '../dist/style.css'
+import '../dist/preview.css'
 
 addDecorator((story) => <ThemeProvider>{story()}</ThemeProvider>)
