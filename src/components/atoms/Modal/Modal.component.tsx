@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-spread */
 /* eslint-disable unicorn/no-null */
 import React from 'react'
 import { render as reactRender } from 'rc-util/lib/React/render'
@@ -59,6 +60,20 @@ export const Modal = {
           </ThemeProvider>,
           container
         )
+        if (visible) {
+          setTimeout(() => {
+            const modalElements = document.querySelectorAll('.jitera-modal-root')
+            Array.from(modalElements)
+              .at(modalElements.length - 1)
+              ?.classList.add(`jitera-modal-root-${modals.length}`)
+          })
+        } else {
+          setTimeout(() => {
+            document
+              .querySelector(`.jitera-modal-root-${modals.length + 1}`)
+              ?.parentElement?.remove()
+          })
+        }
       })
     }
     modals.push(render)
