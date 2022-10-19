@@ -18,7 +18,8 @@ import {
   DrawerProps,
   TabsProps,
   ModalProps,
-  PaginationProps
+  PaginationProps,
+  MessageArgsProps
 } from 'antd'
 export { CheckboxOptionType as RadioCheckboxOptionType } from 'antd'
 import * as react_icons_lib from 'react-icons/lib'
@@ -42,6 +43,7 @@ import {
 } from '@tanstack/table-core'
 import { DragEndEvent } from '@dnd-kit/core'
 import { OtpInputProps } from 'react-otp-input'
+import * as antd_lib_message from 'antd/lib/message'
 export { createColumnHelper } from '@tanstack/react-table'
 export { arrayMove } from '@dnd-kit/sortable'
 
@@ -534,6 +536,40 @@ interface OTPInputProps extends PreviewProps, Omit<OtpInputProps, 'onChange' | '
 declare const OTPInput: React.ForwardRefExoticComponent<
   OTPInputProps & React.RefAttributes<HTMLDivElement>
 >
+
+declare const Toast: {
+  success(
+    ReactComponent: React.ReactNode | string | MessageArgsProps,
+    duration?: number,
+    onClose?: () => void
+  ): void
+  error(
+    ReactComponent: React.ReactNode | string | MessageArgsProps,
+    duration?: number,
+    onClose?: () => void
+  ): void
+  info(
+    ReactComponent: React.ReactNode | string | MessageArgsProps,
+    duration?: number,
+    onClose?: () => void
+  ): void
+  warning(
+    ReactComponent: React.ReactNode | string | MessageArgsProps,
+    duration?: number,
+    onClose?: () => void
+  ): void
+  warn(
+    ReactComponent: React.ReactNode | string | MessageArgsProps,
+    duration?: number,
+    onClose?: () => void
+  ): void
+  loading(
+    ReactComponent: React.ReactNode | string | MessageArgsProps,
+    duration?: number,
+    onClose?: () => void
+  ): void
+  message: antd_lib_message.MessageApi
+}
 
 declare type ThemeProviderProps = {
   children: ReactElement
@@ -2449,6 +2485,7 @@ export {
   TextProps,
   TextTypeEnum,
   ThemeProvider,
+  Toast,
   assertUnreachable,
   defaultTheme,
   getIconComponent,

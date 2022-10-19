@@ -1,6 +1,6 @@
 {
   "name": "@jitera/jitera-web-ui-library",
-  "version": "1.61.0",
+  "version": "1.61.1",
   "description": "atoms and component for web project",
   "sideEffects": [
     "*.css"
