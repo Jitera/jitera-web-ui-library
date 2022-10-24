@@ -6,8 +6,6 @@ import { DrawerProps as AntDrawerProps } from 'antd'
 
 import { ThemeProvider } from '@src/styles/theme'
 
-import { Box } from '../Box/Box.component'
-
 import { StyledDrawer } from './Drawer.styles'
 
 export enum DrawerPositionEnum {
@@ -33,7 +31,7 @@ export const Drawer = {
         reactRender(
           <ThemeProvider>
             <StyledDrawer visible={visible} closable={false} title={null} {...options}>
-              <Box style={{ pointerEvents: 'auto' }}>{ReactComponent}</Box>
+              {ReactComponent}
             </StyledDrawer>
           </ThemeProvider>,
           container

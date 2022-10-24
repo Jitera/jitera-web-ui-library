@@ -6,8 +6,6 @@ import { Modal as AntModal, ModalProps as AntModalProps } from 'antd'
 
 import { ThemeProvider } from '@src/styles/theme'
 
-import { Box } from '../Box/Box.component'
-
 export enum ModalPositionEnum {
   DEFAULT = 'default',
   TOP = 'top',
@@ -49,7 +47,7 @@ export const Modal = {
               closable={false}
               onCancel={() => render(false)}
               footer={null}
-              modalRender={() => <Box style={{ pointerEvents: 'auto' }}>{ReactComponent}</Box>}
+              modalRender={() => ReactComponent}
               centered={options.position === ModalPositionEnum.CENTER}
               style={{
                 top: options.position === ModalPositionEnum.TOP ? '0px' : undefined,
