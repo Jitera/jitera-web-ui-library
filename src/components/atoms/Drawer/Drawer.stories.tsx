@@ -6,11 +6,15 @@ import { Drawer, DrawerPositionEnum } from './Drawer.component'
 const Drawer2MoleculeWrapper = styled.div`
   background-color: #ff77c1;
   padding: 12px;
+  width: 100%;
+  height: 100%;
 `
 
 const Drawer1MoleculeWrapper = styled.div`
   background-color: #fff;
   padding: 24px;
+  width: 100%;
+  height: 100%;
 `
 
 const Drawer2Molecule: React.FC = () => {
