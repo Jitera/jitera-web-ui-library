@@ -35,7 +35,7 @@ const Drawer1Molecule: React.FC<{ position: DrawerPositionEnum }> = ({ position 
         type="button"
         onClick={() => {
           Drawer.show(<Drawer2Molecule />, {
-            placement: position
+            position
           })
         }}
       >
@@ -56,7 +56,7 @@ const Drawer1Molecule: React.FC<{ position: DrawerPositionEnum }> = ({ position 
 export const Default: Story = () => {
   const handleClick = (position: DrawerPositionEnum) => {
     Drawer.show(<Drawer1Molecule position={position} />, {
-      placement: position
+      position
     })
   }
   return (

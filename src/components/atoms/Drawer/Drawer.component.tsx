@@ -16,21 +16,30 @@ export enum DrawerPositionEnum {
 }
 
 export interface DrawerShowOptions
-  extends Omit<AntDrawerProps, 'visible' | 'closable' | 'title' | 'closeIcon' | 'bodyStyle'> {
+  extends Omit<
+    AntDrawerProps,
+    'visible' | 'closable' | 'title' | 'closeIcon' | 'bodyStyle' | 'placement'
+  > {
   position?: `${DrawerPositionEnum}`
 }
 
 const drawers: ((visible?: boolean) => void)[] = []
 
 export const Drawer = {
-  show(ReactComponent: React.ReactNode, options: DrawerShowOptions = {}) {
+  show(ReactComponent: React.ReactNode, { position, ...options }: DrawerShowOptions = {}) {
     const container = document.createDocumentFragment()
 
     function render(visible = true) {
       setTimeout(() => {
         reactRender(
           <ThemeProvider>
-            <StyledDrawer visible={visible} closable={false} title={null} {...options}>
+            <StyledDrawer
+              visible={visible}
+              closable={false}
+              title={null}
+              placement={position}
+              {...options}
+            >
               {ReactComponent}
             </StyledDrawer>
           </ThemeProvider>,

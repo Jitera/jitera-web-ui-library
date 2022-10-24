@@ -526,11 +526,14 @@ declare enum DrawerPositionEnum {
   LEFT = 'left'
 }
 interface DrawerShowOptions
-  extends Omit<DrawerProps, 'visible' | 'closable' | 'title' | 'closeIcon' | 'bodyStyle'> {
+  extends Omit<
+    DrawerProps,
+    'visible' | 'closable' | 'title' | 'closeIcon' | 'bodyStyle' | 'placement'
+  > {
   position?: `${DrawerPositionEnum}`
 }
 declare const Drawer: {
-  show(ReactComponent: React.ReactNode, options?: DrawerShowOptions): void
+  show(ReactComponent: React.ReactNode, { position, ...options }?: DrawerShowOptions): void
   hide(): void
   hideAll(): void
 }
