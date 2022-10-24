@@ -519,6 +519,22 @@ declare const Table: <DataModel>(
   }
 ) => ReturnType<typeof TableInner>
 
+declare enum DrawerPositionEnum {
+  TOP = 'top',
+  RIGHT = 'right',
+  BOTTOM = 'bottom',
+  LEFT = 'left'
+}
+interface DrawerShowOptions
+  extends Omit<DrawerProps, 'visible' | 'closable' | 'title' | 'closeIcon' | 'bodyStyle'> {
+  position?: `${DrawerPositionEnum}`
+}
+declare const Drawer: {
+  show(ReactComponent: React.ReactNode, options?: DrawerShowOptions): void
+  hide(): void
+  hideAll(): void
+}
+
 declare enum OTPInputType {
   Box = 'box',
   Underline = 'underline'
@@ -2422,6 +2438,9 @@ export {
   DateTimePickerProps,
   Divider,
   DividerProps,
+  Drawer,
+  DrawerPositionEnum,
+  DrawerShowOptions,
   Footer,
   FooterProps,
   Form,
