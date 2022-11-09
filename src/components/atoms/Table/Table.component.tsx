@@ -349,7 +349,7 @@ const TableInner = <DataModel,>(
         accessorKey: column.path,
         header: column.name,
         footer: column.name,
-        cell: column.renderColumn ? column.renderColumn : (info: any) => info.getValue(),
+        cell: column.renderColumn ? column.renderColumn : (info: any) => info.getValue() || '',
         enableSorting: column.sortable
       })),
     [columns]
@@ -362,7 +362,7 @@ const TableInner = <DataModel,>(
         },
         header: action.name,
         footer: action.name,
-        cell: action.renderColumn,
+        cell: action.renderColumn ? action.renderColumn : (info: any) => info.getValue() || '',
         enableSorting: false
       })),
     [actions]
