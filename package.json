@@ -1,6 +1,6 @@
 {
   "name": "@jitera/jitera-web-ui-library",
-  "version": "1.66.0",
+  "version": "1.67.0",
   "description": "atoms and component for web project",
   "sideEffects": [
     "*.css"
@@ -111,9 +111,8 @@
     "yalc": "~1.0.0-pre.53"
   },
   "peerDependencies": {
-    "react": "~18.0.0",
-    "react-dom": "~18.0.0",
-    "react-scripts": "~5.0.0"
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2"
   },
   "config": {
     "commitizen": {
