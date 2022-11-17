@@ -182,21 +182,96 @@ declare const Sider: React.ForwardRefExoticComponent<
 
 declare enum TextTypeEnum {
   Link = 'Link',
-  Text = 'Text'
+  Text = 'Text',
+  H1 = 'H1',
+  H2 = 'H2',
+  H3 = 'H3',
+  H4 = 'H4',
+  H5 = 'H5',
+  H6 = 'H6',
+  B = 'B',
+  I = 'I',
+  Em = 'Em',
+  U = 'U',
+  S = 'S',
+  Del = 'Del',
+  Pre = 'Pre',
+  Code = 'Code',
+  Blockquote = 'Blockquote',
+  Figcaption = 'Figcaption',
+  Cite = 'Cite'
 }
 declare type BaseTextProps = React.HTMLAttributes<HTMLDivElement>
 declare type BaseLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+declare type BaseH1Props = React.HTMLAttributes<HTMLHeadingElement>
+declare type BaseH2Props = React.HTMLAttributes<HTMLHeadingElement>
+declare type BaseH3Props = React.HTMLAttributes<HTMLHeadingElement>
+declare type BaseH4Props = React.HTMLAttributes<HTMLHeadingElement>
+declare type BaseH5Props = React.HTMLAttributes<HTMLHeadingElement>
+declare type BaseH6Props = React.HTMLAttributes<HTMLHeadingElement>
+declare type BaseBProps = React.HTMLAttributes<HTMLElement>
+declare type BaseIProps = React.HTMLAttributes<HTMLElement>
+declare type BaseEmProps = React.HTMLAttributes<HTMLElement>
+declare type BaseUProps = React.HTMLAttributes<HTMLElement>
+declare type BaseSProps = React.HTMLAttributes<HTMLElement>
+declare type BaseDelProps = React.HTMLAttributes<HTMLModElement>
+declare type BasePreProps = React.HTMLAttributes<HTMLPreElement>
+declare type BaseCodeProps = React.HTMLAttributes<HTMLElement>
+declare type BaseBlockquoteProps = React.HTMLAttributes<HTMLQuoteElement>
+declare type BaseFigcaptionProps = React.HTMLAttributes<HTMLElement>
+declare type BaseCiteProps = React.HTMLAttributes<HTMLElement>
 declare type TextProps = PreviewProps &
   BaseTextProps &
-  BaseLinkProps & {
+  BaseLinkProps &
+  BaseH1Props &
+  BaseH2Props &
+  BaseH3Props &
+  BaseH4Props &
+  BaseH5Props &
+  BaseH6Props &
+  BaseBProps &
+  BaseIProps &
+  BaseEmProps &
+  BaseUProps &
+  BaseSProps &
+  BaseDelProps &
+  BasePreProps &
+  BaseCodeProps &
+  BaseBlockquoteProps &
+  BaseFigcaptionProps &
+  BaseCiteProps & {
     textType?: `${TextTypeEnum}`
   }
 declare const Text: React.ForwardRefExoticComponent<
   PreviewProps &
     BaseTextProps &
-    BaseLinkProps & {
+    BaseLinkProps &
+    BaseH1Props &
+    BaseH2Props &
+    BaseH3Props &
+    BaseH4Props &
+    BaseH5Props &
+    BaseH6Props &
+    BaseBProps &
+    BaseIProps &
+    BaseEmProps &
+    BaseUProps &
+    BaseSProps &
+    BaseDelProps &
+    BasePreProps &
+    BaseCodeProps &
+    BaseBlockquoteProps &
+    BaseFigcaptionProps &
+    BaseCiteProps & {
       textType?: `${TextTypeEnum}`
-    } & React.RefAttributes<HTMLDivElement & HTMLAnchorElement>
+    } & React.RefAttributes<
+      HTMLDivElement &
+        HTMLAnchorElement &
+        HTMLHeadingElement &
+        HTMLModElement &
+        HTMLPreElement &
+        HTMLQuoteElement
+    >
 >
 
 interface SelectPropsDatum {
@@ -2421,8 +2496,25 @@ declare const useTheme: () => {
 }
 
 export {
+  BaseBProps,
+  BaseBlockquoteProps,
+  BaseCiteProps,
+  BaseCodeProps,
+  BaseDelProps,
+  BaseEmProps,
+  BaseFigcaptionProps,
+  BaseH1Props,
+  BaseH2Props,
+  BaseH3Props,
+  BaseH4Props,
+  BaseH5Props,
+  BaseH6Props,
+  BaseIProps,
   BaseLinkProps,
+  BasePreProps,
+  BaseSProps,
   BaseTextProps,
+  BaseUProps,
   Box,
   BoxProps,
   Button,
