@@ -81,17 +81,16 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   }, [iconProps])
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore TODO: Figure out correct type for ref
   return (
     <ReactSelect
       className={classNames}
       components={components}
-      isDisabled={isPreview}
+      menuIsOpen={isPreview ? false : rest?.menuIsOpen}
       styles={customStyles}
       options={data}
       {...rest}
-      ref={ref as any}
+      // @ts-expect-error TODO: Figure out correct type for ref
+      ref={ref}
     />
   )
 })
