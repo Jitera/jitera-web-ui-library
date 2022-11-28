@@ -81,17 +81,17 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   }, [iconProps])
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore TODO: Figure out correct type for ref
   return (
     <ReactSelect
       className={classNames}
       components={components}
-      isDisabled={isPreview}
+      // disabling the select in preview mode causes some ref issues in the editor, so instead we do this.
+      menuIsOpen={isPreview ? false : rest?.menuIsOpen}
       styles={customStyles}
       options={data}
       {...rest}
-      ref={ref as any}
+      // @ts-expect-error TODO: Figure out correct type for ref
+      ref={ref}
     />
   )
 })
