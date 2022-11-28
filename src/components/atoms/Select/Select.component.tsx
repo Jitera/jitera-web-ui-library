@@ -85,6 +85,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     <ReactSelect
       className={classNames}
       components={components}
+      // disabling the select in preview mode causes some ref issues in the editor, so instead we do this.
       menuIsOpen={isPreview ? false : rest?.menuIsOpen}
       styles={customStyles}
       options={data}
