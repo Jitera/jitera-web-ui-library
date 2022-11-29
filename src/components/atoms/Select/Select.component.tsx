@@ -90,8 +90,8 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       styles={customStyles}
       options={data}
       {...rest}
-      // @ts-expect-error TODO: Figure out correct type for ref
-      ref={ref}
+      // TODO: find correct type for ref
+      ref={ref as any}
     />
   )
 })
