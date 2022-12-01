@@ -46,10 +46,12 @@ export const Modal = {
               visible={visible}
               closable={false}
               onCancel={() => render(false)}
+              maskClosable={false}
               footer={null}
               modalRender={() => ReactComponent}
               centered={options.position === ModalPositionEnum.CENTER}
               style={{
+                pointerEvents: 'auto',
                 top: options.position === ModalPositionEnum.TOP ? '0px' : undefined,
                 ...options.style
               }}
