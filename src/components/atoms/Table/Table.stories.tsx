@@ -140,6 +140,10 @@ const TableTemplate: Story<TableProps<Anime>> = () => {
             </Space>
           )
         }
+      },
+      // https://jitera.atlassian.net/browse/JIT-83
+      {
+        name: ''
       }
     ],
     []
