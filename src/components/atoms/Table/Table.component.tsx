@@ -356,7 +356,8 @@ const TableInner = <DataModel,>(
   )
   const formattedActions = useMemo<ColumnDef<DataModel, any>[]>(
     () =>
-      actions.map((action) => ({
+      actions.map((action, index) => ({
+        id: String(index),
         meta: {
           action: true
         },
