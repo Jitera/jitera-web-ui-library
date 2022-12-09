@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react'
-import dayjs, { Dayjs } from 'dayjs'
-import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs'
+import moment from 'moment'
 
-import generatePicker, { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
+import { DatePicker, DatePickerProps } from 'antd'
 
 import { ComponentProps } from '@src/types/component'
 
@@ -11,8 +10,6 @@ import { PreviewProps } from '@src/types/preview'
 import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { Text } from '../Text/Text.component'
-
-const AntDatePicker = generatePicker<Dayjs>(dayjsGenerateConfig)
 
 export enum PickerEnum {
   TIME = 'time',
@@ -23,11 +20,12 @@ export enum PickerEnum {
 
 export interface DateTimePickerProps
   extends PreviewProps,
-    ComponentProps<Omit<PickerDateProps<Dayjs>, 'picker' | 'defaultValue'>> {
+    ComponentProps<Omit<DatePickerProps, 'picker' | 'defaultValue' | 'value'>> {
   picker?: `${PickerEnum}`
   showTime?: boolean
   errorMessage?: string
-  defaultValue?: Pick<PickerDateProps<Dayjs>, 'defaultValue'> | string
+  defaultValue?: string
+  value?: moment.Moment | string
 }
 
 const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((props, ref) => {
@@ -38,24 +36,36 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>((pr
     picker = 'date',
     errorMessage,
     className,
+    value,
     ...rest
   } = props
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
-  const memoDefaultValue = useMemo<Dayjs | undefined>(() => {
-    if (typeof defaultValue === 'string' || !defaultValue) {
-      return dayjs(defaultValue as string | number | Date | Dayjs)
-    }
-    return defaultValue as Dayjs
+  const memoDefaultValue = useMemo<undefined | moment.Moment>(() => {
+    if (typeof defaultValue === 'string') return moment(defaultValue)
+    return defaultValue
   }, [defaultValue])
+
+  const currentValue = useMemo(() => {
+    if (!value) {
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      return undefined
+    }
+
+    if (typeof value === 'string') {
+      return moment(value)
+    }
+    return value
+  }, [value])
 
   return (
     <div className={classNames} ref={ref}>
-      <AntDatePicker
+      <DatePicker
         disabled={isPreview}
         picker={picker}
         defaultValue={memoDefaultValue}
         prefixCls="jitera-picker"
+        value={currentValue}
         {...rest}
       />
       {!!errorMessage && (
