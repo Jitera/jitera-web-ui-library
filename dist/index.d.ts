@@ -15,6 +15,7 @@ import {
   SpaceProps,
   CheckboxProps as CheckboxProps$1,
   UploadProps,
+  DatePickerProps,
   DrawerProps,
   TabsProps,
   ModalProps,
@@ -30,8 +31,7 @@ import { Props, OptionsOrGroups, GroupBase, SelectInstance } from 'react-select'
 export { SelectInstance as SelectRef } from 'react-select'
 import { TextAreaProps as TextAreaProps$1 } from 'antd/lib/input/TextArea'
 import { CheckboxGroupProps } from 'antd/lib/checkbox'
-import { Dayjs } from 'dayjs'
-import { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
+import moment from 'moment'
 import { Settings, ResponsiveObject } from 'react-slick'
 import {
   RowData,
@@ -353,11 +353,12 @@ declare enum PickerEnum {
 }
 interface DateTimePickerProps
   extends PreviewProps,
-    ComponentProps<Omit<PickerDateProps<Dayjs>, 'picker' | 'defaultValue'>> {
+    ComponentProps<Omit<DatePickerProps, 'picker' | 'defaultValue' | 'value'>> {
   picker?: `${PickerEnum}`
   showTime?: boolean
   errorMessage?: string
-  defaultValue?: Pick<PickerDateProps<Dayjs>, 'defaultValue'> | string
+  defaultValue?: string
+  value?: moment.Moment | string
 }
 declare const DateTimePicker: React.ForwardRefExoticComponent<
   DateTimePickerProps & React.RefAttributes<HTMLDivElement>
