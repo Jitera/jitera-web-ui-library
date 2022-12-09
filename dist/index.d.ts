@@ -31,7 +31,7 @@ export { SelectInstance as SelectRef } from 'react-select'
 import { TextAreaProps as TextAreaProps$1 } from 'antd/lib/input/TextArea'
 import { CheckboxGroupProps } from 'antd/lib/checkbox'
 import { Dayjs } from 'dayjs'
-import { PickerDateProps } from 'antd/lib/date-picker/generatePicker'
+import { PickerDateProps } from 'antd/es/date-picker/generatePicker'
 import { Settings, ResponsiveObject } from 'react-slick'
 import {
   RowData,
