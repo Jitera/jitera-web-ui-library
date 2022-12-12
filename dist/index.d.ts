@@ -18,9 +18,9 @@ import {
   DatePickerProps,
   DrawerProps,
   TabsProps,
-  ModalProps,
   PaginationProps,
-  MessageArgsProps
+  MessageArgsProps,
+  ModalProps as ModalProps$1
 } from 'antd'
 export { CheckboxOptionType as RadioCheckboxOptionType } from 'antd'
 import * as react_icons_lib from 'react-icons/lib'
@@ -434,36 +434,6 @@ interface TabProps extends PreviewProps, ComponentProps<TabsProps> {
 }
 declare const Tab: React.ForwardRefExoticComponent<TabProps & React.RefAttributes<HTMLDivElement>>
 
-declare enum ModalPositionEnum {
-  DEFAULT = 'default',
-  TOP = 'top',
-  CENTER = 'center'
-}
-interface ModalShowOptions
-  extends Omit<
-    ModalProps,
-    | 'visible'
-    | 'closable'
-    | 'footer'
-    | 'modalRender'
-    | 'cancelText'
-    | 'cancelButtonProps'
-    | 'okText'
-    | 'onOk'
-    | 'okButtonProps'
-    | 'okType'
-    | 'title'
-    | 'closeIcon'
-    | 'bodyStyle'
-  > {
-  position?: `${ModalPositionEnum}`
-}
-declare const Modal: {
-  show(ReactComponent: React.ReactNode, options?: ModalShowOptions): void
-  hide(): void
-  hideAll(): void
-}
-
 interface RichTextProps {
   data?: string
   style?: CSSProperties
@@ -664,6 +634,56 @@ declare const Toast: {
     onClose?: () => void
   ): void
   message: antd_lib_message.MessageApi
+}
+
+declare enum ModalPositionEnum {
+  DEFAULT = 'default',
+  TOP = 'top',
+  CENTER = 'center'
+}
+interface ModalOptions
+  extends Omit<
+    ModalProps$1,
+    | 'visible'
+    | 'closable'
+    | 'footer'
+    | 'modalRender'
+    | 'cancelText'
+    | 'cancelButtonProps'
+    | 'okText'
+    | 'onOk'
+    | 'okButtonProps'
+    | 'okType'
+    | 'title'
+    | 'closeIcon'
+    | 'bodyStyle'
+    | 'mask'
+  > {
+  position?: `${ModalPositionEnum}`
+}
+declare type ModalProps = {
+  local?: boolean
+}
+declare type ModalState = {
+  modals: {
+    options: ModalOptions
+    component: React.ReactNode
+    visible: boolean
+    id: string
+  }[]
+}
+declare class ModalComponent extends React.PureComponent<ModalProps, ModalState> {
+  constructor(props: ModalProps)
+  componentDidMount(): void
+  componentWillUnmount(): void
+  clearModal: (hideId?: string) => void
+  hide: (id?: string) => void
+  show: (component: React.ReactNode, options: ModalOptions) => string
+  render(): JSX.Element
+}
+declare const Modal: {
+  show(component: React.ReactNode, modalOptions?: ModalOptions): string
+  hide(id?: string): void
 }
 
 declare type ThemeProviderProps = {
@@ -2566,8 +2586,10 @@ export {
   MenuItemProps,
   MenuProps,
   Modal,
+  ModalComponent,
+  ModalOptions,
   ModalPositionEnum,
-  ModalShowOptions,
+  ModalProps,
   OTPInput,
   OTPInputProps,
   OTPInputType,
