@@ -1,7 +1,8 @@
-import React, { ReactElement, useMemo, useState } from 'react'
+import { ReactElement, useMemo, useState } from 'react'
 import { ConfigProvider } from 'antd'
 
 import { PREFIX_COMPONENT_CLASSNAME, PREFIX_ICON_CLASSNAME } from '../../constants'
+import { ModalComponent } from '../../components/widgets/Modal/Modal.component'
 
 import { defaultTheme } from './default'
 import ThemeContext from './ThemeContext'
@@ -36,7 +37,12 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   return (
     <ConfigProvider prefixCls={PREFIX_COMPONENT_CLASSNAME} iconPrefixCls={PREFIX_ICON_CLASSNAME}>
-      <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>
+      <ThemeContext.Provider value={contextValue}>
+        <>
+          {children}
+          <ModalComponent />
+        </>
+      </ThemeContext.Provider>
     </ConfigProvider>
   )
 }

@@ -80,8 +80,7 @@
         },
         "extensions": [".ts", ".tsx", "css", "png"]
       },
-      "typescript": {
-      }
+      "typescript": {}
     }
   },
   "overrides": [
