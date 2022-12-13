@@ -657,7 +657,6 @@ interface ModalOptions
     | 'title'
     | 'closeIcon'
     | 'bodyStyle'
-    | 'mask'
   > {
   position?: `${ModalPositionEnum}`
 }

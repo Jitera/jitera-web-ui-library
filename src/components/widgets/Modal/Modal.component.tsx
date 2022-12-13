@@ -27,7 +27,6 @@ export interface ModalOptions
     | 'title'
     | 'closeIcon'
     | 'bodyStyle'
-    | 'mask'
   > {
   position?: `${ModalPositionEnum}`
 }
@@ -57,10 +56,17 @@ export class ModalComponent extends React.PureComponent<ModalProps, ModalState> 
     if (!hideId) {
       return
     }
+
     this.setState((state) => {
+      const modals = state.modals.filter((modal) => {
+        if (modal.id === hideId && typeof modal.options?.afterClose === 'function') {
+          modal.options?.afterClose()
+        }
+        return modal.id !== hideId
+      })
       return {
         ...state,
-        modals: state.modals.filter((modal) => modal.id !== hideId)
+        modals
       }
     })
   }
@@ -106,7 +112,7 @@ export class ModalComponent extends React.PureComponent<ModalProps, ModalState> 
               key={modal.id}
               visible={modal.visible}
               closable={false}
-              onCancel={() => false}
+              onCancel={() => this.hide(modal.id)}
               mask
               maskClosable
               footer={null}
