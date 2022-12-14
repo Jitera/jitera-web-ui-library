@@ -13,7 +13,7 @@ export interface ImagePickerProps
   extends PreviewProps,
     ComponentProps<Omit<AntUploadProps, 'listType'>> {
   errorMessage?: string
-  onChange: (info: any) => void
+  onChange: (info: File | File[]) => void
 }
 
 const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, ref) => {
