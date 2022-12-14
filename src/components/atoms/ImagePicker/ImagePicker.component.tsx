@@ -17,8 +17,16 @@ export interface ImagePickerProps
 }
 
 const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, ref) => {
-  const { children, isPreview, responsiveVisibility, errorMessage, className, onChange, ...rest } =
-    props
+  const {
+    children,
+    isPreview,
+    responsiveVisibility,
+    errorMessage,
+    className,
+    multiple,
+    onChange,
+    ...rest
+  } = props
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   return (
@@ -27,7 +35,9 @@ const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, r
         disabled={isPreview}
         listType="picture"
         onChange={(files) => {
-          const originFiles = files.fileList.map((file) => file.originFileObj)
+          const originFiles = multiple
+            ? files.fileList.map((file) => file.originFileObj)
+            : files.file
           onChange(originFiles)
         }}
         {...rest}
