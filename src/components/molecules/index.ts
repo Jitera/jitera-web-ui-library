@@ -1,2 +1,2 @@
 export * from './OTPInput/OTPInput.component'
-export * from './Toast/Toast.component'
+export * from '../widgets/Toast/Toast.component'
