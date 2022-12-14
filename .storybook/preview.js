@@ -3,4 +3,4 @@ import { ThemeProvider } from '../dist'
 
 import '../dist/preview.css'
 
-addDecorator((story) => <ThemeProvider>{story()}</ThemeProvider>)
+addDecorator((story) => <ThemeProvider isPreview>{story()}</ThemeProvider>)
