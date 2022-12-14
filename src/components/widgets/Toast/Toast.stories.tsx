@@ -6,7 +6,7 @@ import { Toast } from './Toast.component'
 
 export const Default: Story = () => {
   return (
-    <ThemeProvider isPreview>
+    <ThemeProvider>
       <>
         <button
           type="button"

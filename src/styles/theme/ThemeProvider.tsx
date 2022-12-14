@@ -45,7 +45,7 @@ const ThemeProvider = ({ children, isPreview }: ThemeProviderProps) => {
         <>
           {children}
           <ModalComponent />
-          {isPreview ? <ToastContainer /> : undefined}
+          {!isPreview ? <ToastContainer /> : undefined}
         </>
       </ThemeContext.Provider>
     </ConfigProvider>
