@@ -650,10 +650,10 @@ declare const Modal: {
   hide(id?: string): void
 }
 
-declare type ThemeProviderProps = {
+declare type ThemeProviderProps = Pick<PreviewProps, 'isPreview'> & {
   children: ReactElement
 }
-declare const ThemeProvider: ({ children }: ThemeProviderProps) => JSX.Element
+declare const ThemeProvider: ({ children, isPreview }: ThemeProviderProps) => JSX.Element
 
 declare const defaultTheme: {
   blueBase: string
