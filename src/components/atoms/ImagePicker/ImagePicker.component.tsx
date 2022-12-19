@@ -13,15 +13,35 @@ export interface ImagePickerProps
   extends PreviewProps,
     ComponentProps<Omit<AntUploadProps, 'listType'>> {
   errorMessage?: string
+  onChange: (info: File | File[]) => void
 }
 
 const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, ref) => {
-  const { children, isPreview, responsiveVisibility, errorMessage, className, ...rest } = props
+  const {
+    children,
+    isPreview,
+    responsiveVisibility,
+    errorMessage,
+    className,
+    multiple,
+    onChange,
+    ...rest
+  } = props
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
   return (
     <div className={classNames} ref={ref}>
-      <AntUpload disabled={isPreview} listType="picture" {...rest}>
+      <AntUpload
+        disabled={isPreview}
+        listType="picture"
+        onChange={(files) => {
+          const originFiles = multiple
+            ? files.fileList.map((file) => file.originFileObj)
+            : files.file
+          onChange(originFiles)
+        }}
+        {...rest}
+      >
         {children}
       </AntUpload>
       {!!errorMessage && <Text type="danger">{errorMessage}</Text>}
