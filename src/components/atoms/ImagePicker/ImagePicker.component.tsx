@@ -1,5 +1,6 @@
 import React from 'react'
 import { Upload as AntUpload, UploadProps as AntUploadProps } from 'antd'
+import type { RcFile } from 'rc-upload/lib/interface'
 
 import { ComponentProps } from '@src/types/component'
 
@@ -11,9 +12,9 @@ import { Text } from '../Text/Text.component'
 
 export interface ImagePickerProps
   extends PreviewProps,
-    ComponentProps<Omit<AntUploadProps, 'listType'>> {
+    ComponentProps<Omit<AntUploadProps, 'listType' | 'onChange'>> {
   errorMessage?: string
-  onChange: (info: File | File[]) => void
+  onChange: (info: RcFile | (RcFile | undefined)[]) => void
 }
 
 const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, ref) => {
@@ -36,8 +37,8 @@ const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, r
         listType="picture"
         onChange={(files) => {
           const originFiles = multiple
-            ? files.fileList.map((file) => file.originFileObj)
-            : files.file
+            ? files.fileList.map((file) => file.originFileObj).filter(Boolean)
+            : (files.file as RcFile)
           onChange(originFiles)
         }}
         {...rest}
