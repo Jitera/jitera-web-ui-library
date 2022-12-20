@@ -30,6 +30,7 @@ import { Props, OptionsOrGroups, GroupBase, SelectInstance } from 'react-select'
 export { SelectInstance as SelectRef } from 'react-select'
 import { TextAreaProps as TextAreaProps$1 } from 'antd/lib/input/TextArea'
 import { CheckboxGroupProps } from 'antd/lib/checkbox'
+import { RcFile } from 'rc-upload/lib/interface'
 import moment from 'moment'
 import { Settings, ResponsiveObject } from 'react-slick'
 import {
@@ -337,8 +338,11 @@ declare const Checkbox: React.ForwardRefExoticComponent<
   CheckboxProps & React.RefAttributes<HTMLDivElement>
 >
 
-interface ImagePickerProps extends PreviewProps, ComponentProps<Omit<UploadProps, 'listType'>> {
+interface ImagePickerProps
+  extends PreviewProps,
+    ComponentProps<Omit<UploadProps, 'listType' | 'onChange'>> {
   errorMessage?: string
+  onChange: (info: RcFile | (RcFile | undefined)[]) => void
 }
 declare const ImagePicker: React.ForwardRefExoticComponent<
   ImagePickerProps & React.RefAttributes<HTMLDivElement>
