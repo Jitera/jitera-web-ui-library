@@ -41,6 +41,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     dropdownStyle,
     optionStyle,
     iconProps,
+    defaultValue,
     ...rest
   } = props
 
@@ -81,6 +82,14 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   }, [iconProps])
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
+  const defaultValueOption = useMemo(() => {
+    if (!defaultValue || !data) {
+      return null
+    }
+
+    return data.find((opt) => (opt as SelectPropsDatum).value === defaultValue)
+  }, [defaultValue, data])
+
   return (
     <ReactSelect
       className={classNames}
@@ -89,6 +98,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       menuIsOpen={isPreview ? false : rest?.menuIsOpen}
       styles={customStyles}
       options={data}
+      defaultValue={defaultValueOption}
       {...rest}
       // TODO: find correct type for ref
       ref={ref as any}
