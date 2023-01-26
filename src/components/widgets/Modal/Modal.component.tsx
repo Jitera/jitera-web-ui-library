@@ -82,7 +82,7 @@ export class ModalComponent extends React.PureComponent<ModalProps, ModalState> 
         }
         return modal
       })
-    } else {
+    } else if (modals?.[modals.length - 1]) {
       modals[modals.length - 1].visible = false
       newModals = modals
     }
@@ -110,7 +110,7 @@ export class ModalComponent extends React.PureComponent<ModalProps, ModalState> 
           return (
             <AntModal
               key={modal.id}
-              visible={modal.visible}
+              visible={modal?.visible}
               closable={false}
               onCancel={() => this.hide(modal.id)}
               mask
