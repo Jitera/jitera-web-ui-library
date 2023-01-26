@@ -6,7 +6,7 @@ import { ImagePicker, ImagePickerProps } from './ImagePicker.component'
 
 const defaultArguments: ImagePickerProps = {
   onChange: () => {}
-};
+}
 
 const ImagePickerTemplate: Story<ImagePickerProps> = (arguments_) => <ImagePicker {...arguments_} />
 
