@@ -19,17 +19,37 @@ export interface SelectPropsDatum {
   value: string
 }
 
-export interface SelectProps extends PreviewProps, Omit<ReactSelectProps, 'onChange'> {
+export interface SelectProps
+  extends PreviewProps,
+    Omit<ReactSelectProps, 'onChange' | 'defaultValue' | 'value'> {
   placeholderStyle?: CSSProperties
   containerStyle?: CSSProperties
   dropdownStyle?: CSSProperties
   optionStyle?: CSSProperties
   iconProps?: IconProps
   data?: OptionsOrGroups<SelectPropsDatum, GroupBase<SelectPropsDatum>> | undefined
+  defaultValue?: string | string[] | undefined
+  value?: string | string[] | undefined
   onChange?: (value: string) => void
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
+const extractSelectOptions = (
+  value: string | string[] | undefined,
+  data: OptionsOrGroups<SelectPropsDatum, GroupBase<SelectPropsDatum>> | undefined,
+  isMulti: boolean
+) => {
+  if (!value || !data) {
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    return undefined
+  }
+
+  if (isMulti) {
+    return data.filter((opt) => (value as string[]).includes((opt as SelectPropsDatum).value))
+  }
+
+  return data.find((opt) => (opt as SelectPropsDatum).value === value)
+}
+
 const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {
@@ -45,6 +65,7 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     iconProps,
     defaultValue,
     value,
+    isMulti = false,
     onChange,
     ...rest
   } = props
@@ -86,24 +107,19 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   }, [iconProps])
   const { classNames } = useResponsiveVisibility({ className, responsiveVisibility })
 
-  const defaultValueOption = useMemo(() => {
-    if (!defaultValue || !data) {
-      return null
-    }
+  const defaultValueOption = useMemo(
+    () => extractSelectOptions(defaultValue, data, isMulti),
+    [defaultValue, data, isMulti]
+  )
 
-    return data.find((opt) => (opt as SelectPropsDatum).value === defaultValue)
-  }, [defaultValue, data])
-
-  const valueOption = useMemo(() => {
-    if (!value || !data) {
-      return null
-    }
-
-    return data.find((opt) => (opt as SelectPropsDatum).value === value)
-  }, [value, data])
+  const valueOption = useMemo(
+    () => extractSelectOptions(value, data, isMulti),
+    [value, data, isMulti]
+  )
 
   return (
     <ReactSelect
+      isMulti={isMulti}
       className={classNames}
       components={components}
       // disabling the select in preview mode causes some ref issues in the editor, so instead we do this.
@@ -114,7 +130,11 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       value={valueOption}
       onChange={(newValue: any) => {
         if (onChange) {
-          onChange(newValue?.value)
+          if (isMulti) {
+            onChange(newValue?.map((newValueItem: any) => newValueItem.value))
+          } else {
+            onChange(newValue?.value)
+          }
         }
       }}
       {...rest}
