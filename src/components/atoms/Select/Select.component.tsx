@@ -19,15 +19,17 @@ export interface SelectPropsDatum {
   value: string
 }
 
-export interface SelectProps extends PreviewProps, ReactSelectProps {
+export interface SelectProps extends PreviewProps, Omit<ReactSelectProps, 'onChange'> {
   placeholderStyle?: CSSProperties
   containerStyle?: CSSProperties
   dropdownStyle?: CSSProperties
   optionStyle?: CSSProperties
   iconProps?: IconProps
   data?: OptionsOrGroups<SelectPropsDatum, GroupBase<SelectPropsDatum>> | undefined
+  onChange?: (value: string) => void
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {
@@ -42,6 +44,8 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     optionStyle,
     iconProps,
     defaultValue,
+    value,
+    onChange,
     ...rest
   } = props
 
@@ -90,6 +94,14 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
     return data.find((opt) => (opt as SelectPropsDatum).value === defaultValue)
   }, [defaultValue, data])
 
+  const valueOption = useMemo(() => {
+    if (!value || !data) {
+      return null
+    }
+
+    return data.find((opt) => (opt as SelectPropsDatum).value === value)
+  }, [value, data])
+
   return (
     <ReactSelect
       className={classNames}
@@ -99,6 +111,12 @@ const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
       styles={customStyles}
       options={data}
       defaultValue={defaultValueOption}
+      value={valueOption}
+      onChange={(newValue: any) => {
+        if (onChange) {
+          onChange(newValue?.value)
+        }
+      }}
       {...rest}
       // TODO: find correct type for ref
       ref={ref as any}
