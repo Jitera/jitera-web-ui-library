@@ -278,13 +278,16 @@ interface SelectPropsDatum {
   label: string
   value: string
 }
-interface SelectProps extends PreviewProps, Props {
+interface SelectProps extends PreviewProps, Omit<Props, 'onChange' | 'defaultValue' | 'value'> {
   placeholderStyle?: CSSProperties
   containerStyle?: CSSProperties
   dropdownStyle?: CSSProperties
   optionStyle?: CSSProperties
   iconProps?: IconProps
   data?: OptionsOrGroups<SelectPropsDatum, GroupBase<SelectPropsDatum>> | undefined
+  defaultValue?: string | string[] | undefined
+  value?: string | string[] | undefined
+  onChange?: (value: string) => void
 }
 declare const Select: React.ForwardRefExoticComponent<
   SelectProps & React.RefAttributes<SelectInstance<unknown, false, GroupBase<unknown>>>
