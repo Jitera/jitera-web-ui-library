@@ -35,7 +35,7 @@ const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, r
     <div className={classNames} ref={ref}>
       <AntUpload
         disabled={isPreview}
-        listType="picture"
+        listType="picture-card"
         accept="image/*"
         onChange={(files) => {
           const originFiles = multiple
