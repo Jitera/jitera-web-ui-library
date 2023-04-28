@@ -50,6 +50,7 @@ const extractSelectOptions = (
   return data.find((opt) => (opt as SelectPropsDatum).value === value)
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const Select = React.forwardRef<SelectInstance, SelectProps>((props, ref) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {

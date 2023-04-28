@@ -1,6 +1,5 @@
 import React from 'react'
 import { Upload as AntUpload, UploadProps as AntUploadProps } from 'antd'
-import type { RcFile } from 'rc-upload/lib/interface'
 
 import { ComponentProps } from '@src/types/component'
 
@@ -9,6 +8,8 @@ import { PreviewProps } from '@src/types/preview'
 import { useResponsiveVisibility } from '@src/hooks/responsiveVisibility'
 
 import { Text } from '../Text/Text.component'
+
+import type { RcFile } from 'rc-upload/lib/interface'
 
 export interface ImagePickerProps
   extends PreviewProps,
@@ -35,6 +36,7 @@ const ImagePicker = React.forwardRef<HTMLDivElement, ImagePickerProps>((props, r
       <AntUpload
         disabled={isPreview}
         listType="picture"
+        accept="image/*"
         onChange={(files) => {
           const originFiles = multiple
             ? files.fileList.map((file) => file.originFileObj).filter(Boolean)
